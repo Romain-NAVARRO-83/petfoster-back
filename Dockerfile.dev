@@ -1,0 +1,18 @@
+# Dockerfile qui sert à lancer l'environnement
+# Node.js pour le développement de façon à ce
+# toute l'équipe utilise le même environnement
+
+FROM node:20
+
+WORKDIR /usr/src/app
+
+# Installer pnpm
+RUN npm install -g pnpm
+
+COPY ./package.json ./pnpm-lock.yaml ./
+RUN pnpm i
+
+COPY ./ ./
+
+EXPOSE 3000
+CMD [ "pnpm", "run", "dev" ]
