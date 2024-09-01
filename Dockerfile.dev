@@ -2,17 +2,24 @@
 # Node.js pour le développement de façon à ce
 # toute l'équipe utilise le même environnement
 
+# Depuis l'image Node de dockerhub version 20
 FROM node:20
 
+# Definir le repertoir de travail
 WORKDIR /usr/src/app
 
 # Installer pnpm
 RUN npm install -g pnpm
 
+# Recuperer le package.json pour la commande 'pnpm i'
 COPY ./package.json ./pnpm-lock.yaml ./
 RUN pnpm i
 
+# Copier le contenu du repertoire racine local dans le répertoire racine du container
 COPY ./ ./
 
+# Exposer le port pour pouvoir acceder au container depuis l'explorateur
 EXPOSE 3000
+
+# Commande à effectuer pour initialiser le container (Ici : 'pnpm run dev')
 CMD [ "pnpm", "run", "dev" ]
