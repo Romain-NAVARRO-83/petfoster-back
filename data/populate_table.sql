@@ -1,32 +1,123 @@
 BEGIN;
 
--- Insertion d'une espèce aléatoire dans la table species
-INSERT INTO "species" ("name", "detail", "created_at", "updated_at")
-VALUES
-('Chien', Null, NOW(), NOW()),
-('Chat', Null, NOW(), NOW()),
-('NAC', 'Hamster', NOW(), NOW());
+-- Alimentation de la table "species" avec les NAC les plus adoptés
+INSERT INTO "species" ("name") VALUES 
+('Chat'),
+('Chien'),
+('Cheval'),
+('Lapin'),
+('Cochon d''Inde'),
+('Hamster'),
+('Furet'),
+('Oiseau'),
+('Serpent'),
+('Lézard'),
+('Tortue'),
+('Rat');
 
--- Insertion d'un utilisateur aléatoire dans la table users
-INSERT INTO "users" ("type_user", "name", "email", "password", "country", "zip", "city", "longitude", "latitude", "phone", "address", "website", "created_at", "updated_at")
-VALUES
-('famille daccueil', 'Jean Dupont', 'jeandupont@example.com', 'motdepasse123', 'France', 75008, 'Paris', 2.3522, 48.8566, '01-23-45-67-89', '12 Rue de Rivoli', 'http://jeandupont.fr', NOW(), NOW());
+-- Alimentation de la table "users" avec 2 utilisateurs pour chaque type
+INSERT INTO "users" ("type_user", "name", "email", "password", "country", "zip", "city", "longitude", "latitude", "phone", "address", "website") VALUES
+-- Adoptants
+('adoptant', 'Alice Dupont', 'alice.dupont@example.com', 'hashed_password1', 'France', 75001, 'Paris', 2.3522, 48.8566, '0123456789', '1 Rue de Rivoli', 'www.alicedupont.com'),
+('adoptant', 'Marie Dubois', 'marie.dubois@example.com', 'hashed_password3', 'France', 33000, 'Bordeaux', -0.5792, 44.8378, '0123456791', '3 Cours de l’Intendance', 'www.mariedubois.com'),
 
--- Insertion d'un animal aléatoire dans la table animals
-INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "long_story", "health", "species_id", "creator_id", "created_at", "updated_at")
-VALUES
-(
-    'Max', 
-    '2021-03-15', 
-    'M', 
-    'Labrador', 
-    'Chien amical trouvé près du parc.', 
-    'Max est un Labrador très amical qui aime jouer et est très bon avec les enfants. Il a été trouvé près du parc et cherche maintenant un nouveau foyer.', 
-    'Bonne santé', 
-    (SELECT "id" FROM "species" WHERE "name" = 'Chien' LIMIT 1), 
-    (SELECT "id" FROM "users" WHERE "name" = 'Jean Dupont' LIMIT 1), 
-    NOW(), 
-    NOW()
-);
+-- Familles d'accueil
+('famille d''accueil', 'Jean Martin', 'jean.martin@example.com', 'hashed_password2', 'France', 69001, 'Lyon', 4.8357, 45.7640, '0123456790', '2 Rue des Capucins', NULL),
+('famille d''accueil', 'Paul Durant', 'paul.durant@example.com', 'hashed_password4', 'France', 31000, 'Toulouse', 1.4442, 43.6047, '0123456792', '4 Allée Jean Jaurès', NULL),
+
+-- Associations
+('association', 'Société Protectrice des Animaux', 'contact@spa-example.com', 'hashed_password5', 'France', 75010, 'Paris', 2.3574, 48.8635, '0123456794', '10 Avenue de la République', 'www.spa-example.com'),
+('association', 'Refuge Animalier', 'contact@refuge-example.com', 'hashed_password6', 'France', 67000, 'Strasbourg', 7.7521, 48.5734, '0123456795', '20 Rue de la Gare', 'www.refuge-example.com');
+
+-- Alimentation de la table "animals" avec 2 chiens, 2 chats, 2 chevaux, et 1 NAC de chaque
+INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "long_story", "health", "species_id", "creator_id") VALUES
+-- Chats
+('Mimi', '2021-05-10', 'F', 'Persan', 'Chat très affectueux', 'Mimi est un chat calme et aimant, parfait pour une famille.', 'Bonne santé', 1, 1),
+('Felix', '2020-08-12', 'M', 'Siamois', 'Chat très joueur', 'Felix adore jouer et est très curieux.', 'Stérilisé', 1, 2),
+
+-- Chiens
+('Rex', '2019-08-22', 'M', 'Berger Allemand', 'Chien protecteur', 'Rex est un chien courageux, idéal pour la garde.', 'Vacciné', 2, 3),
+('Belle', '2018-04-13', 'F', 'Labrador', 'Chien joueur', 'Belle adore jouer et est très sociable avec les enfants.', 'Stérilisée', 2, 4),
+
+-- Chevaux
+('Gringo', '2020-03-05', 'M', 'Shetland', 'Petit poney très doux', 'Gringo est un poney parfait pour l’initiation des enfants.', 'En pleine forme', 3, 5),
+('Storm', '2017-07-19', 'M', 'Frison', 'Cheval élégant', 'Storm est un cheval majestueux, parfait pour les compétitions.', 'Bonne santé', 3, 6),
+
+-- NACs
+('Fidji', '2022-11-20', 'M', 'Lapin Nain', 'Lapin adorable', 'Fidji est très curieux et adore les câlins.', 'Vacciné', 4, 1),
+('Coco', '2021-01-15', 'F', 'Cochon d''Inde', 'Petit rongeur affectueux', 'Coco est très sociable et adore être manipulé.', 'En bonne santé', 5, 2),
+('Speedy', '2020-10-10', 'M', 'Hamster Doré', 'Petit et rapide', 'Speedy est très actif et adore courir dans sa roue.', 'Bonne santé', 6, 3),
+('Sly', '2019-05-25', 'M', 'Furet Albinos', 'Furet joueur', 'Sly est un furet intelligent et joueur, parfait pour les amateurs.', 'Vacciné', 7, 4),
+('Kiki', '2021-03-30', 'F', 'Perruche', 'Oiseau chanteur', 'Kiki est une perruche colorée qui aime chanter.', 'Bonne santé', 8, 5),
+('Slytherin', '2018-08-01', 'M', 'Python Royal', 'Serpent calme', 'Slytherin est un serpent idéal pour les débutants.', 'En pleine santé', 9, 6),
+('Leo', '2020-02-14', 'M', 'Gecko Léopard', 'Petit lézard fascinant', 'Leo est un gecko qui adore grimper et explorer.', 'En bonne santé', 10, 1),
+('Speedy', '2019-12-21', 'M', 'Tortue de Terre', 'Tortue lente et paisible', 'Speedy est une tortue facile à entretenir.', 'En bonne santé', 11, 2),
+('Remy', '2021-09-07', 'M', 'Rat Domestique', 'Rat intelligent et sociable', 'Remy est un rat curieux qui adore interagir avec les humains.', 'En bonne santé', 12, 3);
+
+-- Alimentation de la table "animals_has_users" 
+INSERT INTO "animals_has_users" ("animals_id", "users_id", "date_start", "date_end") VALUES
+(1, 1, '2023-01-01', '2023-06-01'),
+(2, 2, '2023-02-15', NULL),
+(3, 3, '2023-03-10', '2023-08-10'),
+(4, 4, '2023-04-20', NULL),
+(5, 5, '2023-05-25', NULL),
+(6, 6, '2023-06-30', NULL),
+(7, 1, '2023-07-15', NULL),
+(8, 2, '2023-08-20', NULL),
+(9, 3, '2023-09-05', NULL),
+(10, 4, '2023-09-25', NULL),
+(11, 5, '2023-10-10', NULL),
+(12, 6, '2023-10-30', NULL);
+
+-- Alimentation de la table "animals_pictures" 
+INSERT INTO "animals_pictures" ("URL_picture", "animals_id") VALUES
+('https://example.com/mimi.jpg', 1),
+('https://example.com/felix.jpg', 2),
+('https://example.com/rex.jpg', 3),
+('https://example.com/belle.jpg', 4),
+('https://example.com/gringo.jpg', 5),
+('https://example.com/storm.jpg', 6),
+('https://example.com/fidji.jpg', 7),
+('https://example.com/coco.jpg', 8),
+('https://example.com/speedy.jpg', 9),
+('https://example.com/sly.jpg', 10),
+('https://example.com/kiki.jpg', 11),
+('https://example.com/slytherin.jpg', 12),
+('https://example.com/leo.jpg', 13),
+('https://example.com/speedy-tortue.jpg', 14),
+('https://example.com/remy.jpg', 15);
+
+-- Alimentation de la table "messages" 
+INSERT INTO "messages" ("sender_id", "receiver_id", "content") VALUES
+(1, 2, 'Bonjour Marie, je serais intéressée par Felix.'),
+(2, 1, 'Bonjour Alice, Felix est encore disponible pour adoption.'),
+(3, 4, 'Salut Paul, Storm a l’air parfait pour mes enfants.'),
+(4, 3, 'Salut Jean, Storm est vraiment un cheval majestueux.'),
+(5, 6, 'Bonjour, je voudrais des informations sur Gringo.'),
+(6, 5, 'Bonjour, Gringo est un poney idéal pour les enfants.');
+
+-- Alimentation de la table "fosterling_profiles" 
+INSERT INTO "fosterling_profiles" ("age", "sexe", "search_area", "users_id", "species_id") VALUES
+('Jeune', 'M', 50, 1, 1),
+('Adulte', 'F', 100, 2, 2),
+('Jeune', 'M', 50, 3, 3),
+('Adulte', 'F', 100, 4, 4),
+('Jeune', 'M', 50, 5, 5),
+('Adulte', 'F', 100, 6, 6);
+
+-- Alimentation de la table "users_pictures" 
+INSERT INTO "users_pictures" ("URL_picture", "users_id") VALUES
+('https://example.com/alice.jpg', 1),
+('https://example.com/marie.jpg', 2),
+('https://example.com/jean.jpg', 3),
+('https://example.com/paul.jpg', 4),
+('https://example.com/spa.jpg', 5),
+('https://example.com/refuge.jpg', 6);
+
+-- Alimentation de la table "fosterling_requests"
+INSERT INTO "fosterling_requests" ("request_status", "content_request", "animals_id", "users_id") VALUES
+('Pending', 'Je souhaiterais adopter Mimi.', 1, 2),
+('Approved', 'Demande d’adoption pour Rex approuvée.', 3, 3),
+('Rejected', 'Demande d’adoption pour Storm rejetée.', 6, 4);
 
 COMMIT;

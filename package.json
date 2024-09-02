@@ -7,7 +7,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "db:create": "cat ./data/create_table.sql | docker exec -i 'petfoster-db' psql -U petfoster_admin -d petfoster",
+    "db:populate": "cat ./data/populate_table.sql | docker exec -i 'petfoster-db' psql -U petfoster_admin -d petfoster",
+    "db:reset": "pnpm run db:create && pnpm run db:populate"
   },
   "keywords": [],
   "author": "",
