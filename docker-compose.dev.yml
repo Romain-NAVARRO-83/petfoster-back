@@ -10,6 +10,8 @@ services:
       context: .
       dockerfile: Dockerfile.dev
 
+    command: sh -c "rsync -arv /usr/src/cache/node_modules/. /usr/src/app/node_modules && pnpm run dev"
+
     # Lier le port 3000 du container au port 3000 local
     ports:
       -  3000:3000
