@@ -2,12 +2,13 @@
   "name": "pet-foster-back",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "lint": "eslint .",
+    "start": "node index.ts",
+    "dev": "tsx watch index.ts",
     "db:create": "cat ./data/create_table.sql | docker exec -i 'petfoster-db' psql -U petfoster_admin -d petfoster",
     "db:populate": "cat ./data/populate_table.sql | docker exec -i 'petfoster-db' psql -U petfoster_admin -d petfoster",
     "db:reset": "pnpm run db:create && pnpm run db:populate"
@@ -20,7 +21,21 @@
     "express": "^4.19.2"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.2",
+    "@types/pg": "^8.11.8",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "nodemon": "^3.1.4",
-    "pg": "^8.12.0"
+    "pg": "^8.12.0",
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
   }
 }

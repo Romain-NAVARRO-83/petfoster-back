@@ -7,12 +7,9 @@ import express from 'express';
 // Create app
 const app = express();
 
-
-
 import pg from 'pg'; // Importation par défaut du module
 
 const { Pool } = pg; // Extraction de Pool du module
-
 
 // Configuration de la connexion
 // const pool = new Pool({
@@ -29,17 +26,18 @@ const pool = new Pool({
   max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
-
-})
+});
 
 const queryDatabase = async () => {
   try {
     // Exemple de requête SQL pour récupérer tous les enregistrements d'une table
-    const result = await pool.query('SELECT * FROM animals ORDER BY id LIMIT 1;');
+    const result = await pool.query(
+      'SELECT * FROM animals ORDER BY id LIMIT 3;'
+    );
     console.log(result.rows); // Affiche les résultats de la requête
-    return result.rows[0]
+    return result.rows[0];
   } catch (error) {
-    console.error('Erreur lors de l\'exécution de la requête', error);
+    console.error("Erreur lors de l'exécution de la requête", error);
   } finally {
     // Ferme la connexion au pool de connexions
     await pool.end();
@@ -49,13 +47,9 @@ const queryDatabase = async () => {
 // Exécuter la fonction pour accéder à la base de données
 const test = await queryDatabase();
 
-
-
-
-
 // Configure routes
 app.get('/', (req, res) => {
-  res.json(test)
+  res.json(test);
 });
 
 // Start server

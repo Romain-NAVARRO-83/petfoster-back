@@ -1,0 +1,21 @@
+{
+
+  "compilerOptions": {
+    "target": "ES2022",                          // Version JavaScript à laquelle le code doit être transpilé
+    "module": "ES2022",                        // Module utilisé par Node.js
+    "rootDir": ".",                          // Répertoire racine de votre code source
+    "outDir": "./dist",                          // Répertoire de sortie pour les fichiers transpilés
+    "strict": true,                              // Activer toutes les vérifications strictes
+    "esModuleInterop": true,                     // Pour compatibilité avec les modules CommonJS
+    "moduleResolution": "node",                  // Résolution de module pour Node.js
+    "forceConsistentCasingInFileNames": true,    // Force la cohérence dans les noms de fichiers
+    "skipLibCheck": true,                        // Ignorer la vérification des fichiers de type (lib)
+    "resolveJsonModule": true,                   // Permet d'importer des fichiers JSON comme modules
+    "allowJs": true,                             // Permet d'utiliser des fichiers JavaScript
+    "checkJs": true,                             // Active la vérification des fichiers JavaScript
+    "jsx": "react",                              // Si vous utilisez JSX/TSX, supporte JSX (peut être modifié en fonction de la configuration React ou React Native)
+    "lib": ["ES2020"]                            // Bibliothèques inclues
+  },
+  "include": ["src/**/*", "*.ts"],               // Inclut tous les fichiers .ts et .tsx dans src
+  "exclude": ["node_modules", "dist"]            // Exclut ces répertoires
+}
