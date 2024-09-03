@@ -3,10 +3,10 @@
 ## Initialisation
 
 1. Verifier que l'extension Prettier est installée
-2. lancer la commande `docker compose -f docker-compose.dev.yml up --build` (On devrait se retrouver dans l'instace Vite exposant le localhost:5173)
-3. Lancer un second terminal et y lancer la commander `docker exec -it 'petfoster-db' bash`; Pour avoir un acces au container contenant la bdd et y lancer des commandes de bases comme `SELECT * FROM animals`.
+2. lancer la commande `pnpm run compose:dev` (On devrait se retrouver dans l'instace Vite exposant le localhost:5173)
+3. Lancer un second terminal et y lancer la commander `pnpm run container:db`; Pour avoir un acces interactif au container contenant la bdd et y lancer des commandes de bases comme `SELECT * FROM animals`.
 
-HOP-LA !
+Et voilà !
 
 ## Installer un nouveau module
 
@@ -14,5 +14,5 @@ HOP-LA !
 
 ## Si besoin de reinitialiser les container
 
-1. `docker rm -v -f $(docker ps -qa)`
-2. `docker compose -f docker-compose.dev.yml up --build`
+1. `pnpm un rm:container`
+2. `pnpm run compose:dev`

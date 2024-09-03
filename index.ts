@@ -7,14 +7,10 @@ import express from 'express';
 // Create app
 const app = express();
 
+// ==============Juste pour test, à remplacer par Sequelize============
 import pg from 'pg'; // Importation par défaut du module
 
 const { Pool } = pg; // Extraction de Pool du module
-
-// Configuration de la connexion
-// const pool = new Pool({
-//   connectionString: process.env.PG_URL,
-// });
 
 const pool = new Pool({
   host: 'petfoster-db',
@@ -51,6 +47,7 @@ const test = await queryDatabase();
 app.get('/', (req, res) => {
   res.json(test);
 });
+// ====================================================================
 
 // Start server
 const port = process.env.PORT || 3000;
