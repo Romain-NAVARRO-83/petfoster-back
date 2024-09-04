@@ -1,4 +1,6 @@
+import Joi from 'joi';
 import { Animal } from '../models/index.js';
+
 
 export async function getAllAnimals(req, res) {
   const animals = await Animal.findAll({
@@ -10,3 +12,4 @@ export async function getAllAnimals(req, res) {
   console.log('Animals fetched');
   res.status(200).json(animals);
 }
+
