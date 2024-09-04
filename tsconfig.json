@@ -2,8 +2,8 @@
 
   "compilerOptions": {
     "target": "ES2022",                          // Version JavaScript à laquelle le code doit être transpilé
-    "module": "ES2022",                        // Module utilisé par Node.js
-    "rootDir": ".",                          // Répertoire racine de votre code source
+    "module": "ES2022",                          // Module utilisé par Node.js
+    "rootDir": ".",                              // Répertoire racine de votre code source
     "outDir": "./dist",                          // Répertoire de sortie pour les fichiers transpilés
     "strict": true,                              // Activer toutes les vérifications strictes
     "esModuleInterop": true,                     // Pour compatibilité avec les modules CommonJS

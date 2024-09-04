@@ -71,21 +71,41 @@ INSERT INTO "animals_has_users" ("animals_id", "users_id", "date_start", "date_e
 
 -- Alimentation de la table "animals_pictures" 
 INSERT INTO "animals_pictures" ("URL_picture", "animals_id") VALUES
-('https://example.com/mimi.jpg', 1),
-('https://example.com/felix.jpg', 2),
-('https://example.com/rex.jpg', 3),
-('https://example.com/belle.jpg', 4),
-('https://example.com/gringo.jpg', 5),
-('https://example.com/storm.jpg', 6),
-('https://example.com/fidji.jpg', 7),
-('https://example.com/coco.jpg', 8),
-('https://example.com/speedy.jpg', 9),
-('https://example.com/sly.jpg', 10),
-('https://example.com/kiki.jpg', 11),
-('https://example.com/slytherin.jpg', 12),
-('https://example.com/leo.jpg', 13),
-('https://example.com/speedy-tortue.jpg', 14),
-('https://example.com/remy.jpg', 15);
+('persan1.jpg', 1),
+('persan2.jpg', 1),
+('Siamois.jpg', 2),
+('Siamois2.jpg', 2),
+('berger_allemand2.jpg', 3),
+('berger_allemand3.jpg', 3),
+('labrador1.jpg', 4),
+('labrador2.jpg', 4),
+('Shetland1.jpg', 5),
+('Shetland2.jpg', 5),
+
+('Frison1.jpg', 6),
+
+('LapinNain1.jpg', 7),
+('LapinNain2.jpg', 7),
+
+('conchoncdinde1.jpg', 8),
+('conchoncdinde2.jpg', 8),
+
+('hamster1.jpg', 9),
+('hamster2.jpg', 9),
+
+('furet1.jpg', 10),
+
+('Perruche1.jpg', 11),
+('Perruche2.jpg', 11),
+
+('serpent1.jpg', 12),
+
+('gecko1.jpg', 13),
+('gecko2.jpg', 13),
+
+('tortue.jpg', 14),
+
+('rat.jpg', 15);
 
 -- Alimentation de la table "messages" 
 INSERT INTO "messages" ("sender_id", "receiver_id", "content") VALUES
