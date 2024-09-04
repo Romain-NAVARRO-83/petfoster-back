@@ -32,7 +32,7 @@ INSERT INTO "users" ("type_user", "name", "email", "password", "country", "zip",
 -- Alimentation de la table "animals" avec 2 chiens, 2 chats, 2 chevaux, et 1 NAC de chaque
 INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "long_story", "health", "species_id", "creator_id") VALUES
 -- Chats
-('Mimi', '2021-05-10', 'F', 'Persan', 'Chat très affectueux', 'Mimi est un chat calme et aimant, parfait pour une famille.', 'Bonne santé', 1, 1),
+('Mimi', '2024-06-10', 'F', 'Persan', 'Chat très affectueux', 'Mimi est un chat calme et aimant, parfait pour une famille.', 'Bonne santé', 1, 1),
 ('Felix', '2020-08-12', 'M', 'Siamois', 'Chat très joueur', 'Felix adore jouer et est très curieux.', 'Stérilisé', 1, 2),
 
 -- Chiens
