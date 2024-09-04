@@ -52,60 +52,64 @@ INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "
 ('Slytherin', '2018-08-01', 'M', 'Python Royal', 'Serpent calme', 'Slytherin est un serpent idéal pour les débutants.', 'En pleine santé', 9, 6),
 ('Leo', '2020-02-14', 'M', 'Gecko Léopard', 'Petit lézard fascinant', 'Leo est un gecko qui adore grimper et explorer.', 'En bonne santé', 10, 1),
 ('Speedy', '2019-12-21', 'M', 'Tortue de Terre', 'Tortue lente et paisible', 'Speedy est une tortue facile à entretenir.', 'En bonne santé', 11, 2),
-('Remy', '2021-09-07', 'M', 'Rat Domestique', 'Rat intelligent et sociable', 'Remy est un rat curieux qui adore interagir avec les humains.', 'En bonne santé', 12, 3);
+('Splinter', '2021-09-07', 'M', 'Rat Domestique', 'Rat intelligent et sociable', 'Remy est un rat curieux qui adore interagir avec les humains.', 'En bonne santé', 12, 3);
 
 -- Alimentation de la table "animals_has_users" 
 INSERT INTO "animals_has_users" ("animals_id", "users_id", "date_start", "date_end") VALUES
-(1, 1, '2023-01-01', '2023-06-01'),
-(2, 2, '2023-02-15', NULL),
-(3, 3, '2023-03-10', '2023-08-10'),
-(4, 4, '2023-04-20', NULL),
-(5, 5, '2023-05-25', NULL),
+(1, 5, '2023-01-01', '2023-06-01'),
+(2, 5, '2023-02-15', NULL),
+(3, 6, '2023-03-10', '2023-08-10'),
+(4, 5, '2023-04-20', NULL),
+(5, 6, '2023-05-25', NULL),
 (6, 6, '2023-06-30', NULL),
-(7, 1, '2023-07-15', NULL),
-(8, 2, '2023-08-20', NULL),
-(9, 3, '2023-09-05', NULL),
-(10, 4, '2023-09-25', NULL),
+(7, 5, '2023-07-15', NULL),
+(8, 6, '2023-08-20', NULL),
+(9, 5, '2023-09-05', NULL),
+(10, 5, '2023-09-25', NULL),
 (11, 5, '2023-10-10', NULL),
 (12, 6, '2023-10-30', NULL);
 
 -- Alimentation de la table "animals_pictures" 
 INSERT INTO "animals_pictures" ("URL_picture", "animals_id") VALUES
-('persan1.jpg', 1),
-('persan2.jpg', 1),
-('Siamois.jpg', 2),
-('Siamois2.jpg', 2),
-('berger_allemand2.jpg', 3),
-('berger_allemand3.jpg', 3),
-('labrador1.jpg', 4),
-('labrador2.jpg', 4),
-('Shetland1.jpg', 5),
-('Shetland2.jpg', 5),
+('1-Mimi-1.webp', 1),
+('1-Mimi-2.webp', 1),
 
-('Frison1.jpg', 6),
+('2-Felix-1.webp', 2),
+('2-Felix-2.webp', 2),
 
-('LapinNain1.jpg', 7),
-('LapinNain2.jpg', 7),
+('3-Rex-1.webp', 3),
+('3-Rex-2.webp', 3),
 
-('conchoncdinde1.jpg', 8),
-('conchoncdinde2.jpg', 8),
+('4-Belle-1.webp', 4),
+('4-Belle-2.webp', 4),
 
-('hamster1.jpg', 9),
-('hamster2.jpg', 9),
+('5-Gringo-1.webp', 5),
+('5-Gringo-2.webp', 5),
 
-('furet1.jpg', 10),
+('6-Storm-1.webp', 6),
 
-('Perruche1.jpg', 11),
-('Perruche2.jpg', 11),
+('7-Fidji-1.webp', 7),
+('7-Fidji-2.webp', 7),
 
-('serpent1.jpg', 12),
+('8-Coco-1.webp', 8),
+('8-Coco-2.webp', 8),
 
-('gecko1.jpg', 13),
-('gecko2.jpg', 13),
+('9-Speedy-1.webp', 9),
+('9-Speedy-2.webp', 9),
 
-('tortue.jpg', 14),
+('10-Sly-1.webp', 10),
 
-('rat.jpg', 15);
+('11-Kiki-1.webp', 11),
+('11-Kiki-2.webp', 11),
+
+('12-Slytherin-1.webp', 12),
+
+('13-Leo-1.webp', 13),
+('13-Leo-2.webp', 13),
+
+('14-Speedy-1.webp', 14),
+
+('15-Splinter-1.webp', 15);
 
 -- Alimentation de la table "messages" 
 INSERT INTO "messages" ("sender_id", "receiver_id", "content") VALUES
