@@ -3,8 +3,9 @@
 ## Initialisation
 
 1. Verifier que l'extension Prettier est installée
-2. lancer la commande `pnpm run compose:dev` (On devrait se retrouver dans l'instace Vite exposant le localhost:5173)
-3. Lancer un second terminal et y lancer la commander `pnpm run container:db`; Pour avoir un acces interactif au container contenant la bdd et y lancer des commandes de bases comme `SELECT * FROM animals`.
+2. Faites votre .env !
+3. lancer la commande `pnpm run compose:dev` (On devrait se retrouver dans l'instace Vite exposant le localhost:5173)
+4. Lancer un second terminal et y lancer la commander `pnpm run container:db`; Pour avoir un acces interactif au container contenant la bdd et y lancer des commandes de bases comme `SELECT * FROM animals`.
 
 Et voilà !
 
