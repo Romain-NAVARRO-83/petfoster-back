@@ -1,8 +1,7 @@
 import Joi from 'joi';
 import { Animal } from '../models/index.js';
 
-
-export async function getAllAnimals(req, res) {
+export async function getAllAnimals(req: any, res: any) {
   const animals = await Animal.findAll({
     include: 'creator',
     order: [
