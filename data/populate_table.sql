@@ -121,13 +121,13 @@ INSERT INTO "messages" ("sender_id", "receiver_id", "content") VALUES
 (6, 5, 'Bonjour, Gringo est un poney idéal pour les enfants.');
 
 -- Alimentation de la table "fosterling_profiles" 
-INSERT INTO "fosterling_profiles" ("age", "sexe", "search_area", "users_id", "species_id") VALUES
-('Jeune', 'M', 50, 1, 1),
-('Adulte', 'F', 100, 2, 2),
-('Jeune', 'M', 50, 3, 3),
-('Adulte', 'F', 100, 4, 4),
-('Jeune', 'M', 50, 5, 5),
-('Adulte', 'F', 100, 6, 6);
+INSERT INTO "fosterling_profiles" ("age", "sexe", "quantity", "search_area", "users_id", "species_id") VALUES
+('Jeune', 'M', 1, 50, 1, 1),
+('Adulte', 'F', 2, 100, 2, 2),
+('Jeune', 'M', 1, 50, 3, 3),
+('Adulte', 'F', 1, 100, 4, 4),
+('Jeune', 'M', 3, 50, 5, 5),
+('Adulte', 'F', 1, 100, 6, 6);
 
 -- Alimentation de la table "users_pictures" 
 INSERT INTO "users_pictures" ("URL_picture", "users_id") VALUES

@@ -1,10 +1,13 @@
 import Joi from 'joi';
 import { Request, Response } from 'express';
-import { Animal } from '../models/index.js';
+import { Animal, User, Species } from '../models/index.js';
 
 export async function getAllAnimals(req: Request, res: Response) {
   const animals = await Animal.findAll({
-    include: 'creator',
+    include: [
+      { model: User, as: 'creator' },
+      { model: Species, as: 'species' },
+    ],
     order: [
       ['id', 'ASC'], // Trier par l'ID des Animaux en ordre croissant
     ],
@@ -124,6 +127,7 @@ export async function updateAnimal(req: Request, res: Response) {
     species_id,
     creator_id,
   } = req.body;
+
   const updatedAnimal = await animal.update({
     name: name,
     date_of_birth: date_of_birth,

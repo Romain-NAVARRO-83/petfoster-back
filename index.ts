@@ -9,7 +9,9 @@ const app = express();
 import cors from 'cors';
 import { router } from './router/router';
 
-app.use(express.json());
+// Add body parser
+app.use(express.urlencoded({ extended: true })); // Parser les bodies de type "application/www-form-urlencoded"
+app.use(express.json()); // Parser les bodies de type "application/json"
 
 // Add body parser
 app.use(express.urlencoded({ extended: true })); // Parser les bodies de type "application/www-form-urlencoded"
