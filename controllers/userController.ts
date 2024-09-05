@@ -154,6 +154,12 @@ export async function createUser(req: Request, res: Response) {
   // On hash le mot de passe avec l'outil Argon2i
   const hashedPassword = await argon2i.hash(req.body.password);
 
+  // delete req.body.password;
+  // const createdUser = await User.create({
+  //   ...req.body,
+  //   password: hashedPassword
+  // })
+  
   // On déstructure le req.body et on crée l'utilisateur
   const {
     type_user,
@@ -182,10 +188,11 @@ export async function createUser(req: Request, res: Response) {
     description,
     longitude,
     latitude,
-    phone,
     address,
     website,
+  
   });
+    website });
 
   res.status(201).json(createdUser);
 }
@@ -224,8 +231,8 @@ export async function updateUser(req: Request, res: Response) {
   const { error } = updateUserSchema.validate(req.body); // Si error, alors cela signifie que le body ne passe pas la validation
   if (error) {
     return res.status(400).json({ error: error.message }); // Le message d'erreur est généré automatiquement par Joi
-  }
 
+  // On récupére l'id de l'utilisateur à update
   // On récupére l'id de la l'utilisateur à update
   const user = await User.findByPk(userId);
   // Valider l'ID du user
