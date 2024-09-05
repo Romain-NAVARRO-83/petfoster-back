@@ -203,7 +203,7 @@ export async function updateUser(req: Request, res: Response) {
 
   //On valide le body avec l'outil Joi
   // ==> On définie ce à quoi le body que nous envoie le client doit ressembler
-  // ==> On valide le body avec cet outil pratique !
+  // ==> On valide le body 
   const updateUserSchema = Joi.object({
     type_user: Joi.string().min(1),
     name: Joi.string().min(1),
