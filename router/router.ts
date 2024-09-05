@@ -16,6 +16,7 @@ router.delete('/animals/:id', cw(animalController.deleteAnimal));
 
 //Route Auth
 router.post('/login', cw(userController.loginUser));
+router.post('/loginh', cw(userController.loginhUser));
 
 // Routes des Users
 router.get('/users', cw(userController.getAllUsers));
