@@ -12,7 +12,7 @@ export async function getAllAnimals(req: Request, res: Response) {
       ['id', 'ASC'], // Trier par l'ID des Animaux en ordre croissant
     ],
   });
-  console.log('Animals fetched');
+
   res.status(200).json(animals);
 }
 
@@ -44,10 +44,10 @@ export async function getOneAnimal(req: Request, res: Response) {
 
 export async function createAnimal(req: Request, res: Response) {
   const createAnimalSchema = Joi.object({
-    name: Joi.string().min(1).required(),
+    name: Joi.string().min(1),
     date_of_birth: Joi.date().iso().required(),
-    sexe: Joi.string().min(1).required(),
-    race: Joi.string().min(1).allow(''),
+    sexe: Joi.string().min(1),
+    race: Joi.string().allow(''),
     short_story: Joi.string().allow(''),
     long_story: Joi.string().allow(''),
     health: Joi.string().allow(''),
@@ -95,10 +95,10 @@ export async function updateAnimal(req: Request, res: Response) {
   }
 
   const updateAnimalSchema = Joi.object({
-    name: Joi.string().min(1).required(),
+    name: Joi.string().min(1),
     date_of_birth: Joi.date().iso().required(),
-    sexe: Joi.string().min(1).required(),
-    race: Joi.string().min(1).allow(''),
+    sexe: Joi.string().min(1),
+    race: Joi.string().allow(''),
     short_story: Joi.string().allow(''),
     long_story: Joi.string().allow(''),
     health: Joi.string().allow(''),
