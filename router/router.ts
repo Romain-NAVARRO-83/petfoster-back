@@ -22,11 +22,11 @@ router.put('/users/:id', cw(userController.updateUser));
 router.delete('/users/:id', cw(userController.deleteUser));
 
 // Routes des Profils
-router.get('profiles', cw(profileController.getAllProfiles));
-router.get('profiles/:id', cw(profileController.getOneProfile));
-router.post('profiles', cw(profileController.createFosterlingProfile));
-router.put('profiles/:id', cw(profileController.updateProfile));
-router.delete('profiles/:id', cw(profileController.deleteProfile));
+router.get('/profiles', cw(profileController.getAllProfiles));
+router.get('/profiles/:id', cw(profileController.getOneProfile));
+router.post('/profiles', cw(profileController.createFosterlingProfile));
+router.put('/profiles/:id', cw(profileController.updateProfile));
+router.delete('/profiles/:id', cw(profileController.deleteProfile));
 
 // Routes des Requests
 router.get('requests', cw(requestController.getAllRequests));

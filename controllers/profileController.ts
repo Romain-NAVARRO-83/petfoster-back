@@ -37,7 +37,7 @@ export async function createFosterlingProfile(req: Request, res: Response) {
     users_id: Joi.number().integer().greater(0).required(),
     age: Joi.number().integer().greater(0).allow(),
     sexe: Joi.string().allow(''),
-    search_area: Joi.string().allow(''),
+    search_area: Joi.number().integer().min(10),
   });
 
   // Validation de la requête
@@ -62,8 +62,8 @@ export async function createFosterlingProfile(req: Request, res: Response) {
 
 export async function updateProfile(req: Request, res: Response) {
   const profileId = parseInt(req.params.id);
-  if (!Number.isInteger(FosterlingProfile)) {
-    return res.status(404).json({ error: 'Profile not found.' });
+  if (!Number.isInteger(profileId)) {
+    return res.status(404).json({ error: 'Bad request.' });
   }
 
   const updateProfileSchema = Joi.object({
@@ -72,12 +72,12 @@ export async function updateProfile(req: Request, res: Response) {
     users_id: Joi.number().integer().greater(0).required(),
     age: Joi.number().integer().greater(0).allow(),
     sexe: Joi.string().allow(''),
-    search_area: Joi.string().allow(''),
+    search_area: Joi.number().integer().min(10),
   });
 
   const { error } = updateProfileSchema.validate(req.body);
   if (error) {
-    return res.status(404).json({ error: 'Profile not found.' });
+    return res.status(404).json({ error: 'Bad request.' });
   }
 
   const profile = await FosterlingProfile.findByPk(req.params.id);
