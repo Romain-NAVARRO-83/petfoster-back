@@ -20,7 +20,7 @@ export async function loginUser(req: Request, res: Response) {
 
   // http response
   if (user) {
-    const jwtContent = { userId: user.name };
+    const jwtPayload = { userId: user.id, userName: user.name };
     const jwtOptions = {
       expiresIn: '3h',
     };
@@ -28,7 +28,7 @@ export async function loginUser(req: Request, res: Response) {
     res.json({
       logged: true,
       pseudo: user.username,
-      token: jwt.sign(jwtContent, process.env.JWTSECRET as string, jwtOptions),
+      token: jwt.sign(jwtPayload, process.env.JWTSECRET as string, jwtOptions),
     });
   } else {
     console.log('<< 401 UNAUTHORIZED');
@@ -62,7 +62,7 @@ export async function loginhUser(req: Request, res: Response) {
 
   // http response
   if (user) {
-    const jwtContent = { userId: user.name };
+    const jwtPayload = { userId: user.id, userName: user.name };
     const jwtOptions = {
       expiresIn: '3h',
     };
@@ -70,7 +70,7 @@ export async function loginhUser(req: Request, res: Response) {
     res.json({
       logged: true,
       pseudo: user.username,
-      token: jwt.sign(jwtContent, process.env.JWTSECRET as string, jwtOptions),
+      token: jwt.sign(jwtPayload, process.env.JWTSECRET as string, jwtOptions),
     });
   } else {
     console.log('<< 401 UNAUTHORIZED');
