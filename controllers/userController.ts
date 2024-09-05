@@ -1,5 +1,4 @@
 import Joi from 'joi';
-// import { argon2i } from 'argon2';
 import * as argon2i from "argon2";
 
 // On importe Request et Response pour typer les objets req et res venant d'Express.
