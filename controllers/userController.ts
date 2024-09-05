@@ -94,7 +94,8 @@ export async function createUser(req:Request, res:Response) {
     latitude, 
     phone,
     address, 
-    website });
+    website 
+  });
 
   res.status(201).json(createdUser);
 }
@@ -131,7 +132,7 @@ export async function updateUser(req:Request, res:Response) {
     return res.status(400).json({ error: error.message }); // Le message d'erreur est généré automatiquement par Joi
   }
   
-  // On récupére l'id de la l'utilisateur à update
+  // On récupére l'id de l'utilisateur à update
   const user = await User.findByPk(userId);
   // Valider l'ID du user
   if (! user) {
