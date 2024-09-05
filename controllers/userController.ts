@@ -1,9 +1,40 @@
 import Joi from 'joi';
 import * as argon2i from 'argon2';
+import { Op } from 'sequelize';
+import jwt from 'jsonwebtoken';
 
 // On importe Request et Response pour typer les objets req et res venant d'Express.
 import { Request, Response } from 'express';
 import { User, AnimalsHasUsers, Animal } from '../models/index.js';
+
+export async function loginUser(req: Request, res: Response) {
+  console.log('>> POST /login', req.body);
+  const { email, password } = req.body;
+
+  // authentication
+  const user = await User.findOne({
+    where: { [Op.and]: [{ email: email }, { password: password }] },
+  });
+
+  console.log(user);
+
+  // http response
+  if (user) {
+    const jwtContent = { userId: user.name };
+    const jwtOptions = {
+      expiresIn: '3h',
+    };
+    console.log('<< 200', user.name);
+    res.json({
+      logged: true,
+      pseudo: user.username,
+      token: jwt.sign(jwtContent, process.env.JWTSECRET as string, jwtOptions),
+    });
+  } else {
+    console.log('<< 401 UNAUTHORIZED');
+    res.sendStatus(401);
+  }
+}
 
 export async function getAllUsers(req: Request, res: Response) {
   // On récupère tous les utilisateurs en BDD
