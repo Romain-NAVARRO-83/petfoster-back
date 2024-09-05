@@ -21,12 +21,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/sequelize": "^4.28.20",
     "argon2": "^0.41.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
     "sequelize": "^6.37.3"
   },
   "devDependencies": {
