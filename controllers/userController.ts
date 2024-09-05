@@ -36,6 +36,48 @@ export async function loginUser(req: Request, res: Response) {
   }
 }
 
+export async function loginhUser(req: Request, res: Response) {
+  console.log('>> POST /login', req.body);
+  const { email, password } = req.body;
+
+  // authentication
+  const user = await User.findOne({
+    where: { email: email },
+  });
+  if (!user) {
+    return res.status(404).json({ error: 'User not found.' });
+  }
+
+  try {
+    if (await argon2i.verify(user.password, password)) {
+      // password match
+    } else {
+      return res.status(401).json({ error: 'Wrong password' });
+    }
+  } catch (err) {
+    return res.status(404).json({ error: 'Something went wrong' });
+  }
+
+  console.log(user);
+
+  // http response
+  if (user) {
+    const jwtContent = { userId: user.name };
+    const jwtOptions = {
+      expiresIn: '3h',
+    };
+    console.log('<< 200', user.name);
+    res.json({
+      logged: true,
+      pseudo: user.username,
+      token: jwt.sign(jwtContent, process.env.JWTSECRET as string, jwtOptions),
+    });
+  } else {
+    console.log('<< 401 UNAUTHORIZED');
+    res.sendStatus(401);
+  }
+}
+
 export async function getAllUsers(req: Request, res: Response) {
   // On récupère tous les utilisateurs en BDD
   const users = await User.findAll({
