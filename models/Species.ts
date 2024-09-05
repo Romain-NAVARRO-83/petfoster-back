@@ -24,6 +24,7 @@ Species.init(
   {
     sequelize,
     tableName: 'species',
+    timestamps: false,
   }
 );
 export default Species;
