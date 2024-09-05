@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import * as animalControler from '../controllers/animalControler';
+import * as profileController from '../controllers/profileController';
 import { controllerWrapper as cw } from '../utils/controllerWrapper';
 
 export const router = Router();
@@ -12,3 +13,5 @@ router.patch('/animals/:id', cw(animalControler.updateAnimal));
 router.delete('/animals/:id', cw(animalControler.deleteAnimal));
 
 // Routes des Users
+
+// Routes des Profils
