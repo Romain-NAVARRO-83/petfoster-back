@@ -1,7 +1,6 @@
 import Joi from 'joi';
 import { Request, Response } from 'express';
 import FosterlingProfile from '../models/FosterlingProfile';
-import { profile } from 'console';
 
 export async function getAllProfiles(req: Request, res: Response) {
   const profiles = await FosterlingProfile.findAll();
