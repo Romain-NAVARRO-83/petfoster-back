@@ -1,7 +1,51 @@
-import { DataTypes, Model } from 'sequelize';
 import { sequelize } from './dbClientSequelize';
+import { Model, Optional, DataTypes } from 'sequelize';
 
-class User extends Model {}
+// Définition des attributs de l'utilisateur
+type UserAttributes = {
+  id: number;
+  type_user: string;
+  name: string;
+  email: string;
+  password: string;
+  country: string;
+  zip: number;
+  city: string;
+  longitude: number;
+  latitude: number;
+  phone?: string; // optionnel
+  address?: string; // optionnel
+  website?: string; // optionnel
+  description?: string; // optionnel, ajout de la description
+  created_at: Date;
+  updated_at?: Date; // optionnel
+};
+
+// Définition des attributs pour la création, avec 'id' optionnel
+type UserCreationAttributes = Optional<
+  UserAttributes,
+  'id' | 'created_at' | 'updated_at'
+>;
+
+class User extends Model<UserAttributes, UserCreationAttributes> {
+  declare id: number;
+  declare type_user: string;
+  declare name: string;
+  declare email: string;
+  declare password: string;
+  declare country: string;
+  declare zip: number;
+  declare city: string;
+  declare longitude: number;
+  declare latitude: number;
+  declare phone?: string;
+  declare address?: string;
+  declare website?: string;
+  declare description?: string; // ajout de la description
+  declare created_at: Date;
+  declare updated_at?: Date;
+}
+
 User.init(
   {
     id: {
@@ -55,6 +99,9 @@ User.init(
     website: {
       type: DataTypes.STRING(255),
     },
+    description: {
+      type: DataTypes.STRING(1024), // ajout de la description avec une longueur maximale de 1024 caractères
+    },
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -70,4 +117,5 @@ User.init(
     timestamps: false,
   }
 );
-export default User;
+
+export { UserAttributes, UserCreationAttributes, User };

@@ -1,8 +1,38 @@
-import { DataTypes, Model } from 'sequelize';
 import { sequelize } from './dbClientSequelize';
+import { Model, Optional, DataTypes } from 'sequelize';
 import Animal from './Animal';
-import User from './User';
-class AnimalsHasUsers extends Model {}
+import { User } from './User';
+
+// Définition des attributs pour la relation Animal-User
+type AnimalsHasUsersAttributes = {
+  id: number;
+  animals_id: number;
+  users_id: number;
+  date_start?: Date; // optionnel
+  date_end?: Date; // optionnel
+  created_at: Date;
+  updated_at?: Date; // optionnel
+};
+
+// Définition des attributs pour la création, avec 'id' optionnel
+type AnimalsHasUsersCreationAttributes = Optional<
+  AnimalsHasUsersAttributes,
+  'id' | 'created_at' | 'updated_at'
+>;
+
+class AnimalsHasUsers extends Model<
+  AnimalsHasUsersAttributes,
+  AnimalsHasUsersCreationAttributes
+> {
+  declare id: number;
+  declare animals_id: number;
+  declare users_id: number;
+  declare date_start?: Date;
+  declare date_end?: Date;
+  declare created_at: Date;
+  declare updated_at?: Date;
+}
+
 AnimalsHasUsers.init(
   {
     id: {

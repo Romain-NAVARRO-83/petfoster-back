@@ -1,7 +1,33 @@
-import { DataTypes, Model } from 'sequelize';
 import { sequelize } from './dbClientSequelize';
+import { Model, Optional, DataTypes } from 'sequelize';
 import Animal from './Animal';
-class AnimalsPictures extends Model {}
+
+// Définition des attributs pour les images des animaux
+type AnimalsPicturesAttributes = {
+  id: number;
+  URL_picture: string;
+  animals_id: number;
+  created_at: Date;
+  updated_at?: Date; // optionnel
+};
+
+// Définition des attributs pour la création, avec 'id' optionnel
+type AnimalsPicturesCreationAttributes = Optional<
+  AnimalsPicturesAttributes,
+  'id' | 'created_at' | 'updated_at'
+>;
+
+class AnimalsPictures extends Model<
+  AnimalsPicturesAttributes,
+  AnimalsPicturesCreationAttributes
+> {
+  declare id: number;
+  declare URL_picture: string;
+  declare animals_id: number;
+  declare created_at: Date;
+  declare updated_at?: Date;
+}
+
 AnimalsPictures.init(
   {
     id: {

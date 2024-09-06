@@ -16,18 +16,18 @@ INSERT INTO "species" ("name") VALUES
 ('Rat');
 
 -- Alimentation de la table "users" avec 2 utilisateurs pour chaque type
-INSERT INTO "users" ("type_user", "name", "email", "password", "country", "zip", "city", "longitude", "latitude", "phone", "address", "website") VALUES
+INSERT INTO "users" ("type_user", "name", "email", "password", "country", "zip", "city", "longitude", "latitude", "phone", "address", "website", "description") VALUES
 -- Adoptants
-('adoptant', 'Alice Dupont', 'alice.dupont@example.com', 'hashed_password1', 'France', 75001, 'Paris', 2.3522, 48.8566, '0123456789', '1 Rue de Rivoli', 'www.alicedupont.com'),
-('adoptant', 'Marie Dubois', 'marie.dubois@example.com', 'hashed_password3', 'France', 33000, 'Bordeaux', -0.5792, 44.8378, '0123456791', '3 Cours de l’Intendance', 'www.mariedubois.com'),
+('adoptant', 'Alice Dupont', 'alice.dupont@example.com', 'hashed_password1', 'France', 75001, 'Paris', 2.3522, 48.8566, '0123456789', '1 Rue de Rivoli', 'www.alicedupont.com', 'Grande passionnée des animaux, en particulier des chats.'),
+('adoptant', 'Marie Dubois', 'marie.dubois@example.com', 'hashed_password3', 'France', 33000, 'Bordeaux', -0.5792, 44.8378, '0123456791', '3 Cours de l’Intendance', 'www.mariedubois.com', 'Adoptante expérimentée, elle possède déjà plusieurs animaux.'),
 
 -- Familles d'accueil
-('famille d''accueil', 'Jean Martin', 'jean.martin@example.com', 'hashed_password2', 'France', 69001, 'Lyon', 4.8357, 45.7640, '0123456790', '2 Rue des Capucins', NULL),
-('famille d''accueil', 'Paul Durant', 'paul.durant@example.com', 'hashed_password4', 'France', 31000, 'Toulouse', 1.4442, 43.6047, '0123456792', '4 Allée Jean Jaurès', NULL),
+('famille d''accueil', 'Jean Martin', 'jean.martin@example.com', 'hashed_password2', 'France', 69001, 'Lyon', 4.8357, 45.7640, '0123456790', '2 Rue des Capucins', NULL, 'Habitué à accueillir des animaux de toutes tailles.'),
+('famille d''accueil', 'Paul Durant', 'paul.durant@example.com', 'hashed_password4', 'France', 31000, 'Toulouse', 1.4442, 43.6047, '0123456792', '4 Allée Jean Jaurès', NULL, 'Amoureux des chiens et spécialisé dans leur éducation.'),
 
 -- Associations
-('association', 'Société Protectrice des Animaux', 'contact@spa-example.com', 'hashed_password5', 'France', 75010, 'Paris', 2.3574, 48.8635, '0123456794', '10 Avenue de la République', 'www.spa-example.com'),
-('association', 'Refuge Animalier', 'contact@refuge-example.com', 'hashed_password6', 'France', 67000, 'Strasbourg', 7.7521, 48.5734, '0123456795', '20 Rue de la Gare', 'www.refuge-example.com');
+('association', 'Société Protectrice des Animaux', 'contact@spa-example.com', 'hashed_password5', 'France', 75010, 'Paris', 2.3574, 48.8635, '0123456794', '10 Avenue de la République', 'www.spa-example.com', 'La SPA est une des plus grandes associations de protection animale en France.'),
+('association', 'Refuge Animalier', 'contact@refuge-example.com', 'hashed_password6', 'France', 67000, 'Strasbourg', 7.7521, 48.5734, '0123456795', '20 Rue de la Gare', 'www.refuge-example.com', 'Refuge dédié aux animaux abandonnés et maltraités dans l’est de la France.');
 
 -- Alimentation de la table "animals" avec 2 chiens, 2 chats, 2 chevaux, et 1 NAC de chaque
 INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "long_story", "health", "species_id", "creator_id") VALUES
@@ -52,7 +52,7 @@ INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "
 ('Slytherin', '2018-08-01', 'M', 'Python Royal', 'Serpent calme', 'Slytherin est un serpent idéal pour les débutants.', 'En pleine santé', 9, 6),
 ('Leo', '2020-02-14', 'M', 'Gecko Léopard', 'Petit lézard fascinant', 'Leo est un gecko qui adore grimper et explorer.', 'En bonne santé', 10, 1),
 ('Speedy', '2019-12-21', 'M', 'Tortue de Terre', 'Tortue lente et paisible', 'Speedy est une tortue facile à entretenir.', 'En bonne santé', 11, 2),
-('Splinter', '2021-09-07', 'M', 'Rat Domestique', 'Rat intelligent et sociable', 'Remy est un rat curieux qui adore interagir avec les humains.', 'En bonne santé', 12, 3);
+('Splinter', '2021-09-07', 'M', 'Rat Domestique', 'Rat intelligent et sociable', 'Splinter est un rat curieux qui adore interagir avec les humains.', 'En bonne santé', 12, 3);
 
 -- Alimentation de la table "animals_has_users" 
 INSERT INTO "animals_has_users" ("animals_id", "users_id", "date_start", "date_end") VALUES
@@ -103,45 +103,14 @@ INSERT INTO "animals_pictures" ("URL_picture", "animals_id") VALUES
 ('11-Kiki-2.webp', 11),
 
 ('12-Slytherin-1.webp', 12),
+('12-Slytherin-2.webp', 12),
 
 ('13-Leo-1.webp', 13),
 ('13-Leo-2.webp', 13),
 
 ('14-Speedy-1.webp', 14),
 
-('15-Splinter-1.webp', 15);
-
--- Alimentation de la table "messages" 
-INSERT INTO "messages" ("sender_id", "receiver_id", "content") VALUES
-(1, 2, 'Bonjour Marie, je serais intéressée par Felix.'),
-(2, 1, 'Bonjour Alice, Felix est encore disponible pour adoption.'),
-(3, 4, 'Salut Paul, Storm a l’air parfait pour mes enfants.'),
-(4, 3, 'Salut Jean, Storm est vraiment un cheval majestueux.'),
-(5, 6, 'Bonjour, je voudrais des informations sur Gringo.'),
-(6, 5, 'Bonjour, Gringo est un poney idéal pour les enfants.');
-
--- Alimentation de la table "fosterling_profiles" 
-INSERT INTO "fosterling_profiles" ("age", "sexe", "quantity", "search_area", "users_id", "species_id") VALUES
-('Jeune', 'M', 1, 50, 1, 1),
-('Adulte', 'F', 2, 100, 2, 2),
-('Jeune', 'M', 1, 50, 3, 3),
-('Adulte', 'F', 1, 100, 4, 4),
-('Jeune', 'M', 3, 50, 5, 5),
-('Adulte', 'F', 1, 100, 6, 6);
-
--- Alimentation de la table "users_pictures" 
-INSERT INTO "users_pictures" ("URL_picture", "users_id") VALUES
-('https://example.com/alice.jpg', 1),
-('https://example.com/marie.jpg', 2),
-('https://example.com/jean.jpg', 3),
-('https://example.com/paul.jpg', 4),
-('https://example.com/spa.jpg', 5),
-('https://example.com/refuge.jpg', 6);
-
--- Alimentation de la table "fosterling_requests"
-INSERT INTO "fosterling_requests" ("request_status", "content_request", "animals_id", "users_id") VALUES
-('Pending', 'Je souhaiterais adopter Mimi.', 1, 2),
-('Approved', 'Demande d’adoption pour Rex approuvée.', 3, 3),
-('Rejected', 'Demande d’adoption pour Storm rejetée.', 6, 4);
+('15-Splinter-1.webp', 15),
+('15-Splinter-2.webp', 15);
 
 COMMIT;

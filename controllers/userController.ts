@@ -27,7 +27,7 @@ export async function loginUser(req: Request, res: Response) {
     console.log('<< 200', user.name);
     res.json({
       logged: true,
-      pseudo: user.username,
+      pseudo: user.name,
       token: jwt.sign(jwtPayload, process.env.JWTSECRET as string, jwtOptions),
     });
   } else {
@@ -69,7 +69,7 @@ export async function loginhUser(req: Request, res: Response) {
     console.log('<< 200', user.name);
     res.json({
       logged: true,
-      pseudo: user.username,
+      pseudo: user.name,
       token: jwt.sign(jwtPayload, process.env.JWTSECRET as string, jwtOptions),
     });
   } else {
@@ -111,7 +111,20 @@ export async function getOneUser(req: Request, res: Response) {
   }
 
   // Récupérer un utilisateur en BDD
-  const user = await User.findByPk(req.params.id);
+  const user = await User.findByPk(req.params.id, {
+    include: [
+      {
+        model: AnimalsHasUsers,
+        as: 'userAnimals',
+        include: [
+          {
+            model: Animal,
+            as: 'animal',
+          },
+        ],
+      },
+    ],
+  });
 
   // Si l'utilisateur n'existe pas
   if (!user) {
@@ -188,6 +201,7 @@ export async function createUser(req: Request, res: Response) {
     description,
     longitude,
     latitude,
+    phone,
     address,
     website,
   });
