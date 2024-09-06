@@ -30,6 +30,15 @@ export async function getOneAnimal(req: Request, res: Response) {
     include: [
       { model: User, as: 'creator' },
       { model: Species, as: 'species' },
+      { model: AnimalsPictures,
+        as: 'animals_pictures',
+        include: [
+          {
+            model: Animal,
+            as: 'animal',
+          },
+        ],
+      },
     ],
     order: [
       ['id', 'ASC'], // Trier par l'ID des Animaux en ordre croissant
@@ -164,11 +173,3 @@ export async function deleteAnimal(req: Request, res: Response) {
 
 
 
-export async function getOneAnimalAndPictures (req:Request, res:Response){
-  const {id} = req.params;
-  const animal = await Animal.findByPk(id, {
-      include : 'AnimalsPictures'
-  })
-  if(!animal) return res.status(404).json(`Aucun animal à l'id : ${id}`);
-  res.status(200).json(animal);
-}
