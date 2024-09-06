@@ -8,6 +8,7 @@ type FosterlingProfileAttributes = {
   id: number;
   age: string;
   sexe: string;
+  quantity: number;
   search_area: number;
   users_id: number;
   species_id: number;
@@ -27,6 +28,7 @@ class FosterlingProfile extends Model<
 > {
   declare id: number;
   declare age: string;
+  declare quantity: number;
   declare sexe: string;
   declare search_area: number;
   declare users_id: number;
@@ -47,6 +49,9 @@ FosterlingProfile.init(
     },
     sexe: {
       type: DataTypes.CHAR(1),
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
     },
     search_area: {
       type: DataTypes.INTEGER,
