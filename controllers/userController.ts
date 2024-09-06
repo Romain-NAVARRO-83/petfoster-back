@@ -230,7 +230,7 @@ export async function updateUser(req: Request, res: Response) {
   if (error) {
     return res.status(400).json({ error: error.message }); // Le message d'erreur est généré automatiquement par Joi
   }
-  // On récupére l'id de l'utilisateur à update
+  
   // On récupére l'id de la l'utilisateur à update
   const user = await User.findByPk(userId);
   // Valider l'ID du user
