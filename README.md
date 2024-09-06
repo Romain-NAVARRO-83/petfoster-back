@@ -15,5 +15,5 @@ Et voilà !
 
 ## Si besoin de reinitialiser les container
 
-1. `pnpm un rm:container`
+1. `pnpm run rm:container`
 2. `pnpm run compose:dev`
