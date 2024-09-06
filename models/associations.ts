@@ -1,4 +1,4 @@
-import User from './User';
+import { User } from './User';
 import Animal from './Animal';
 import Species from './Species';
 import AnimalsHasUsers from './AnimalsHasUsers';
