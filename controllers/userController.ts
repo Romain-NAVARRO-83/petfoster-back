@@ -111,7 +111,20 @@ export async function getOneUser(req: Request, res: Response) {
   }
 
   // Récupérer un utilisateur en BDD
-  const user = await User.findByPk(req.params.id);
+  const user = await User.findByPk(req.params.id, {
+    include: [
+      {
+        model: AnimalsHasUsers,
+        as: 'userAnimals',
+        include: [
+          {
+            model: Animal,
+            as: 'animal',
+          },
+        ],
+      },
+    ],
+  });
 
   // Si l'utilisateur n'existe pas
   if (!user) {

@@ -27,7 +27,10 @@ export async function getOneAnimal(req: Request, res: Response) {
 
   // Récupérer l'animal en BDD
   const animal = await Animal.findByPk(req.params.id, {
-    include: 'creator',
+    include: [
+      { model: User, as: 'creator' },
+      { model: Species, as: 'species' },
+    ],
     order: [
       ['id', 'ASC'], // Trier par l'ID des Animaux en ordre croissant
     ],
