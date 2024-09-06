@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { Request, Response } from 'express';
-import { Animal, User, Species } from '../models/index.js';
+import { Animal, User, Species, AnimalsPictures } from '../models/index.js';
 
 export async function getAllAnimals(req: Request, res: Response) {
   const animals = await Animal.findAll({
@@ -157,4 +157,15 @@ export async function deleteAnimal(req: Request, res: Response) {
   await animal.destroy();
 
   res.status(204).end();
+}
+
+
+
+export async function getOneAnimalAndPictures (req:Request, res:Response){
+  const {id} = req.params;
+  const animal = await Animal.findByPk(id, {
+      include : 'AnimalsPictures'
+  })
+  if(!animal) return res.status(404).json(`Aucun animal à l'id : ${id}`);
+  res.status(200).json(animal);
 }
