@@ -3,6 +3,7 @@ import * as animalController from '../controllers/animalController';
 import * as userController from '../controllers/userController';
 import * as profileController from '../controllers/profileController';
 import * as requestController from '../controllers/requestController';
+import * as messageController from '../controllers/messageController';
 import { controllerWrapper as cw } from '../utils/controllerWrapper';
 
 export const router = Router();
@@ -33,8 +34,12 @@ router.put('/profiles/:id', cw(profileController.updateProfile));
 router.delete('/profiles/:id', cw(profileController.deleteProfile));
 
 // Routes des Requests
-router.get('requests', cw(requestController.getAllRequests));
-router.get('requests/:id', cw(requestController.getOneRequest));
-router.post('requests', cw(requestController.createFosterlingRequest));
-router.put('requests/:id', cw(requestController.updateRequest));
-router.delete('requests/:id', cw(requestController.deleteRequest));
+router.get('/requests', cw(requestController.getAllRequests));
+router.get('/requests/:id', cw(requestController.getOneRequest));
+router.post('/requests', cw(requestController.createFosterlingRequest));
+router.put('/requests/:id', cw(requestController.updateRequest));
+router.delete('/requests/:id', cw(requestController.deleteRequest));
+
+// Routes des Messages
+router.get('/users/:id/messages', cw(messageController.getAllMessages));
+router.post('/messages', cw(messageController.writeMessage));
