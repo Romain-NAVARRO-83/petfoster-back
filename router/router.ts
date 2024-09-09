@@ -1,11 +1,21 @@
 import { Router } from 'express';
+import { Request, Response } from 'express';
 import * as animalController from '../controllers/animalController';
 import * as userController from '../controllers/userController';
 import * as profileController from '../controllers/profileController';
 import * as requestController from '../controllers/requestController';
 import { controllerWrapper as cw } from '../utils/controllerWrapper';
+import csrf from 'csrf';
+const csrfProtection = new csrf();
 
 export const router = Router();
+
+// Route to serve the CSRF token
+router.get('/csrf-token', (req: Request, res: Response) => {
+  const csrfToken = csrfProtection.create(process.env.CSRF_SECRET as string);
+  // Send the token as a cookie or in the response body
+  res.status(200).json(csrfToken);
+});
 
 // Routes des Animaux
 router.get('/animals', cw(animalController.getAllAnimals));

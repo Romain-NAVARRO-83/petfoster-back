@@ -2,10 +2,17 @@ import Joi from 'joi';
 import * as argon2i from 'argon2';
 import { Op } from 'sequelize';
 import jwt from 'jsonwebtoken';
+import csrf from 'csrf';
+const csrfProtection = new csrf();
 
 // On importe Request et Response pour typer les objets req et res venant d'Express.
 import { Request, Response } from 'express';
-import { User, AnimalsHasUsers, Animal, UsersPicture } from '../models/index.js';
+import {
+  User,
+  AnimalsHasUsers,
+  Animal,
+  UsersPicture,
+} from '../models/index.js';
 
 export async function loginUser(req: Request, res: Response) {
   console.log('>> POST /login', req.body);
@@ -137,6 +144,18 @@ export async function getOneUser(req: Request, res: Response) {
 }
 
 export async function createUser(req: Request, res: Response) {
+  // Validate the CSRF token in requests
+  const csrfToken = req.headers['x-xsrf-token'];
+  if (
+    !csrfProtection.verify(
+      process.env.CSRF_SECRET as string,
+      csrfToken as string
+    )
+  ) {
+    return res.status(403).send('Invalid CSRF token');
+  }
+  // Continue processing the request...
+
   const createUserSchema = Joi.object({
     type_user: Joi.string().min(1),
     name: Joi.string().min(1),
@@ -218,7 +237,7 @@ export async function updateUser(req: Request, res: Response) {
 
   //On valide le body avec l'outil Joi
   // ==> On définie ce à quoi le body que nous envoie le client doit ressembler
-  // ==> On valide le body 
+  // ==> On valide le body
   const updateUserSchema = Joi.object({
     type_user: Joi.string().min(1),
     name: Joi.string().min(1),
@@ -245,7 +264,7 @@ export async function updateUser(req: Request, res: Response) {
   if (error) {
     return res.status(400).json({ error: error.message }); // Le message d'erreur est généré automatiquement par Joi
   }
-  
+
   // On récupére l'id de la l'utilisateur à update
   const user = await User.findByPk(userId);
   // Valider l'ID du user

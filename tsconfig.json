@@ -17,11 +17,12 @@
     "lib": ["ES2020"],                            // Bibliothèques inclues
     "baseUrl": ".",
     "paths": {
-        "*": ["types/*"]}
+        "*": ["types/*"]},
+    "typeRoots": ["./node_modules/@types"],
   },
   "include": [
     "eslint.config.js", // on inclut la configuration d'ESLint
-    "./#/##"
+    ".ts"
     ],              
     "exclude": [
       "node_modules"
