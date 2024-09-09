@@ -30,7 +30,15 @@ export async function getOneAnimal(req: Request, res: Response) {
     include: [
       { model: User, as: 'creator' },
       { model: Species, as: 'species' },
-      { model: AnimalsPictures, as: 'pictures' },
+      { model: AnimalsPictures,
+        as: 'pictures',
+        include: [
+          {
+            model: Animal,
+            as: 'animal',
+          },
+        ],
+      },
     ],
     order: [
       ['id', 'ASC'], // Trier par l'ID des Animaux en ordre croissant
