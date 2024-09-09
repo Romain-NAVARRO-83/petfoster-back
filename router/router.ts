@@ -32,6 +32,7 @@ router.post('/loginh', cw(userController.loginhUser));
 // Routes des Users
 router.get('/users', cw(userController.getAllUsers));
 router.get('/users/:id', cw(userController.getOneUser));
+router.get('users/:id', cw(userController.getAnimalsUser));
 router.post('/users', cw(userController.createUser));
 router.put('/users/:id', cw(userController.updateUser));
 router.delete('/users/:id', cw(userController.deleteUser));
@@ -53,3 +54,4 @@ router.delete('/requests/:id', cw(requestController.deleteRequest));
 // Routes des Messages
 router.get('/users/:id/messages', cw(messageController.getAllMessages));
 router.post('/messages', cw(messageController.writeMessage));
+router.delete('/messages/:id', cw(messageController.deleteMessage));
