@@ -31,7 +31,7 @@ export async function getOneAnimal(req: Request, res: Response) {
       { model: User, as: 'creator' },
       { model: Species, as: 'species' },
       { model: AnimalsPictures,
-        as: 'animals_pictures',
+        as: 'pictures',
         include: [
           {
             model: Animal,
