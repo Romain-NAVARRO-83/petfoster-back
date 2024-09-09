@@ -52,7 +52,7 @@ INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "
 ('Slytherin', '2018-08-01', 'M', 'Python Royal', 'Serpent calme', 'Slytherin est un serpent idéal pour les débutants.', 'En pleine santé', 9, 6),
 ('Leo', '2020-02-14', 'M', 'Gecko Léopard', 'Petit lézard fascinant', 'Leo est un gecko qui adore grimper et explorer.', 'En bonne santé', 10, 1),
 ('Speedy', '2019-12-21', 'M', 'Tortue de Terre', 'Tortue lente et paisible', 'Speedy est une tortue facile à entretenir.', 'En bonne santé', 11, 2),
-('Splinter', '2021-09-07', 'M', 'Rat Domestique', 'Rat intelligent et sociable', 'Splinter est un rat curieux qui adore interagir avec les humains.', 'En bonne santé', 12, 3);
+('Splinter', '2021-09-07', 'M', 'Rat Domestique', 'Rat intelligent et sociable', 'Splinter est un rat curieux qui adore interagir avec les humains, et les tortues...', 'En bonne santé', 12, 3);
 
 -- Alimentation de la table "animals_has_users" 
 INSERT INTO "animals_has_users" ("animals_id", "users_id", "date_start", "date_end") VALUES
@@ -131,12 +131,18 @@ INSERT INTO "fosterling_profiles" ("age", "sexe", "quantity", "search_area", "us
 
 -- Alimentation de la table "users_pictures" 
 INSERT INTO "users_pictures" ("URL_picture", "users_id") VALUES
-('https://example.com/alice.jpg', 1),
-('https://example.com/marie.jpg', 2),
-('https://example.com/jean.jpg', 3),
-('https://example.com/paul.jpg', 4),
-('https://example.com/spa.jpg', 5),
-('https://example.com/refuge.jpg', 6);
+('1-Alice Dupont-1.webp', 1),
+('2-Marie Dubois-1.webp', 2),
+('3-Jean Martin-1.webp', 3),
+('3-Jean Martin-2.webp', 3),
+
+('4-Paul Durant-1.webp', 4),
+('5-Société Protectrice des Animaux-1.webp', 5),
+('5-Société Protectrice des Animaux-2.webp', 5),
+
+('6-Refuge Animalier-1.webp', 6),
+('6-Refuge Animalier-2.webp', 6);
+
 
 -- Alimentation de la table "fosterling_requests"
 INSERT INTO "fosterling_requests" ("request_status", "content_request", "animals_id", "users_id") VALUES
