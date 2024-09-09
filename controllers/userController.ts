@@ -2,6 +2,8 @@ import Joi from 'joi';
 import * as argon2i from 'argon2';
 import { Op } from 'sequelize';
 import jwt from 'jsonwebtoken';
+import csrf from 'csrf';
+const csrfProtection = new csrf();
 
 // On importe Request et Response pour typer les objets req et res venant d'Express.
 import { Request, Response } from 'express';

@@ -2,6 +2,8 @@ import Joi from 'joi';
 import { Request, Response } from 'express';
 import { Message } from '../models';
 import { Op } from 'sequelize';
+import csrf from 'csrf';
+const csrfProtection = new csrf();
 
 // Récupérer tous les messages
 export async function getAllMessages(req: Request, res: Response) {
@@ -17,6 +19,18 @@ export async function getAllMessages(req: Request, res: Response) {
 
 // On crée un schéma Joi pour les messsages
 export async function writeMessage(req: Request, res: Response) {
+  // Validate the CSRF token in requests
+  const csrfToken = req.headers['x-xsrf-token'];
+  if (
+    !csrfProtection.verify(
+      process.env.CSRF_SECRET as string,
+      csrfToken as string
+    )
+  ) {
+    return res.status(403).send('Invalid CSRF token');
+  }
+  // Continue processing the request...
+
   const createMessageSchema = Joi.object({
     sender_id: Joi.number().integer().required(),
     receiver_id: Joi.number().integer().required(),
