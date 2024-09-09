@@ -1,11 +1,16 @@
 import Joi from 'joi';
 import * as argon2i from 'argon2';
 import { Op } from 'sequelize';
+import { hash, compare } from '../utils/crypto.js';
+import * as EmailValidator from 'email-validator';
+import { PasswordValidator}  from 'password-validator';
 import jwt from 'jsonwebtoken';
 
 // On importe Request et Response pour typer les objets req et res venant d'Express.
 import { Request, Response } from 'express';
 import { User, AnimalsHasUsers, Animal, UsersPicture, FosterlingProfile, FosterlingRequest } from '../models/index.js';
+
+
 
 export async function loginUser(req: Request, res: Response) {
   console.log('>> POST /login', req.body);
