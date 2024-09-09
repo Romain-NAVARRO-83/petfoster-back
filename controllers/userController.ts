@@ -12,6 +12,8 @@ import {
   AnimalsHasUsers,
   Animal,
   UsersPicture,
+  FosterlingProfile,
+  FosterlingRequest,
 } from '../models/index.js';
 
 export async function loginUser(req: Request, res: Response) {
@@ -131,6 +133,8 @@ export async function getOneUser(req: Request, res: Response) {
         ],
       },
       { model: UsersPicture, as: 'pictures' },
+      { model: FosterlingProfile, as: 'fosterlingProfiles' },
+      { model: FosterlingRequest, as: 'fosterlingRequests' },
     ],
   });
 
