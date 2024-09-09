@@ -41,3 +41,23 @@ export async function writeMessage(req: Request, res: Response) {
   // On renvoie la réponse, le nouveau message
   res.status(200).json(newMessage);
 }
+
+export async function deleteMessage(req: Request, res: Response) {
+  // On récupère l'ID du message à supprimer
+  const messageId = parseInt(req.params.id);
+  // On vérifie que l'ID est valide
+  if (!Number.isInteger(messageId)) {
+    return res.status(404).json({ error: 'Message not found.' });
+  }
+
+  // On récupère le message à supprimer en BDD
+  const message = await Message.findByPk(messageId);
+  // S'il n'existe pas, on renvoie une erreur 404
+  if (!message) {
+    return res.status(404).json({ error: 'Message not found.' });
+  }
+  // On supprime le message
+  await message.destroy();
+  // On renvoie une erreur 204 (no content)
+  res.status(204).end(); // (end: Pour répondre à une requête sans y mettre de body)
+}

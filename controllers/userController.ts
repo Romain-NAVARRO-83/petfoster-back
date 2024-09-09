@@ -5,7 +5,14 @@ import jwt from 'jsonwebtoken';
 
 // On importe Request et Response pour typer les objets req et res venant d'Express.
 import { Request, Response } from 'express';
-import { User, AnimalsHasUsers, Animal, UsersPicture, FosterlingProfile, FosterlingRequest } from '../models/index.js';
+import {
+  User,
+  AnimalsHasUsers,
+  Animal,
+  UsersPicture,
+  FosterlingProfile,
+  FosterlingRequest,
+} from '../models/index.js';
 
 export async function loginUser(req: Request, res: Response) {
   console.log('>> POST /login', req.body);
@@ -123,9 +130,10 @@ export async function getOneUser(req: Request, res: Response) {
           },
         ],
       },
-      { model: UsersPicture, as: 'pictures' }, 
+      { model: UsersPicture, as: 'pictures' },
       { model: FosterlingProfile, as: 'fosterlingProfiles' },
-      { model: FosterlingRequest, as: 'fosterlingRequests' }
+      { model: FosterlingRequest, as: 'fosterlingRequests' },
+      { model: Animal, as: 'createdAnimals' },
     ],
   });
 
@@ -220,7 +228,7 @@ export async function updateUser(req: Request, res: Response) {
 
   //On valide le body avec l'outil Joi
   // ==> On définie ce à quoi le body que nous envoie le client doit ressembler
-  // ==> On valide le body 
+  // ==> On valide le body
   const updateUserSchema = Joi.object({
     type_user: Joi.string().min(1),
     name: Joi.string().min(1),
@@ -247,7 +255,7 @@ export async function updateUser(req: Request, res: Response) {
   if (error) {
     return res.status(400).json({ error: error.message }); // Le message d'erreur est généré automatiquement par Joi
   }
-  
+
   // On récupére l'id de la l'utilisateur à update
   const user = await User.findByPk(userId);
   // Valider l'ID du user
