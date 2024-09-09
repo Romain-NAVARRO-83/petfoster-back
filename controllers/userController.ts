@@ -148,18 +148,6 @@ export async function getOneUser(req: Request, res: Response) {
 }
 
 export async function createUser(req: Request, res: Response) {
-  // Validate the CSRF token in requests
-  const csrfToken = req.headers['x-xsrf-token'];
-  if (
-    !csrfProtection.verify(
-      process.env.CSRF_SECRET as string,
-      csrfToken as string
-    )
-  ) {
-    return res.status(403).send('Invalid CSRF token');
-  }
-  // Continue processing the request...
-
   const createUserSchema = Joi.object({
     type_user: Joi.string().min(1),
     name: Joi.string().min(1),
