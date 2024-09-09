@@ -30,15 +30,7 @@ export async function getOneAnimal(req: Request, res: Response) {
     include: [
       { model: User, as: 'creator' },
       { model: Species, as: 'species' },
-      { model: AnimalsPictures,
-        as: 'animals_pictures',
-        include: [
-          {
-            model: Animal,
-            as: 'animal',
-          },
-        ],
-      },
+      { model: AnimalsPictures, as: 'pictures' },
     ],
     order: [
       ['id', 'ASC'], // Trier par l'ID des Animaux en ordre croissant
@@ -170,6 +162,3 @@ export async function deleteAnimal(req: Request, res: Response) {
 
   res.status(204).end();
 }
-
-
-
