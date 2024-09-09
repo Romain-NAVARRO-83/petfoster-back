@@ -26,7 +26,7 @@ router.put('/animals/:id', cw(animalController.updateAnimal));
 router.delete('/animals/:id', cw(animalController.deleteAnimal));
 
 //Route Auth
-router.post('/login', cw(userController.loginUser));
+router.post('/login', cw(userController.loginUser)); // !!! A SUPPRIMER LORSQUE l'AUTH SERA EN PLACE (à Remplacer par /longinh)
 router.post('/loginh', cw(userController.loginhUser));
 
 // Routes des Users
