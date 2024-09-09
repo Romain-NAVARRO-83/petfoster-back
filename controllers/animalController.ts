@@ -170,6 +170,3 @@ export async function deleteAnimal(req: Request, res: Response) {
 
   res.status(204).end();
 }
-
-
-
