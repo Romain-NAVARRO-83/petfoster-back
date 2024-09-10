@@ -5,8 +5,6 @@ import * as emailValidator from 'email-validator';
 import passwordValidator from 'password-validator';
 import jwt from 'jsonwebtoken';
 import geolib from 'geolib';
-import csrf from 'csrf';
-const csrfProtection = new csrf();
 
 // On importe Request et Response pour typer les objets req et res venant d'Express.
 import { Request, Response } from 'express';
@@ -18,8 +16,8 @@ import {
   FosterlingProfile,
   FosterlingRequest,
 } from '../models/index.js';
-import CSRF_Verification from '../utils/CSRF_Verification.js';
 
+//! A SUPPRIMER A TERME
 export async function loginUser(req: Request, res: Response) {
   console.log('>> POST /login', req.body);
   const { email, password } = req.body;
@@ -184,8 +182,6 @@ export async function getOneUser(req: Request, res: Response) {
 }
 
 export async function createUser(req: Request, res: Response) {
-  CSRF_Verification(req, res);
-
   const createUserSchema = Joi.object({
     type_user: Joi.string().min(1),
     name: Joi.string().min(1),
