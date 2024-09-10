@@ -1,5 +1,5 @@
 import { sequelize } from './dbClientSequelize';
-import { Model, Optional, DataTypes } from 'sequelize';
+import { Model, Optional, DataTypes, BOOLEAN } from 'sequelize';
 import { User } from './User';
 
 // Définition des attributs pour un message
@@ -8,6 +8,7 @@ type MessageAttributes = {
   sender_id: number;
   receiver_id: number;
   content: string;
+  is_read: Boolean;
   created_at: Date;
   updated_at?: Date; // optionnel
 };
@@ -23,6 +24,7 @@ class Message extends Model<MessageAttributes, MessageCreationAttributes> {
   declare sender_id: number;
   declare receiver_id: number;
   declare content: string;
+  declare is_read: Boolean;
   declare created_at: Date;
   declare updated_at?: Date;
 }
@@ -58,6 +60,11 @@ Message.init(
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
+    },
+    is_read: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
     updated_at: {
       type: DataTypes.DATE,

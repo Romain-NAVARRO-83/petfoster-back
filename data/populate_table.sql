@@ -112,13 +112,13 @@ INSERT INTO "animals_pictures" ("URL_picture", "animals_id") VALUES
 ('15-Splinter-1.webp', 15);
 
 -- Alimentation de la table "messages" 
-INSERT INTO "messages" ("sender_id", "receiver_id", "content") VALUES
-(1, 2, 'Bonjour Marie, je serais intéressée par Felix.'),
-(2, 1, 'Bonjour Alice, Felix est encore disponible pour adoption.'),
-(3, 4, 'Salut Paul, Storm a l’air parfait pour mes enfants.'),
-(4, 3, 'Salut Jean, Storm est vraiment un cheval majestueux.'),
-(5, 6, 'Bonjour, je voudrais des informations sur Gringo.'),
-(6, 5, 'Bonjour, Gringo est un poney idéal pour les enfants.');
+INSERT INTO "messages" ("sender_id", "receiver_id", "content", "is_read") VALUES
+(1, 2, 'Bonjour Marie, je serais intéressée par Felix.', true),
+(2, 1, 'Bonjour Alice, Felix est encore disponible pour adoption.', false),
+(3, 4, 'Salut Paul, Storm a l’air parfait pour mes enfants.', true),
+(4, 3, 'Salut Jean, Storm est vraiment un cheval majestueux.', false),
+(5, 6, 'Bonjour, je voudrais des informations sur Gringo.', true),
+(6, 5, 'Bonjour, Gringo est un poney idéal pour les enfants.', false);
 
 -- Alimentation de la table "fosterling_profiles" 
 INSERT INTO "fosterling_profiles" ("age", "sexe", "quantity", "search_area", "users_id", "species_id") VALUES

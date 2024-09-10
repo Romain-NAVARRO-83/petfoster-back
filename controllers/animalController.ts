@@ -1,6 +1,8 @@
 import Joi from 'joi';
 import { Request, Response } from 'express';
 import { Animal, User, Species, AnimalsPictures } from '../models/index.js';
+import csrf from 'csrf';
+const csrfProtection = new csrf();
 
 export async function getAllAnimals(req: Request, res: Response) {
   const animals = await Animal.findAll({
@@ -29,15 +31,7 @@ export async function getOneAnimal(req: Request, res: Response) {
     include: [
       { model: User, as: 'creator' },
       { model: Species, as: 'species' },
-      { model: AnimalsPictures,
-        as: 'pictures',
-        include: [
-          {
-            model: Animal,
-            as: 'animal',
-          },
-        ],
-      },
+      { model: AnimalsPictures, as: 'pictures' },
     ],
     order: [
       ['id', 'ASC'], // Trier par l'ID des Animaux en ordre croissant
@@ -54,6 +48,18 @@ export async function getOneAnimal(req: Request, res: Response) {
 }
 
 export async function createAnimal(req: Request, res: Response) {
+  // Validate the CSRF token in requests
+  const csrfToken = req.headers['x-xsrf-token'];
+  if (
+    !csrfProtection.verify(
+      process.env.CSRF_SECRET as string,
+      csrfToken as string
+    )
+  ) {
+    return res.status(403).send('Invalid CSRF token');
+  }
+  // Continue processing the request...
+
   const createAnimalSchema = Joi.object({
     name: Joi.string().min(1),
     date_of_birth: Joi.date().iso().required(),
