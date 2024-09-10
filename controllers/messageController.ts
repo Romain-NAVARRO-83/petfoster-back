@@ -22,7 +22,18 @@ export async function getAllTalks(req: Request, res: Response) {
   // On récupère tous les échanges de deux utilisateurs connectés en BDD
   const messages = await Message.findAll({
     where: {
-      [Op.and]: [{ sender_id: 1 }, { receiver_id: 2 }],
+      [Op.and]: [
+        {
+          sender_id: {
+            [Op.or]: [req.params.userId, req.params.interlocutorId],
+          },
+        },
+        {
+          receiver_id: {
+            [Op.or]: [req.params.userId, req.params.interlocutorId],
+          },
+        },
+      ],
     },
   });
 
