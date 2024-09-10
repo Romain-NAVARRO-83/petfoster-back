@@ -1,6 +1,8 @@
 import Joi from 'joi';
 import * as argon2i from 'argon2';
 import { Op } from 'sequelize';
+import * as emailValidator from 'email-validator';
+import passwordValidator from 'password-validator';
 import jwt from 'jsonwebtoken';
 import csrf from 'csrf';
 const csrfProtection = new csrf();
@@ -16,6 +18,7 @@ import {
   FosterlingRequest,
 } from '../models/index.js';
 import CSRF_Verification from '../utils/CSRF_Verification.js';
+
 
 export async function loginUser(req: Request, res: Response) {
   console.log('>> POST /login', req.body);
@@ -179,7 +182,7 @@ export async function createUser(req: Request, res: Response) {
       .pattern(/^(\+?\d{1,4})?([ .-]?\(?\d{1,4}\)?)?([ .-]?\d{1,4}){1,4}$/)
       .allow(''),
     address: Joi.string().allow(''),
-    website: Joi.string().uri(),
+    website: Joi.string().uri().allow(null),
   });
 
   // On valide le req.body
@@ -188,47 +191,42 @@ export async function createUser(req: Request, res: Response) {
     return res.status(400).json({ error: error.message });
   }
 
+
+    // On valide le format de l'email
+    if (! emailValidator.validate(req.body.email)) {
+      return res.status(400).json({ error: "Format d'email invalide." });
+    }
+
+    // Valider la force du mdp
+    const schema = new passwordValidator()
+    .is().min(12)                 
+    .has().uppercase()            
+    .has().lowercase()            
+    .has().digits(1)              
+    .has().not().spaces();        
+
+    if (!schema.validate(req.body.password)) {
+      return res.status(400).json({ error: "Format de mot de passe invalide." });
+    }
+
+    const email= req.body.email
+
+    // On vérifie si le mail n'est pas déjà pris 
+    const alreadyExistingUser = await User.findOne({ where: { email } });
+    if (alreadyExistingUser) {
+      return res.status(409).json({ error: "Cet email est déjà utiisé." }); 
+    }
+
+  
   // On hash le mot de passe avec l'outil Argon2i
   const hashedPassword = await argon2i.hash(req.body.password);
 
-  // delete req.body.password;
-  // const createdUser = await User.create({
-  //   ...req.body,
-  //   password: hashedPassword
-  // })
-
-  // On déstructure le req.body et on crée l'utilisateur
-  const {
-    type_user,
-    name,
-    email,
-    password,
-    country,
-    zip,
-    city,
-    description,
-    longitude,
-    latitude,
-    phone,
-    address,
-    website,
-  } = req.body;
-
+  delete req.body.password;
   const createdUser = await User.create({
-    type_user,
-    name,
-    email,
-    password: hashedPassword, // On stocke le password hashé
-    country,
-    zip,
-    city,
-    description,
-    longitude,
-    latitude,
-    phone,
-    address,
-    website,
-  });
+    ...req.body,
+    password: hashedPassword
+  })
+
 
   res.status(201).json(createdUser);
 }

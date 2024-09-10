@@ -23,8 +23,7 @@ export async function getOneAnimal(req: Request, res: Response) {
   const { error } = Joi.number().integer().greater(0).validate(req.params.id);
   if (error) {
     return res.status(404).json({
-      error: `Animal not found. Verify the provided ID. ${error.message}`,
-    });
+      error: `Animal not found. Verify the provided ID. ` });
   }
 
   // Récupérer l'animal en BDD

@@ -17,6 +17,37 @@ export async function getAllMessages(req: Request, res: Response) {
   res.status(200).json(messages);
 }
 
+// Fonction pour marquer un message comme "lu"
+export async function markAsRead(req: Request, res: Response) {
+  const messageId = parseInt(req.params.id);
+
+  // Vérifiez que l'ID du message est valide
+  if (!Number.isInteger(messageId)) {
+    return res.status(400).json({ error: 'Invalid message ID.' });
+  }
+
+  try {
+    // Trouver le message par son ID
+    const message = await Message.findByPk(messageId);
+
+    // Si le message n'existe pas
+    if (!message) {
+      return res.status(404).json({ error: 'Message not found.' });
+    }
+
+    // Mettre à jour le statut is_read à true
+    await message.update({ is_read: true });
+
+    // Réponse au client
+    res.status(200).json({ message: 'Message marked as read successfully.' });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ error: 'An error occurred while updating the message status.' });
+  }
+}
+
 // On crée un schéma Joi pour les messsages
 export async function writeMessage(req: Request, res: Response) {
   // Validate the CSRF token in requests
@@ -44,12 +75,13 @@ export async function writeMessage(req: Request, res: Response) {
   }
 
   // On crée le message en déstrucurant le req.body
-  const { sender_id, receiver_id, content } = req.body;
+  const { sender_id, receiver_id, content, is_read } = req.body;
 
   const newMessage = await Message.create({
     sender_id,
     receiver_id,
     content,
+    is_read,
   });
 
   // On renvoie la réponse, le nouveau message
