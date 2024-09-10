@@ -15,6 +15,7 @@ import {
   FosterlingProfile,
   FosterlingRequest,
 } from '../models/index.js';
+import CSRF_Verification from '../utils/CSRF_Verification.js';
 
 export async function loginUser(req: Request, res: Response) {
   console.log('>> POST /login', req.body);
@@ -157,6 +158,8 @@ export async function getOneUser(req: Request, res: Response) {
 }
 
 export async function createUser(req: Request, res: Response) {
+  CSRF_Verification(req, res);
+
   const createUserSchema = Joi.object({
     type_user: Joi.string().min(1),
     name: Joi.string().min(1),
