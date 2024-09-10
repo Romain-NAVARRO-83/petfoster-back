@@ -104,10 +104,13 @@ export async function getAllUsers(req: Request, res: Response) {
   // const perimetre = 100000; // ! Pour test, variable à supprimer à terme
 
   const pointDepart = {
-    latitude: parseInt(req.params.latitude),
-    longitude: parseInt(req.params.longitude),
+    latitude: parseFloat(req.query.latitude as string),
+    longitude: parseFloat(req.query.longitude as string),
   };
-  const perimetre = parseInt(req.params.perimeter);
+  const perimetre = parseInt(req.query.perimeter as string);
+
+  console.log(pointDepart);
+  console.log(perimetre);
 
   // On récupère tous les utilisateurs en BDD
   const users = await User.findAll({
