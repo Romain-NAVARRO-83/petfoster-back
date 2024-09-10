@@ -4,6 +4,7 @@ import { Op } from 'sequelize';
 import * as emailValidator from 'email-validator';
 import passwordValidator from 'password-validator';
 import jwt from 'jsonwebtoken';
+import geolib from 'geolib';
 import csrf from 'csrf';
 const csrfProtection = new csrf();
 
@@ -18,7 +19,6 @@ import {
   FosterlingRequest,
 } from '../models/index.js';
 import CSRF_Verification from '../utils/CSRF_Verification.js';
-
 
 export async function loginUser(req: Request, res: Response) {
   console.log('>> POST /login', req.body);
@@ -100,6 +100,15 @@ export async function loginhUser(req: Request, res: Response) {
 }
 
 export async function getAllUsers(req: Request, res: Response) {
+  // const pointDepart = { latitude: 44.2, longitude: 0.633333 }; // Agen // ! Pour test, variable à supprimer à terme
+  // const perimetre = 100000; // ! Pour test, variable à supprimer à terme
+
+  const pointDepart = {
+    latitude: parseInt(req.params.latitude),
+    longitude: parseInt(req.params.longitude),
+  };
+  const perimetre = parseInt(req.params.perimeter);
+
   // On récupère tous les utilisateurs en BDD
   const users = await User.findAll({
     include: [
@@ -119,7 +128,18 @@ export async function getAllUsers(req: Request, res: Response) {
     ],
   });
 
-  res.status(200).json(users);
+  if (pointDepart.latitude && pointDepart.longitude && perimetre) {
+    const usersInDistance = users.filter(
+      (user) =>
+        geolib.getDistance(pointDepart, {
+          latitude: user.latitude,
+          longitude: user.longitude,
+        }) <= perimetre
+    );
+    res.status(200).json(usersInDistance);
+  } else {
+    res.status(200).json(users);
+  }
 }
 
 export async function getOneUser(req: Request, res: Response) {
@@ -191,42 +211,45 @@ export async function createUser(req: Request, res: Response) {
     return res.status(400).json({ error: error.message });
   }
 
+  // On valide le format de l'email
+  if (!emailValidator.validate(req.body.email)) {
+    return res.status(400).json({ error: "Format d'email invalide." });
+  }
 
-    // On valide le format de l'email
-    if (! emailValidator.validate(req.body.email)) {
-      return res.status(400).json({ error: "Format d'email invalide." });
-    }
+  // Valider la force du mdp
+  const schema = new passwordValidator()
+    .is()
+    .min(12)
+    .has()
+    .uppercase()
+    .has()
+    .lowercase()
+    .has()
+    .digits(1)
+    .has()
+    .not()
+    .spaces();
 
-    // Valider la force du mdp
-    const schema = new passwordValidator()
-    .is().min(12)                 
-    .has().uppercase()            
-    .has().lowercase()            
-    .has().digits(1)              
-    .has().not().spaces();        
+  if (!schema.validate(req.body.password)) {
+    return res.status(400).json({ error: 'Format de mot de passe invalide.' });
+  }
 
-    if (!schema.validate(req.body.password)) {
-      return res.status(400).json({ error: "Format de mot de passe invalide." });
-    }
+  const email = req.body.email;
 
-    const email= req.body.email
+  // On vérifie si le mail n'est pas déjà pris
+  const alreadyExistingUser = await User.findOne({ where: { email } });
+  if (alreadyExistingUser) {
+    return res.status(409).json({ error: 'Cet email est déjà utiisé.' });
+  }
 
-    // On vérifie si le mail n'est pas déjà pris 
-    const alreadyExistingUser = await User.findOne({ where: { email } });
-    if (alreadyExistingUser) {
-      return res.status(409).json({ error: "Cet email est déjà utiisé." }); 
-    }
-
-  
   // On hash le mot de passe avec l'outil Argon2i
   const hashedPassword = await argon2i.hash(req.body.password);
 
   delete req.body.password;
   const createdUser = await User.create({
     ...req.body,
-    password: hashedPassword
-  })
-
+    password: hashedPassword,
+  });
 
   res.status(201).json(createdUser);
 }
