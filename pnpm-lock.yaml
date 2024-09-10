@@ -41,6 +41,9 @@ importers:
       express-session:
         specifier: ^1.18.0
         version: 1.18.0
+      geolib:
+        specifier: ^3.3.4
+        version: 3.3.4
       joi:
         specifier: ^17.13.3
         version: 17.13.3
@@ -63,12 +66,12 @@ importers:
       '@types/express':
         specifier: ^4.17.21
         version: 4.17.21
-      '@types/joi':
-        specifier: ^17.2.3
-        version: 17.2.3
       '@types/express-session':
         specifier: ^1.18.0
         version: 1.18.0
+      '@types/joi':
+        specifier: ^17.2.3
+        version: 17.2.3
       '@types/node':
         specifier: ^22.5.2
         version: 22.5.2
@@ -956,6 +959,9 @@ packages:
 
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
+
+  geolib@3.3.4:
+    resolution: {integrity: sha512-EicrlLLL3S42gE9/wde+11uiaYAaeSVDwCUIv2uMIoRBfNJCn8EsSI+6nS3r4TCKDO6+RQNM9ayLq2at+oZQWQ==}
 
   get-intrinsic@1.2.4:
     resolution: {integrity: sha512-5uYhsJH8VJBTv7oslg4BznJYhDoRI6waYCxMmCdnTrcCrHA/fCFKoTFz2JKKE0HdDFUF7/oQuhzumXJK7paBRQ==}
@@ -2951,6 +2957,8 @@ snapshots:
       functions-have-names: 1.2.3
 
   functions-have-names@1.2.3: {}
+
+  geolib@3.3.4: {}
 
   get-intrinsic@1.2.4:
     dependencies:

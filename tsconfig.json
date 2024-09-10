@@ -22,7 +22,7 @@
   },
   "include": [
     "eslint.config.js", // on inclut la configuration d'ESLint
-    ".ts",
+    "./**/*.ts",
     ],              
     "exclude": [
       "node_modules"
