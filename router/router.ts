@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { Request, Response } from 'express';
 import { rateLimit } from 'express-rate-limit';
-import { rateLimit } from 'express-rate-limit';
 import * as animalController from '../controllers/animalController';
 import * as userController from '../controllers/userController';
 import * as profileController from '../controllers/profileController';
@@ -12,13 +11,6 @@ import * as CSRF from '../utils/CSRF';
 
 // Middleware pour limiter le nombre de requêtes par IP sur les routes critiques afin de prévenir les attaques DDOS
 const limiter = rateLimit({
-  windowMs: 1 * 60 * 1000, // 1 minute
-  limit: 10, // Limite chaque IP à 10 requêtes max par minute
-  message: {
-    error: 'Too many requests from this IP, please try again after a minute.',
-  },
-});
-
   windowMs: 1 * 60 * 1000, // 1 minute
   limit: 10, // Limite chaque IP à 10 requêtes max par minute
   message: {
@@ -107,6 +99,18 @@ router.get(
   cw(CSRF.verificate),
   cw(messageController.getAllTalks)
 );
-router.post('/messages',cw(CSRF.verificate), cw(messageController.writeMessage));
-router.delete('/messages/:id',cw(CSRF.verificate), cw(messageController.deleteMessage));
-router.patch('/users/:id/messages',cw(CSRF.verificate), cw(messageController.markAsRead));
+router.post(
+  '/messages',
+  cw(CSRF.verificate),
+  cw(messageController.writeMessage)
+);
+router.delete(
+  '/messages/:id',
+  cw(CSRF.verificate),
+  cw(messageController.deleteMessage)
+);
+router.patch(
+  '/users/:id/messages',
+  cw(CSRF.verificate),
+  cw(messageController.markAsRead)
+);
