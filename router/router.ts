@@ -96,7 +96,6 @@ router.delete(
 router.get('/users/:id/messages', cw(messageController.getAllMessages));
 router.get(
   '/connectedUser/:userId/messages/interlocutor/:interlocutorId',
-  cw(CSRF.verificate),
   cw(messageController.getAllTalks)
 );
 router.post(
