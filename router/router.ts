@@ -1,10 +1,18 @@
 import { Router } from 'express';
+import { rateLimit } from 'express-rate-limit'
 import * as animalController from '../controllers/animalController';
 import * as userController from '../controllers/userController';
 import * as profileController from '../controllers/profileController';
 import * as requestController from '../controllers/requestController';
 import { controllerWrapper as cw } from '../utils/controllerWrapper';
 
+// Middleware pour limiter le nombre de requêtes par IP sur les routes critiques afin de prévenir les attaques DDOS
+const limiter = rateLimit({
+	windowMs: 1 * 60 * 1000, // 1 minute
+	limit: 10, // Limite chaque IP à 10 requêtes max par minute
+  message: { error: 'Too many requests from this IP, please try again after a minute.' }
+})
+  
 export const router = Router();
 
 // Routes des Animaux
@@ -16,7 +24,7 @@ router.delete('/animals/:id', cw(animalController.deleteAnimal));
 
 //Route Auth
 router.post('/login', cw(userController.loginUser));
-router.post('/loginh', cw(userController.loginhUser));
+router.post('/loginh', limiter, cw(userController.loginhUser));
 
 // Routes des Users
 router.get('/users', cw(userController.getAllUsers));
