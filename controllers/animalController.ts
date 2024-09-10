@@ -1,6 +1,12 @@
 import Joi from 'joi';
 import { Request, Response } from 'express';
-import { Animal, User, Species, AnimalsPictures } from '../models/index.js';
+import {
+  Animal,
+  User,
+  Species,
+  AnimalsPictures,
+  AnimalsHasUsers,
+} from '../models/index.js';
 import csrf from 'csrf';
 const csrfProtection = new csrf();
 
@@ -23,12 +29,23 @@ export async function getOneAnimal(req: Request, res: Response) {
   const { error } = Joi.number().integer().greater(0).validate(req.params.id);
   if (error) {
     return res.status(404).json({
-      error: `Animal not found. Verify the provided ID. ` });
+      error: `Animal not found. Verify the provided ID. `,
+    });
   }
 
   // Récupérer l'animal en BDD
   const animal = await Animal.findByPk(req.params.id, {
     include: [
+      {
+        model: AnimalsHasUsers,
+        as: 'animalOwners',
+        include: [
+          {
+            model: User,
+            as: 'user',
+          },
+        ],
+      },
       { model: User, as: 'creator' },
       { model: Species, as: 'species' },
       { model: AnimalsPictures, as: 'pictures' },
@@ -78,28 +95,14 @@ export async function createAnimal(req: Request, res: Response) {
     return res.status(400).json({ error: error.message });
   }
 
-  // On déstructure le req.body et on crée l'animal
-  const {
-    name,
-    date_of_birth,
-    sexe,
-    race,
-    short_story,
-    long_story,
-    health,
-    species_id,
-    creator_id,
-  } = req.body;
   const createdAnimal = await Animal.create({
-    name,
-    date_of_birth,
-    sexe,
-    race,
-    short_story,
-    long_story,
-    health,
-    species_id,
-    creator_id,
+    ...req.body,
+  });
+
+  await AnimalsHasUsers.create({
+    animals_id: createdAnimal.id,
+    users_id: createdAnimal.creator_id,
+    date_start: createdAnimal.created_at,
   });
 
   res.status(201).json(createdAnimal);

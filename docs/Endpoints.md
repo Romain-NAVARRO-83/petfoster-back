@@ -45,7 +45,8 @@ interface Message {
 Messagerie
 | Method | Route | Request Body | Response Body | Code (success) |
 | ------ | ------------------- | -------------------------------------- | -------------- | -------------- |
-| GET | /users/:id/messages | | []Message | 200 |
+| GET | /connectedUser/:id/messages | | [{interlocuteurId, interlocuteurName, Dernier message (par qui, quand)}] | 200 |
+| GET | /connectedUser/:id/messages/interlocutor/:id | | Tous les messages échangés avec interlocutorId du plus ancien au plus recent | 200 |
 | POST | /messages | {sender_id: , receiver_id: , content:} | Sended Message | 201 |
 
 ## Animals
