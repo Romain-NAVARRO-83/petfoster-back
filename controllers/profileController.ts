@@ -46,14 +46,8 @@ export async function createFosterlingProfile(req: Request, res: Response) {
   }
 
   //On déstructure le req.body et on crée le profil d'accueil
-  const { species_id, quantity, users_id, age, sexe, search_area } = req.body;
   const createdFosterlingProfile = await FosterlingProfile.create({
-    species_id,
-    quantity,
-    users_id,
-    age,
-    sexe,
-    search_area,
+    ...req.body,
   });
 
   res.status(201).json(createdFosterlingProfile);
@@ -84,14 +78,8 @@ export async function updateProfile(req: Request, res: Response) {
     return res.status(404).json({ error: 'Profile not found.' });
   }
 
-  const { species_id, quantity, users_id, age, sexe, search_area } = req.body;
   const updatedProfile = await profile.update({
-    species_id: species_id,
-    quantity: quantity,
-    users_id: users_id,
-    age: age,
-    sexe: sexe,
-    search_area: search_area,
+    ...req.body,
   });
 
   res.status(200).json(updatedProfile);

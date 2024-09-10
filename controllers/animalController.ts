@@ -122,28 +122,8 @@ export async function updateAnimal(req: Request, res: Response) {
     return res.status(404).json({ error: 'Animal not found.' });
   }
 
-  const {
-    name,
-    date_of_birth,
-    sexe,
-    race,
-    short_story,
-    long_story,
-    health,
-    species_id,
-    creator_id,
-  } = req.body;
-
   const updatedAnimal = await animal.update({
-    name: name,
-    date_of_birth: date_of_birth,
-    sexe: sexe,
-    race: race,
-    short_story: short_story,
-    long_story: long_story,
-    health: health,
-    species_id: species_id,
-    creator_id: creator_id,
+    ...req.body,
   });
 
   res.status(200).json(updatedAnimal);

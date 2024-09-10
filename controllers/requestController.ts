@@ -51,13 +51,8 @@ export async function createFosterlingRequest(req: Request, res: Response) {
   }
 
   // On déstructure le req.body et on crée la demande
-  const { request_status, animals_id, users_id, content_request } = req.body;
-
   const createdFosterlingRequest = await FosterlingRequest.create({
-    request_status,
-    animals_id,
-    users_id,
-    content_request,
+    ...req.body,
   });
 
   res.status(201).json(createdFosterlingRequest);
@@ -93,15 +88,9 @@ export async function updateRequest(req: Request, res: Response) {
     return res.status(404).json({ error: 'Request not found.' });
   }
 
-  // On déstructure le req.body
-  const { request_status, animals_id, users_id, content_request } = req.body;
-
   // On update l'utilisateur avec le mot de passe hashé
   const updatedUser = await request.update({
-    request_status,
-    animals_id,
-    users_id,
-    content_request,
+    ...req.body,
   });
 
   // On renvoie la demande updated au client

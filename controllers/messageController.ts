@@ -84,13 +84,8 @@ export async function writeMessage(req: Request, res: Response) {
   }
 
   // On crée le message en déstrucurant le req.body
-  const { sender_id, receiver_id, content, is_read } = req.body;
-
   const newMessage = await Message.create({
-    sender_id,
-    receiver_id,
-    content,
-    is_read,
+    ...req.body,
   });
 
   // On renvoie la réponse, le nouveau message

@@ -299,38 +299,11 @@ export async function updateUser(req: Request, res: Response) {
   // On hash le mot de passe
   const hashedPassword = await argon2i.hash(req.body.password);
 
-  // On déstructure le req.body
-  const {
-    type_user,
-    name,
-    email,
-    password,
-    country,
-    zip,
-    city,
-    description,
-    longitude,
-    latitude,
-    phone,
-    address,
-    website,
-  } = req.body;
-
   // On update l'utilisateur avec le mot de passe hashé
+  delete req.body.password;
   const updatedUser = await user.update({
-    type_user,
-    name,
-    email,
-    password: hashedPassword, // On stocke le password hashé
-    country,
-    zip,
-    city,
-    description,
-    longitude,
-    latitude,
-    phone,
-    address,
-    website,
+    ...req.body,
+    password: hashedPassword,
   });
 
   // On renvoie l'utilisateur updated au client
