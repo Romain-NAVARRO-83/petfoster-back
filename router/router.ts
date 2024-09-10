@@ -55,3 +55,4 @@ router.delete('/requests/:id', cw(requestController.deleteRequest));
 router.get('/users/:id/messages', cw(messageController.getAllMessages));
 router.post('/messages', cw(messageController.writeMessage));
 router.delete('/messages/:id', cw(messageController.deleteMessage));
+router.patch('/users/:id/messages', cw(messageController.markAsRead));
