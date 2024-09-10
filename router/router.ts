@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { Request, Response } from 'express';
-import { rateLimit } from 'express-rate-limit'
+import { rateLimit } from 'express-rate-limit';
 import * as animalController from '../controllers/animalController';
 import * as userController from '../controllers/userController';
 import * as profileController from '../controllers/profileController';
@@ -12,11 +12,13 @@ const csrfProtection = new csrf();
 
 // Middleware pour limiter le nombre de requêtes par IP sur les routes critiques afin de prévenir les attaques DDOS
 const limiter = rateLimit({
-	windowMs: 1 * 60 * 1000, // 1 minute
-	limit: 10, // Limite chaque IP à 10 requêtes max par minute
-  message: { error: 'Too many requests from this IP, please try again after a minute.' }
-})
-  
+  windowMs: 1 * 60 * 1000, // 1 minute
+  limit: 10, // Limite chaque IP à 10 requêtes max par minute
+  message: {
+    error: 'Too many requests from this IP, please try again after a minute.',
+  },
+});
+
 export const router = Router();
 
 // Route to serve the CSRF token
@@ -60,6 +62,10 @@ router.delete('/requests/:id', cw(requestController.deleteRequest));
 
 // Routes des Messages
 router.get('/users/:id/messages', cw(messageController.getAllMessages));
+router.get(
+  '/connectedUser/:id/messages/interlocutor/:id',
+  cw(messageController.getAllTalks)
+);
 router.post('/messages', cw(messageController.writeMessage));
 router.delete('/messages/:id', cw(messageController.deleteMessage));
 router.patch('/users/:id/messages', cw(messageController.markAsRead));

@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { Request, Response } from 'express';
-import { Message } from '../models';
+import { Message, User } from '../models';
 import { Op } from 'sequelize';
 import csrf from 'csrf';
 const csrfProtection = new csrf();
@@ -11,6 +11,18 @@ export async function getAllMessages(req: Request, res: Response) {
   const messages = await Message.findAll({
     where: {
       [Op.or]: [{ sender_id: req.params.id }, { receiver_id: req.params.id }],
+    },
+  });
+
+  res.status(200).json(messages);
+}
+
+// Récupérer tous les échanges entre deux utilisateurs
+export async function getAllTalks(req: Request, res: Response) {
+  // On récupère tous les échanges de deux utilisateurs connectés en BDD
+  const messages = await Message.findAll({
+    where: {
+      [Op.and]: [{ sender_id: 1 }, { receiver_id: 2 }],
     },
   });
 
