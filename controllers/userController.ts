@@ -71,7 +71,11 @@ export async function loginhUser(req: Request, res: Response) {
 
   // http response
   if (user) {
-    const jwtPayload = { userId: user.id, userName: user.name };
+    const jwtPayload = {
+      userId: user.id,
+      userName: user.name,
+      userType: user.type_user,
+    };
     const jwtOptions = {
       expiresIn: '3h',
     };
