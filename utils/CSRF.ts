@@ -5,11 +5,6 @@ const csrfProtection = new csrf();
 import { Request, Response } from 'express';
 
 export function create(req: Request, res: Response) {
-  if (process.env.CSRF_IS_ON) {
-    const csrfToken = csrfProtection.create(process.env.CSRF_SECRET as string);
-    // Send the token as a cookie or in the response body
-    res.status(200).json(csrfToken);
-  }
   const csrfToken = csrfProtection.create(process.env.CSRF_SECRET as string);
   // Send the token as a cookie or in the response body
   res.status(200).json(csrfToken);
