@@ -1,8 +1,8 @@
 import 'dotenv/config';
 
+import { Request, Response } from 'express';
 import csrf from 'csrf';
 const csrfProtection = new csrf();
-import { Request, Response } from 'express';
 
 export function create(req: Request, res: Response) {
   const csrfToken = csrfProtection.create(process.env.CSRF_SECRET as string);
@@ -10,8 +10,9 @@ export function create(req: Request, res: Response) {
   res.status(200).json(csrfToken);
 }
 
-export function verificate(req: Request, res: Response) {
+export function verificate(req: Request, res: Response, next: any) {
   if (process.env.CSRF_IS_OFF === 'true') {
+    next();
   } else {
     // Validate the CSRF token in requests
     const csrfToken = req.headers['x-xsrf-token'];
@@ -24,5 +25,6 @@ export function verificate(req: Request, res: Response) {
       return res.status(403).send('Invalid CSRF token');
     }
     // Continue processing the request...
+    next();
   }
 }

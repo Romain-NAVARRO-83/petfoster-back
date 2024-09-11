@@ -123,6 +123,7 @@ export async function getAllUsers(req: Request, res: Response) {
           },
         ],
       },
+      { model: Animal, as: 'createdAnimals' },
     ],
     order: [
       ['id', 'ASC'], // Trier par l'ID des users en ordre croissant
