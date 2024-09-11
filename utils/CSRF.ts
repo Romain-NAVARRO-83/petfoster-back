@@ -10,8 +10,10 @@ export function create(req: Request, res: Response) {
   res.status(200).json(csrfToken);
 }
 
-export function verificate(req: Request, res: Response) {
-  if (process.env.CSRF_IS_ON === 'true') {
+export function verificate(req: Request, res: Response, next) {
+  if (process.env.CSRF_IS_OFF === 'true') {
+    next();
+  } else {
     // Validate the CSRF token in requests
     const csrfToken = req.headers['x-xsrf-token'];
     if (
