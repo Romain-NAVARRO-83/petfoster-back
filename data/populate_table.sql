@@ -118,6 +118,7 @@ INSERT INTO "messages" ("sender_id", "receiver_id", "content", "is_read") VALUES
 (1, 2, 'Très, bien! Je  voudrais savoir s''il y avait des frais pour l''adoption.', true),
 (1, 2, 'Et si oui, à combien s''élèvent-ils?', true),
 (2, 1, 'Il faudra participer aux frais de vaccination et de stérilisation, je vous communiquerai tout cela sous peu.', false),
+(1, 4, 'Bonjour! J''aimerais beaucoup rencontrer Storm si c''est possible!', true),
 (3, 4, 'Salut Paul, Storm a l''air parfait pour mes enfants.', true),
 (4, 3, 'Salut Jean, Storm est vraiment un cheval majestueux.', true),
 (3, 4, 'Il est très beau, en effet. Avez-vou prévu un transport dans le cas d''une éventuelle adoption?', true),
