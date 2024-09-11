@@ -98,6 +98,10 @@ router.get(
   '/connectedUser/:userId/messages/interlocutor/:interlocutorId',
   cw(messageController.getAllTalks)
 );
+router.get(
+  '/connectedUser/:id/messages',
+  cw(messageController.getAllInterlocutors)
+);
 router.post(
   '/messages',
   cw(CSRF.verificate),
