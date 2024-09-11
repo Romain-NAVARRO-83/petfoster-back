@@ -39,7 +39,7 @@ router.delete(
 );
 
 //Route Auth
-router.post('/login', cw(CSRF.verificate), cw(userController.loginUser));
+router.post('/login', CSRF.verificate, cw(userController.loginUser));
 router.post(
   '/loginh',
   limiter,
