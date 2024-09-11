@@ -25,6 +25,5 @@ export function verificate(req: Request, res: Response, next) {
       return res.status(403).send('Invalid CSRF token');
     }
     // Continue processing the request...
-    next();
   }
 }
