@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import * as joischema from '../utils/joi';
 import * as argon2i from 'argon2';
 import { Op } from 'sequelize';
 import * as emailValidator from 'email-validator';
@@ -183,27 +184,7 @@ export async function getOneUser(req: Request, res: Response) {
 }
 
 export async function createUser(req: Request, res: Response) {
-  const createUserSchema = Joi.object({
-    type_user: Joi.string().min(1),
-    name: Joi.string().min(1),
-    email: Joi.string()
-      .email({ minDomainSegments: 2, tlds: { allow: false } })
-      .required(),
-    password: Joi.string().min(12).required(),
-    country: Joi.string().min(1),
-    zip: Joi.number().integer().greater(0).required(),
-    city: Joi.string().min(1),
-    description: Joi.string().allow(''),
-    longitude: Joi.number().less(180).precision(7).required(),
-    latitude: Joi.number().less(90).precision(7).required(),
-    phone: Joi.string()
-      .min(10)
-      .max(15)
-      .pattern(/^(\+?\d{1,4})?([ .-]?\(?\d{1,4}\)?)?([ .-]?\d{1,4}){1,4}$/)
-      .allow(''),
-    address: Joi.string().allow(''),
-    website: Joi.string().uri().allow(null),
-  });
+  const createUserSchema= joischema.createUserSchema;
 
   // On valide le req.body
   const { error } = createUserSchema.validate(req.body);
@@ -263,27 +244,7 @@ export async function updateUser(req: Request, res: Response) {
   //On valide le body avec l'outil Joi
   // ==> On définie ce à quoi le body que nous envoie le client doit ressembler
   // ==> On valide le body
-  const updateUserSchema = Joi.object({
-    type_user: Joi.string().min(1),
-    name: Joi.string().min(1),
-    email: Joi.string()
-      .email({ minDomainSegments: 2, tlds: { allow: false } })
-      .required(),
-    password: Joi.string().min(12).required(),
-    country: Joi.string().min(1),
-    zip: Joi.number().integer().greater(0).required(),
-    city: Joi.string().min(1),
-    description: Joi.string().allow(''),
-    longitude: Joi.number().less(180).precision(7).required(),
-    latitude: Joi.number().less(90).precision(7).required(),
-    phone: Joi.string()
-      .min(10)
-      .max(15)
-      .pattern(/^(\+?\d{1,4})?([ .-]?\(?\d{1,4}\)?)?([ .-]?\d{1,4}){1,4}$/)
-      .allow(''),
-    address: Joi.string().allow(''),
-    website: Joi.string().uri(),
-  });
+  const updateUserSchema=joischema.updateUserSchema;
 
   const { error } = updateUserSchema.validate(req.body); // Si error, alors cela signifie que le body ne passe pas la validation
   if (error) {
