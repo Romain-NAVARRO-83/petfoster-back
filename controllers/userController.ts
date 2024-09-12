@@ -16,6 +16,7 @@ import {
   UsersPicture,
   FosterlingProfile,
   FosterlingRequest,
+  Species,
 } from '../models/index.js';
 
 //! A SUPPRIMER A TERME
@@ -157,6 +158,7 @@ export async function getOneUser(req: Request, res: Response) {
   // Récupérer un utilisateur en BDD
   const user = await User.findByPk(req.params.id, {
     include: [
+      { model: UsersPicture, as: 'pictures' },
       {
         model: AnimalsHasUsers,
         as: 'userAnimals',
@@ -168,8 +170,16 @@ export async function getOneUser(req: Request, res: Response) {
         ],
         order: [['created_at', 'ASC']], // Tri par date de création (du plus ancien au plus récent)
       },
-      { model: UsersPicture, as: 'pictures' },
-      { model: FosterlingProfile, as: 'fosterlingProfiles' },
+      {
+        model: FosterlingProfile,
+        as: 'fosterlingProfiles',
+        include: [
+          {
+            model: Species,
+            as: 'species',
+          },
+        ],
+      },
       { model: FosterlingRequest, as: 'fosterlingRequests' },
       { model: Animal, as: 'createdAnimals', order: [['created_at', 'ASC']] },
     ],
