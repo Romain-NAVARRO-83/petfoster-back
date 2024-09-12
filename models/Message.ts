@@ -8,7 +8,7 @@ type MessageAttributes = {
   sender_id: number;
   receiver_id: number;
   content: string;
-  is_read: Boolean;
+  read_by_receiver: Boolean;
   created_at: Date;
   updated_at?: Date; // optionnel
 };
@@ -24,7 +24,7 @@ class Message extends Model<MessageAttributes, MessageCreationAttributes> {
   declare sender_id: number;
   declare receiver_id: number;
   declare content: string;
-  declare is_read: Boolean;
+  declare read_by_receiver: Boolean;
   declare created_at: Date;
   declare updated_at?: Date;
 }
@@ -61,7 +61,7 @@ Message.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    is_read: {
+    read_by_receiver: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,

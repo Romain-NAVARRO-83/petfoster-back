@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS "messages" (
    "sender_id" integer NOT NULL REFERENCES "users"("id"),
    "receiver_id" integer NOT NULL REFERENCES "users"("id"),
    "content" text NOT NULL,
-   "is_read" BOOLEAN DEFAULT FALSE,
+   "read_by_receiver" BOOLEAN DEFAULT FALSE,
    "created_at" timestamptz NOT NULL DEFAULT NOW(),
    "updated_at" timestamptz
   
