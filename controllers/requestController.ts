@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import * as joischema from '../utils/joi';
 import { Request, Response } from 'express';
 import FosterlingRequest from '../models/FosterlingRequest';
 
@@ -35,14 +36,7 @@ export async function getOneRequest(req: Request, res: Response) {
 }
 
 export async function createFosterlingRequest(req: Request, res: Response) {
-  const createRequestSchema = Joi.object({
-    request_status: Joi.string()
-      .valid('pending', 'approved', 'rejected')
-      .required(),
-    animals_id: Joi.number().integer().greater(0).required(),
-    users_id: Joi.number().integer().greater(0).required(),
-    content_request: Joi.string().allow(''),
-  });
+  const createRequestSchema= joischema.createRequestSchema;
 
   // On valide le req.body
   const { error } = createRequestSchema.validate(req.body);
@@ -66,15 +60,8 @@ export async function updateRequest(req: Request, res: Response) {
 
   //On valide le body avec l'outil Joi
   // ==> On définie ce à quoi le body que nous envoie le client doit ressembler
-  // ==> On valide le body avec cet outil pratique !
-  const updateRequestSchema = Joi.object({
-    request_status: Joi.string()
-      .valid('pending', 'approved', 'rejected')
-      .required(),
-    animals_id: Joi.number().integer().greater(0).required(),
-    users_id: Joi.number().integer().greater(0).required(),
-    content_request: Joi.string().allow(''),
-  });
+  // ==> On valide le body avec cet outil
+  const updateRequestSchema= joischema.updateRequestSchema;
 
   const { error } = updateRequestSchema.validate(req.body); // Si error, alors cela signifie que le body ne passe pas la validation
   if (error) {

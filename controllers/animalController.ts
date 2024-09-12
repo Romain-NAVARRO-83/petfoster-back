@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import * as joischema from '../utils/joi';
 import { Request, Response } from 'express';
 import {
   Animal,
@@ -63,17 +64,7 @@ export async function getOneAnimal(req: Request, res: Response) {
 }
 
 export async function createAnimal(req: Request, res: Response) {
-  const createAnimalSchema = Joi.object({
-    name: Joi.string().min(1),
-    date_of_birth: Joi.date().iso().required(),
-    sexe: Joi.string().min(1),
-    race: Joi.string().allow(''),
-    short_story: Joi.string().allow(''),
-    long_story: Joi.string().allow(''),
-    health: Joi.string().allow(''),
-    species_id: Joi.number().integer().greater(0).required(),
-    creator_id: Joi.number().integer().greater(0).required(),
-  });
+  const createAnimalSchema= joischema.createAnimalSchema;
 
   // Validation de la requête
   const { error } = createAnimalSchema.validate(req.body);
@@ -100,17 +91,7 @@ export async function updateAnimal(req: Request, res: Response) {
     return res.status(404).json({ error: 'Animal not found.' });
   }
 
-  const updateAnimalSchema = Joi.object({
-    name: Joi.string().min(1),
-    date_of_birth: Joi.date().iso().required(),
-    sexe: Joi.string().min(1),
-    race: Joi.string().allow(''),
-    short_story: Joi.string().allow(''),
-    long_story: Joi.string().allow(''),
-    health: Joi.string().allow(''),
-    species_id: Joi.number().integer().greater(0).required(),
-    creator_id: Joi.number().integer().greater(0).required(),
-  });
+  const updateAnimalSchema= joischema.updateAnimalSchema;
 
   const { error } = updateAnimalSchema.validate(req.body);
   if (error) {

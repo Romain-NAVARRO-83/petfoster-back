@@ -92,10 +92,13 @@ router.delete(
 );
 
 // Routes des Messages
-router.get('/users/:id/messages', cw(messageController.getAllMessages));
 router.get(
   '/connectedUser/:userId/messages/interlocutor/:interlocutorId',
   cw(messageController.getAllTalks)
+);
+router.get(
+  '/connectedUser/:id/messages',
+  cw(messageController.getAllInterlocutors)
 );
 router.post(
   '/messages',
@@ -108,7 +111,7 @@ router.delete(
   cw(messageController.deleteMessage)
 );
 router.patch(
-  '/users/:id/messages',
+  '/connectedUser/:userId/messages/interlocutor/:interlocutorId',
   cw(CSRF.verificate),
   cw(messageController.markAsRead)
 );

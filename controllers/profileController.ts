@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import * as joischema from '../utils/joi';
 import { Request, Response } from 'express';
 import FosterlingProfile from '../models/FosterlingProfile';
 
@@ -30,14 +31,7 @@ export async function getOneProfile(req: Request, res: Response) {
 }
 
 export async function createFosterlingProfile(req: Request, res: Response) {
-  const createProfileSchema = Joi.object({
-    species_id: Joi.number().integer().greater(0).required(),
-    quantity: Joi.number().integer().greater(0).required(),
-    users_id: Joi.number().integer().greater(0).required(),
-    age: Joi.number().integer().greater(0).allow(),
-    sexe: Joi.string().allow(''),
-    search_area: Joi.number().integer().min(10),
-  });
+  const createProfileSchema= joischema.createProfileSchema;
 
   // Validation de la requête
   const { error } = createProfileSchema.validate(req.body);
@@ -59,14 +53,7 @@ export async function updateProfile(req: Request, res: Response) {
     return res.status(404).json({ error: 'Bad request.' });
   }
 
-  const updateProfileSchema = Joi.object({
-    species_id: Joi.number().integer().greater(0).required(),
-    quantity: Joi.number().integer().greater(0).required(),
-    users_id: Joi.number().integer().greater(0).required(),
-    age: Joi.number().integer().greater(0).allow(),
-    sexe: Joi.string().allow(''),
-    search_area: Joi.number().integer().min(10),
-  });
+  const updateProfileSchema= joischema.updateProfileSchema;
 
   const { error } = updateProfileSchema.validate(req.body);
   if (error) {
