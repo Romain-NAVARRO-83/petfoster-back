@@ -93,7 +93,6 @@ router.delete(
 );
 
 // Routes des Messages
-router.get('/users/:id/messages', cw(messageController.getAllMessages));
 router.get(
   '/connectedUser/:userId/messages/interlocutor/:interlocutorId',
   cw(messageController.getAllTalks)
