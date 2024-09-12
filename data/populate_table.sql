@@ -119,7 +119,7 @@ INSERT INTO "messages" ("sender_id", "receiver_id", "content", "is_read") VALUES
 (1, 2, 'Et si oui, à combien s''élèvent-ils?', true),
 (2, 1, 'Il faudra participer aux frais de vaccination et de stérilisation, je vous communiquerai tout cela sous peu.', false),
 (1, 4, 'Bonjour! J''aimerais beaucoup rencontrer Storm si c''est possible!', true),
-(4, 1, 'Hello! Il est possible de le voir oui, proposez-moi une date', true),
+(4, 1, 'Hello! Il est possible de le voir oui, proposez-moi une date', false),
 (3, 4, 'Salut Paul, Storm a l''air parfait pour mes enfants.', true),
 (4, 3, 'Salut Jean, Storm est vraiment un cheval majestueux.', true),
 (3, 4, 'Il est très beau, en effet. Avez-vou prévu un transport dans le cas d''une éventuelle adoption?', true),
@@ -129,7 +129,9 @@ INSERT INTO "messages" ("sender_id", "receiver_id", "content", "is_read") VALUES
 (6, 5, 'Bonjour, Gringo est un poney idéal pour les enfants.', true),
 (5, 6, 'Génial! Auriez-vous la possibilité de nous montrer davantage de photos?', true),
 (5, 6, 'Nous aurions également besoin de savoir s''il peut vitre avec d''autres poneys, chevaux etc..', true),
-(6, 5, 'Oui, Gringo est très sociable également avec ses congénères, il n''y a pas de problème.', false);
+(6, 5, 'Oui, Gringo est très sociable également avec ses congénères, il n''y a pas de problème.', false),
+(1, 2, 'Phrase bidon pour tester un truc', false);
+
 
 -- Alimentation de la table "fosterling_profiles" 
 INSERT INTO "fosterling_profiles" ("age", "sexe", "quantity", "search_area", "users_id", "species_id") VALUES

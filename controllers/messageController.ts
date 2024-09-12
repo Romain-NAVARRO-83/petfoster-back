@@ -21,7 +21,7 @@ export async function getAllTalks(req: Request, res: Response) {
         },
       ],
     },
-    order: [['created_at', 'DESC']],
+    order: [['id', 'DESC']],
   });
   res.status(200).json(messages);
 }
@@ -63,10 +63,21 @@ export async function getAllInterlocutors(req: Request, res: Response) {
               { sender_id: interlocutor, receiver_id: userId },
             ],
           },
-          order: [['created_at', 'DESC']], // Tri par date de création (du plus ancien au plus récent)
+          attributes: ['sender_id', 'created_at', 'is_read'], // On récupère le dernier sender, la date et le statut read_by_receiver
+          order: [['id', 'DESC']], // Tri par date de création (du plus ancien au plus récent)
           limit: 1, // Limite à 1 seul message, le dernier
         });
-        return lastMessage;
+        if (lastMessage) {
+          const interlocutorName = await User.findByPk(interlocutor, {
+            attributes: ['name'], // On récupère seulement la date
+          });
+
+          const cloneLastMessage = lastMessage.get({ plain: true });
+          (cloneLastMessage as any).interlocutorId = interlocutor;
+          (cloneLastMessage as any).interlocutorName = interlocutorName?.name;
+          return cloneLastMessage;
+        }
+        // (lastMessage as any).interlocutorId = interlocutor;
       })
     );
     console.log(lastMessages);
