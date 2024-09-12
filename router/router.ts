@@ -112,7 +112,7 @@ router.delete(
   cw(messageController.deleteMessage)
 );
 router.patch(
-  '/users/:id/messages',
+  '/connectedUser/:userId/messages/interlocutor/:interlocutorId',
   cw(CSRF.verificate),
   cw(messageController.markAsRead)
 );

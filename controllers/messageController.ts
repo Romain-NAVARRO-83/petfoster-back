@@ -21,7 +21,7 @@ export async function getAllTalks(req: Request, res: Response) {
         },
       ],
     },
-    order: [['created_at', 'ASC']],
+    order: [['created_at', 'DESC']],
   });
   res.status(200).json(messages);
 }
@@ -112,7 +112,7 @@ export async function markAsRead(req: Request, res: Response) {
 
 // On crée un schéma Joi pour les messsages
 export async function writeMessage(req: Request, res: Response) {
-  const createMessageSchema= joischema.createMessageSchema;
+  const createMessageSchema = joischema.createMessageSchema;
 
   // On valide le req.body
   const { error } = createMessageSchema.validate(req.body);
