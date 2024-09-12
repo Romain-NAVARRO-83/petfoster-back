@@ -63,7 +63,7 @@ export async function getAllInterlocutors(req: Request, res: Response) {
               { sender_id: interlocutor, receiver_id: userId },
             ],
           },
-          attributes: ['sender_id', 'created_at', 'is_read'], // On récupère le dernier sender, la date et le statut read_by_receiver
+          attributes: ['sender_id', 'created_at', 'read_by_receiver'], // On récupère le dernier sender, la date et le statut read_by_receiver
           order: [['id', 'DESC']], // Tri par date de création (du plus ancien au plus récent)
           limit: 1, // Limite à 1 seul message, le dernier
         });
