@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import * as joischema from '../utils/joi';
 import { Request, Response } from 'express';
 import { Message, User } from '../models';
 import { Op } from 'sequelize';
@@ -112,11 +112,7 @@ export async function markAsRead(req: Request, res: Response) {
 
 // On crée un schéma Joi pour les messsages
 export async function writeMessage(req: Request, res: Response) {
-  const createMessageSchema = Joi.object({
-    sender_id: Joi.number().integer().required(),
-    receiver_id: Joi.number().integer().required(),
-    content: Joi.string().min(1),
-  });
+  const createMessageSchema= joischema.createMessageSchema;
 
   // On valide le req.body
   const { error } = createMessageSchema.validate(req.body);
