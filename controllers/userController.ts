@@ -166,11 +166,12 @@ export async function getOneUser(req: Request, res: Response) {
             as: 'animal',
           },
         ],
+        order: [['created_at', 'ASC']], // Tri par date de création (du plus ancien au plus récent)
       },
       { model: UsersPicture, as: 'pictures' },
       { model: FosterlingProfile, as: 'fosterlingProfiles' },
       { model: FosterlingRequest, as: 'fosterlingRequests' },
-      { model: Animal, as: 'createdAnimals' },
+      { model: Animal, as: 'createdAnimals', order: [['created_at', 'ASC']] },
     ],
   });
 
@@ -184,7 +185,7 @@ export async function getOneUser(req: Request, res: Response) {
 }
 
 export async function createUser(req: Request, res: Response) {
-  const createUserSchema= joischema.createUserSchema;
+  const createUserSchema = joischema.createUserSchema;
 
   // On valide le req.body
   const { error } = createUserSchema.validate(req.body);
@@ -244,7 +245,7 @@ export async function updateUser(req: Request, res: Response) {
   //On valide le body avec l'outil Joi
   // ==> On définie ce à quoi le body que nous envoie le client doit ressembler
   // ==> On valide le body
-  const updateUserSchema=joischema.updateUserSchema;
+  const updateUserSchema = joischema.updateUserSchema;
 
   const { error } = updateUserSchema.validate(req.body); // Si error, alors cela signifie que le body ne passe pas la validation
   if (error) {
