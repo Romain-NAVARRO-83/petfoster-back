@@ -92,24 +92,26 @@ export async function getAllInterlocutors(req: Request, res: Response) {
 
 // Fonction pour marquer un message comme "lu"
 export async function markAsRead(req: Request, res: Response) {
-  const messageId = parseInt(req.params.id);
-
-  // Vérifiez que l'ID du message est valide
-  if (!Number.isInteger(messageId)) {
-    return res.status(400).json({ error: 'Invalid message ID.' });
-  }
+  const userId = parseInt(req.params.userId);
+  const interlocutorId = parseInt(req.params.interlocutorId);
 
   try {
     // Trouver le message par son ID
-    const message = await Message.findByPk(messageId);
+    const messages = await Message.findAll({
+      where: { sender_id: interlocutorId, receiver_id: userId },
+    });
 
     // Si le message n'existe pas
-    if (!message) {
+    if (!messages) {
       return res.status(404).json({ error: 'Message not found.' });
     }
 
-    // Mettre à jour le statut is_read à true
-    await message.update({ is_read: true });
+    await Promise.all(
+      messages.map(async (message) => {
+        // Mettre à jour le statut `read_by_receiver` à true pour marquer le message comme lu
+        await message.update({ read_by_receiver: true });
+      })
+    );
 
     // Réponse au client
     res.status(200).json({ message: 'Message marked as read successfully.' });

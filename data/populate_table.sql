@@ -112,7 +112,7 @@ INSERT INTO "animals_pictures" ("URL_picture", "animals_id") VALUES
 ('15-Splinter-1.webp', 15);
 
 -- Alimentation de la table "messages" 
-INSERT INTO "messages" ("sender_id", "receiver_id", "content", "is_read") VALUES
+INSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_by_receiver") VALUES
 (1, 2, 'Bonjour Marie, je serais intéressée par Felix.', true),
 (2, 1, 'Bonjour Alice, Felix est encore disponible pour adoption.', true),
 (1, 2, 'Très, bien! Je  voudrais savoir s''il y avait des frais pour l''adoption.', true),
