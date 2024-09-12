@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { Request, Response } from 'express';
 import { rateLimit } from 'express-rate-limit';
 import * as animalController from '../controllers/animalController';
 import * as userController from '../controllers/userController';
@@ -39,7 +38,7 @@ router.delete(
 );
 
 //Route Auth
-router.post('/login', CSRF.verificate, cw(userController.loginUser));
+router.post('/login', cw(CSRF.verificate), cw(userController.loginUser));
 router.post(
   '/loginh',
   limiter,
