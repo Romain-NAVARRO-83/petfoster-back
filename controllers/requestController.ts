@@ -168,6 +168,9 @@ export async function updateRequest(req: Request, res: Response) {
     } catch (error) {
       res.status(400).json({ error: "Erreur lors du transfert d'animal" });
     }
+  } else {
+    // On renvoie la demande updated au client
+    res.status(200).json(updatedRequest);
   }
 }
 
