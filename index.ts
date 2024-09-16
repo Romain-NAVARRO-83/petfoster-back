@@ -31,7 +31,13 @@ app.use(
 );
 
 // Authorize CORS requests
-app.use(cors('*' as any)); // * = tous les domaines (pour nous faciliter la vie sur la saison future, mais en pratique, on devrait limiter l'accès à notre API uniquement au front qui va nous appeler !)
+// app.use(cors('http://localhost:3000'));
+// * = tous les domaines (pour nous faciliter la vie sur la saison future, mais en pratique, on devrait limiter l'accès à notre API uniquement au front qui va nous appeler !)
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+  })
+);
 
 // Configure routes
 app.use('/api', router);

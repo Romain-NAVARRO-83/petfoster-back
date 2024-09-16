@@ -14,6 +14,11 @@ export async function getAllAnimals(req: Request, res: Response) {
     include: [
       { model: User, as: 'creator' },
       { model: Species, as: 'species' },
+      {
+        model: AnimalsHasUsers,
+        as: 'animalOwners',
+        include: [{ model: User, as: 'user', attributes: ['id', 'name'] }],
+      },
     ],
     order: [
       ['id', 'ASC'], // Trier par l'ID des Animaux en ordre croissant
@@ -64,7 +69,7 @@ export async function getOneAnimal(req: Request, res: Response) {
 }
 
 export async function createAnimal(req: Request, res: Response) {
-  const createAnimalSchema= joischema.createAnimalSchema;
+  const createAnimalSchema = joischema.createAnimalSchema;
 
   // Validation de la requête
   const { error } = createAnimalSchema.validate(req.body);
@@ -91,7 +96,7 @@ export async function updateAnimal(req: Request, res: Response) {
     return res.status(404).json({ error: 'Animal not found.' });
   }
 
-  const updateAnimalSchema= joischema.updateAnimalSchema;
+  const updateAnimalSchema = joischema.updateAnimalSchema;
 
   const { error } = updateAnimalSchema.validate(req.body);
   if (error) {

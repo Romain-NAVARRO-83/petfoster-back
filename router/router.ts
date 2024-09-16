@@ -7,6 +7,7 @@ import * as requestController from '../controllers/requestController';
 import * as messageController from '../controllers/messageController';
 import { controllerWrapper as cw } from '../utils/controllerWrapper';
 import * as CSRF from '../utils/CSRF';
+import { uploadProfilePicture } from '../controllers/profileController';
 
 // Middleware pour limiter le nombre de requêtes par IP sur les routes critiques afin de prévenir les attaques DDOS
 const limiter = rateLimit({
@@ -71,6 +72,12 @@ router.delete(
   cw(CSRF.verificate),
   cw(profileController.deleteProfile)
 );
+// Ajout de la route pour télécharger une image de profil
+router.post(
+  '/profiles/:id/upload-profile-picture',
+  cw(CSRF.verificate), // Vérification CSRF
+  uploadProfilePicture // Fonction de gestion de l'upload
+);
 
 // Routes des Requests
 router.get('/requests', cw(requestController.getAllRequests));
@@ -80,7 +87,7 @@ router.post(
   cw(CSRF.verificate),
   cw(requestController.createFosterlingRequest)
 );
-router.put(
+router.patch(
   '/requests/:id',
   cw(CSRF.verificate),
   cw(requestController.updateRequest)

@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import * as joischema from '../utils/joi';
-import * as argon2i from 'argon2';
+import * as argon2id from 'argon2';
 import { Op } from 'sequelize';
 import * as emailValidator from 'email-validator';
 import passwordValidator from 'password-validator';
@@ -16,6 +16,8 @@ import {
   UsersPicture,
   FosterlingProfile,
   FosterlingRequest,
+  Species,
+  AnimalsPictures,
 } from '../models/index.js';
 
 //! A SUPPRIMER A TERME
@@ -65,7 +67,7 @@ export async function loginhUser(req: Request, res: Response) {
   }
 
   try {
-    if (await argon2i.verify(user.password, password)) {
+    if (await argon2id.verify(user.password, password)) {
       // password match
     } else {
       return res.status(401).json({ error: 'Wrong password' });
@@ -125,6 +127,7 @@ export async function getAllUsers(req: Request, res: Response) {
         ],
       },
       { model: Animal, as: 'createdAnimals' },
+      { model: FosterlingProfile, as: 'fosterlingProfiles' },
     ],
     order: [
       ['id', 'ASC'], // Trier par l'ID des users en ordre croissant
@@ -157,6 +160,7 @@ export async function getOneUser(req: Request, res: Response) {
   // Récupérer un utilisateur en BDD
   const user = await User.findByPk(req.params.id, {
     include: [
+      { model: UsersPicture, as: 'pictures' },
       {
         model: AnimalsHasUsers,
         as: 'userAnimals',
@@ -168,10 +172,36 @@ export async function getOneUser(req: Request, res: Response) {
         ],
         order: [['created_at', 'ASC']], // Tri par date de création (du plus ancien au plus récent)
       },
-      { model: UsersPicture, as: 'pictures' },
-      { model: FosterlingProfile, as: 'fosterlingProfiles' },
+      {
+        model: FosterlingProfile,
+        as: 'fosterlingProfiles',
+        include: [
+          {
+            model: Species,
+            as: 'species',
+          },
+        ],
+      },
       { model: FosterlingRequest, as: 'fosterlingRequests' },
-      { model: Animal, as: 'createdAnimals', order: [['created_at', 'ASC']] },
+      {
+        model: Animal,
+        as: 'createdAnimals',
+        include: [
+          {
+            model: AnimalsHasUsers,
+            as: 'animalOwners',
+            where: { date_end: null },
+            include: [
+              {
+                model: User,
+                as: 'user',
+                attributes: ['id', 'name'],
+              },
+            ],
+          },
+        ],
+        order: [['created_at', 'ASC']],
+      },
     ],
   });
 
@@ -224,8 +254,8 @@ export async function createUser(req: Request, res: Response) {
     return res.status(409).json({ error: 'Cet email est déjà utiisé.' });
   }
 
-  // On hash le mot de passe avec l'outil Argon2i
-  const hashedPassword = await argon2i.hash(req.body.password);
+  // On hash le mot de passe avec l'outil Argon2id
+  const hashedPassword = await argon2id.hash(req.body.password);
 
   delete req.body.password;
   const createdUser = await User.create({
@@ -259,14 +289,10 @@ export async function updateUser(req: Request, res: Response) {
     return res.status(404).json({ error: 'User not found.' });
   }
 
-  // On hash le mot de passe
-  const hashedPassword = await argon2i.hash(req.body.password);
-
   // On update l'utilisateur avec le mot de passe hashé
   delete req.body.password;
   const updatedUser = await user.update({
     ...req.body,
-    password: hashedPassword,
   });
 
   // On renvoie l'utilisateur updated au client

@@ -1,5 +1,5 @@
 import { sequelize } from './dbClientSequelize';
-import { Model, Optional, DataTypes, BOOLEAN } from 'sequelize';
+import { Model, Optional, DataTypes } from 'sequelize';
 import { User } from './User';
 
 // Définition des attributs pour un message
