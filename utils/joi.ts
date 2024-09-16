@@ -114,5 +114,5 @@ export const updateUserSchema = Joi.object({
     .pattern(/^(\+?\d{1,4})?([ .-]?\(?\d{1,4}\)?)?([ .-]?\d{1,4}){1,4}$/)
     .allow(''),
   address: Joi.string().allow(''),
-  website: Joi.string().uri(),
+  website: Joi.string().pattern(/^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}([\/\w .-]*)*\/?$/)
 });
