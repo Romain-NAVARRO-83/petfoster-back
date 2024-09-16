@@ -100,8 +100,7 @@ export const updateUserSchema = Joi.object({
   type_user: Joi.string().min(1),
   name: Joi.string().min(1),
   email: Joi.string()
-    .email({ minDomainSegments: 2, tlds: { allow: false } })
-    .required(),
+    .email({ minDomainSegments: 2, tlds: { allow: false } }),
   password: Joi.string().min(12).required(),
   country: Joi.string().min(1),
   zip: Joi.number().integer().greater(0).required(),
