@@ -1,13 +1,44 @@
 import Joi from 'joi';
 import * as joischema from '../utils/joi';
 import { Request, Response } from 'express';
-import FosterlingRequest from '../models/FosterlingRequest';
+import {
+  FosterlingRequest,
+  Animal,
+  AnimalsPictures,
+  User,
+  AnimalsHasUsers,
+} from '../models/index.js';
+import { Op } from 'sequelize';
 
 export async function getAllRequests(req: Request, res: Response) {
   // On récupère toutes les demandes en BDD
   const requests = await FosterlingRequest.findAll({
+    include: [
+      {
+        model: Animal,
+        as: 'animal',
+        attributes: ['name'],
+        include: [
+          {
+            model: AnimalsPictures,
+            as: 'pictures',
+          },
+        ],
+      },
+      {
+        model: User,
+        as: 'user',
+        attributes: ['id', 'name'],
+      },
+    ],
     order: [
-      ['id', 'ASC'], // Trier par l'ID des demandes en ordre croissant
+      ['id', 'ASC'],
+      [
+        { model: Animal, as: 'animal' },
+        { model: AnimalsPictures, as: 'pictures' },
+        'id',
+        'ASC',
+      ], // Trier par l'ID des demandes en ordre croissant
     ],
   });
 
@@ -24,7 +55,34 @@ export async function getOneRequest(req: Request, res: Response) {
   }
 
   // Récupérer une demande en BDD
-  const request = await FosterlingRequest.findByPk(req.params.id);
+  const request = await FosterlingRequest.findByPk(req.params.id, {
+    include: [
+      {
+        model: Animal,
+        as: 'animal',
+        attributes: ['name'],
+        include: [
+          {
+            model: AnimalsPictures,
+            as: 'pictures',
+          },
+        ],
+      },
+      {
+        model: User,
+        as: 'user',
+        attributes: ['id', 'name'],
+      },
+    ],
+    order: [
+      [
+        { model: Animal, as: 'animal' },
+        { model: AnimalsPictures, as: 'pictures' },
+        'id',
+        'ASC',
+      ], // Trier par l'ID des demandes en ordre croissant
+    ],
+  });
 
   // Si la demande n'existe pas
   if (!request) {
@@ -36,7 +94,7 @@ export async function getOneRequest(req: Request, res: Response) {
 }
 
 export async function createFosterlingRequest(req: Request, res: Response) {
-  const createRequestSchema= joischema.createRequestSchema;
+  const createRequestSchema = joischema.createRequestSchema;
 
   // On valide le req.body
   const { error } = createRequestSchema.validate(req.body);
@@ -61,7 +119,7 @@ export async function updateRequest(req: Request, res: Response) {
   //On valide le body avec l'outil Joi
   // ==> On définie ce à quoi le body que nous envoie le client doit ressembler
   // ==> On valide le body avec cet outil
-  const updateRequestSchema= joischema.updateRequestSchema;
+  const updateRequestSchema = joischema.updateRequestSchema;
 
   const { error } = updateRequestSchema.validate(req.body); // Si error, alors cela signifie que le body ne passe pas la validation
   if (error) {
@@ -76,12 +134,41 @@ export async function updateRequest(req: Request, res: Response) {
   }
 
   // On update l'utilisateur avec le mot de passe hashé
-  const updatedUser = await request.update({
+  const updatedRequest = await request.update({
     ...req.body,
   });
 
-  // On renvoie la demande updated au client
-  res.status(200).json(updatedUser);
+  if (updatedRequest && req.body.request_status === 'approved') {
+    try {
+      const newFosterling = await AnimalsHasUsers.create({
+        animals_id: updatedRequest.animals_id,
+        users_id: updatedRequest.users_id,
+        date_start: updatedRequest.created_at,
+      });
+
+      const lastFosterling = await AnimalsHasUsers.findOne({
+        where: {
+          [Op.and]: [
+            { date_end: null },
+            { animals_id: updatedRequest.animals_id },
+          ],
+        },
+      });
+
+      if (lastFosterling) {
+        const updatedLastFosterling = await lastFosterling.update({
+          date_end: updatedRequest.created_at,
+        });
+
+        // On renvoie la demande updated au client
+        res
+          .status(200)
+          .json([updatedRequest, newFosterling, updatedLastFosterling]);
+      }
+    } catch (error) {
+      res.status(400).json({ error: "Erreur lors du transfert d'animal" });
+    }
+  }
 }
 
 export async function deleteRequest(req: Request, res: Response) {

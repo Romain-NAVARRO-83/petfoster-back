@@ -23,7 +23,6 @@ export const router = Router();
 // Route to serve the CSRF token
 router.get('/csrf-token', cw(CSRF.create));
 
-
 // Routes des Animaux
 router.get('/animals', cw(animalController.getAllAnimals));
 router.get('/animals/:id', cw(animalController.getOneAnimal));
@@ -88,7 +87,7 @@ router.post(
   cw(CSRF.verificate),
   cw(requestController.createFosterlingRequest)
 );
-router.put(
+router.patch(
   '/requests/:id',
   cw(CSRF.verificate),
   cw(requestController.updateRequest)
