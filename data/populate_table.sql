@@ -159,8 +159,12 @@ INSERT INTO "users_pictures" ("URL_picture", "users_id") VALUES
 
 -- Alimentation de la table "fosterling_requests"
 INSERT INTO "fosterling_requests" ("request_status", "content_request", "animals_id", "users_id") VALUES
-('Pending', 'Je souhaiterais adopter Mimi.', 1, 2),
-('Approved', 'Demande d’adoption pour Rex approuvée.', 3, 3),
-('Rejected', 'Demande d’adoption pour Storm rejetée.', 6, 4);
+('pending', 'Je souhaiterais adopter Mimi.', 1, 2),
+('approved', 'Demande d’adoption pour Rex approuvée.', 3, 3),
+('rejected', 'Demande d’adoption pour Storm rejetée.', 6, 4),
+('pending', 'Je souhaiterais adopter Gringo.', 5, 1),
+('pending', 'Je souhaiterais adopter Gringo.', 5, 2),
+('pending', 'Je souhaiterais adopter Kiki.', 11, 4);
+
 
 COMMIT;

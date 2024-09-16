@@ -9,7 +9,7 @@ type AnimalsHasUsersAttributes = {
   animals_id: number;
   users_id: number;
   date_start?: Date; // optionnel
-  date_end?: Date; // optionnel
+  date_end?: Date | null; // optionnel
   created_at: Date;
   updated_at?: Date; // optionnel
 };
@@ -28,7 +28,7 @@ class AnimalsHasUsers extends Model<
   declare animals_id: number;
   declare users_id: number;
   declare date_start?: Date;
-  declare date_end?: Date;
+  declare date_end?: Date | null;
   declare created_at: Date;
   declare updated_at?: Date;
 }

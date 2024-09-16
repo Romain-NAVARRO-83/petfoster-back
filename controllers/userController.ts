@@ -17,6 +17,7 @@ import {
   FosterlingProfile,
   FosterlingRequest,
   Species,
+  AnimalsPictures,
 } from '../models/index.js';
 
 //! A SUPPRIMER A TERME
