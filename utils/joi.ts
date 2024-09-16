@@ -21,7 +21,6 @@ export const updateAnimalSchema = Joi.object({
   long_story: Joi.string().allow(''),
   health: Joi.string().allow(''),
   species_id: Joi.number().integer().greater(0).required(),
-  creator_id: Joi.number().integer().greater(0).required(),
 });
 
 export const createMessageSchema = Joi.object({
@@ -88,10 +87,8 @@ export const createUserSchema = Joi.object({
 export const updateUserSchema = Joi.object({
   type_user: Joi.string().min(1),
   name: Joi.string().min(1),
-  email: Joi.string()
-    .email({ minDomainSegments: 2, tlds: { allow: false } })
-    .required(),
-  password: Joi.string().min(12).required(),
+  email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: false } }),
+  password: Joi.string().min(12),
   country: Joi.string().min(1),
   zip: Joi.number().integer().greater(0).required(),
   city: Joi.string().min(1),
@@ -104,5 +101,7 @@ export const updateUserSchema = Joi.object({
     .pattern(/^(\+?\d{1,4})?([ .-]?\(?\d{1,4}\)?)?([ .-]?\d{1,4}){1,4}$/)
     .allow(''),
   address: Joi.string().allow(''),
-  website: Joi.string().uri(),
+  website: Joi.string().pattern(
+    /^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}([\/\w .-]*)*\/?$/
+  ),
 });

@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import * as joischema from '../utils/joi';
-import * as argon2i from 'argon2';
+import * as argon2id from 'argon2';
 import { Op } from 'sequelize';
 import * as emailValidator from 'email-validator';
 import passwordValidator from 'password-validator';
@@ -67,7 +67,7 @@ export async function loginhUser(req: Request, res: Response) {
   }
 
   try {
-    if (await argon2i.verify(user.password, password)) {
+    if (await argon2id.verify(user.password, password)) {
       // password match
     } else {
       return res.status(401).json({ error: 'Wrong password' });
@@ -254,8 +254,8 @@ export async function createUser(req: Request, res: Response) {
     return res.status(409).json({ error: 'Cet email est déjà utiisé.' });
   }
 
-  // On hash le mot de passe avec l'outil Argon2i
-  const hashedPassword = await argon2i.hash(req.body.password);
+  // On hash le mot de passe avec l'outil Argon2id
+  const hashedPassword = await argon2id.hash(req.body.password);
 
   delete req.body.password;
   const createdUser = await User.create({
@@ -290,7 +290,7 @@ export async function updateUser(req: Request, res: Response) {
   }
 
   // On hash le mot de passe
-  const hashedPassword = await argon2i.hash(req.body.password);
+  const hashedPassword = await argon2id.hash(req.body.password);
 
   // On update l'utilisateur avec le mot de passe hashé
   delete req.body.password;
