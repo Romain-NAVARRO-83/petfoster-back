@@ -17,8 +17,7 @@ export async function getAllAnimals(req: Request, res: Response) {
       {
         model: AnimalsHasUsers,
         as: 'animalOwners',
-        include: [{ model: User, as: 'user' }],
-        attributes: ['id', 'name'],
+        include: [{ model: User, as: 'user', attributes: ['id', 'name'] }],
       },
     ],
     order: [
