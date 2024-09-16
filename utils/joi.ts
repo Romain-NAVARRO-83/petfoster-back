@@ -22,7 +22,6 @@ export const updateAnimalSchema = Joi.object({
   long_story: Joi.string().allow(''),
   health: Joi.string().allow(''),
   species_id: Joi.number().integer().greater(0).required(),
-  creator_id: Joi.number().integer().greater(0).required(),
 });
 
 
@@ -101,7 +100,7 @@ export const updateUserSchema = Joi.object({
   name: Joi.string().min(1),
   email: Joi.string()
     .email({ minDomainSegments: 2, tlds: { allow: false } }),
-  password: Joi.string().min(12).required(),
+  password: Joi.string().min(12),
   country: Joi.string().min(1),
   zip: Joi.number().integer().greater(0).required(),
   city: Joi.string().min(1),
