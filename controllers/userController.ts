@@ -126,6 +126,7 @@ export async function getAllUsers(req: Request, res: Response) {
         ],
       },
       { model: Animal, as: 'createdAnimals' },
+      { model: FosterlingProfile, as: 'fosterlingProfiles' },
     ],
     order: [
       ['id', 'ASC'], // Trier par l'ID des users en ordre croissant
@@ -181,7 +182,25 @@ export async function getOneUser(req: Request, res: Response) {
         ],
       },
       { model: FosterlingRequest, as: 'fosterlingRequests' },
-      { model: Animal, as: 'createdAnimals', order: [['created_at', 'ASC']] },
+      {
+        model: Animal,
+        as: 'createdAnimals',
+        include: [
+          {
+            model: AnimalsHasUsers,
+            as: 'animalOwners',
+            where: { date_end: null },
+            include: [
+              {
+                model: User,
+                as: 'user',
+                attributes: ['id', 'name'],
+              },
+            ],
+          },
+        ],
+        order: [['created_at', 'ASC']],
+      },
     ],
   });
 
