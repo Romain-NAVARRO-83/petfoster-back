@@ -2,6 +2,7 @@ import Joi from 'joi';
 import * as joischema from '../utils/joi';
 import { Request, Response } from 'express';
 import FosterlingProfile from '../models/FosterlingProfile';
+import { upload, handleImageUpload } from '../utils/uploadMiddleware'; 
 
 export async function getAllProfiles(req: Request, res: Response) {
   const profiles = await FosterlingProfile.findAll();
@@ -29,6 +30,23 @@ export async function getOneProfile(req: Request, res: Response) {
   // Envoyer une réponse
   res.status(200).json(profile);
 }
+
+// permettre à l'utilisateur de télécharger une image de profil.
+const uploadProfilePicture = [
+  upload.single('image'), // Utilisation de multer pour accepter un seul fichier
+  handleImageUpload('utilisateurs'), // Utiliser notre middleware pour gérer le téléchargement et la conversion
+  (req: Request, res: Response) => {
+    try {
+      // Retourner le chemin du fichier WebP converti
+      res.status(200).json({ message: 'Image téléchargée avec succès', filePath: req.filePath });
+    } catch (error) {
+      res.status(500).json({ error: 'Erreur lors du téléchargement de l\'image' });
+    }
+  }
+];
+
+export { uploadProfilePicture };
+
 
 export async function createFosterlingProfile(req: Request, res: Response) {
   const createProfileSchema= joischema.createProfileSchema;
