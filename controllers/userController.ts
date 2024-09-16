@@ -289,14 +289,10 @@ export async function updateUser(req: Request, res: Response) {
     return res.status(404).json({ error: 'User not found.' });
   }
 
-  // On hash le mot de passe
-  const hashedPassword = await argon2id.hash(req.body.password);
-
   // On update l'utilisateur avec le mot de passe hashé
   delete req.body.password;
   const updatedUser = await user.update({
     ...req.body,
-    password: hashedPassword,
   });
 
   // On renvoie l'utilisateur updated au client
