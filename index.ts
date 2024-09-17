@@ -5,10 +5,19 @@ import 'dotenv/config';
 import express from 'express';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Create app
 const app = express();
 
+// Serve user and animal images
+// Get __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static files from the "public/img" directory
+app.use('/img', express.static(path.join(__dirname, 'public', 'img')));
 import cors from 'cors';
 import { router } from './router/router';
 
