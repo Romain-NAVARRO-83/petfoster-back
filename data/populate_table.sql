@@ -34,7 +34,7 @@ INSERT INTO "users" ("type_user", "name", "email", "password", "country", "zip",
 ('adoptant', 'Théo Michel', 'theo.michel@example.com', 'hashed_password18', 'France', 64000, 'Pau', -0.3708, 43.2951, '0123456799', '10 Boulevard des Pyrénées', NULL, 'Passionné de reptiles.'),
 ('adoptant', 'Camille Girard', 'camille.girard@example.com', 'hashed_password19', 'France', 51100, 'Reims', 4.0317, 49.2583, '0123456700', '20 Rue de Venise', NULL, 'Cherche un compagnon fidèle.'),
 ('adoptant', 'Nathan Lefèvre', 'nathan.lefevre@example.com', 'hashed_password20', 'France', 37000, 'Tours', 0.6848, 47.3941, '0123456701', '7 Place Jean Jaurès', NULL, 'Adoptant occasionnel.'),
-('adoptant', 'Claire Simon', 'claire.simon@example.com', 'hashed_password21', 'France', 59491, 'Villeneuve d''Ascq', 3.1315, 50.6232, '0123456702', '110 Avenue le Notre', NULL, 'Adore les animaux exotiques.');
+('adoptant', 'Claire Simon', 'claire.simon@example.com', 'hashed_password21', 'France', 59491, 'Villeneuve d''Ascq', 3.1315, 50.6232, '0123456702', '110 Avenue le Notre', NULL, 'Adore les animaux exotiques.'),
 
 -- Familles d'accueil
 ('famille d''accueil', 'Jean Martin', 'jean.martin@example.com', 'hashed_password2', 'France', 69001, 'Lyon', 4.8357, 45.7640, '0123456790', '2 Rue des Capucins', NULL, 'Habitué à accueillir des animaux de toutes tailles.'),
@@ -46,7 +46,7 @@ INSERT INTO "users" ("type_user", "name", "email", "password", "country", "zip",
 ('famille d''accueil', 'Laura Barbier', 'laura.barbier@example.com', 'hashed_password24', 'France', 13002, 'Marseille', 5.3761, 43.2952, '0123456704', '6 Rue de la République', NULL, 'Spécialisée dans l''accueil de chats.'),
 ('famille d''accueil', 'Victor Roux', 'victor.roux@example.com', 'hashed_password25', 'France', 31000, 'Toulouse', 1.4496, 43.6006, '0123456705', '10 Rue Alsace-Lorraine', NULL, 'Habitué à accueillir des NAC.'),
 ('famille d''accueil', 'Chloé Caron', 'chloe.caron@example.com', 'hashed_password26', 'France', 75007, 'Paris', 2.3166, 48.8566, '0123456706', '8 Rue de Grenelle', NULL, 'Famille d''accueil pour animaux abandonnés.'),
-('famille d''accueil', 'Antoine Muller', 'antoine.muller@example.com', 'hashed_password27', 'France', 34000, 'Montpellier', 3.8767, 43.6117, '0123456707', '12 Rue Foch', NULL, 'Amoureux des chiens et chats.');
+('famille d''accueil', 'Antoine Muller', 'antoine.muller@example.com', 'hashed_password27', 'France', 34000, 'Montpellier', 3.8767, 43.6117, '0123456707', '12 Rue Foch', NULL, 'Amoureux des chiens et chats.'),
 ('famille d''accueil', 'Charlotte Garnier', 'charlotte.garnier@example.com', 'hashed_password28', 'France', 67000, 'Strasbourg', 7.7521, 48.5734, '0123456708', '2 Rue de la Gare', NULL, 'Amoureuse des NAC.'),
 ('famille d''accueil', 'Benoît Lefort', 'benoit.lefort@example.com', 'hashed_password29', 'France', 54000, 'Nancy', 6.1844, 48.6921, '0123456709', '11 Rue Saint-Jean', NULL, 'Spécialisé dans les reptiles.'),
 ('famille d''accueil', 'Amandine Noël', 'amandine.noel@example.com', 'hashed_password30', 'France', 75012, 'Paris', 2.3792, 48.8422, '0123456710', '16 Avenue Daumesnil', NULL, 'Accueille des chats et chiens.'),
@@ -55,14 +55,14 @@ INSERT INTO "users" ("type_user", "name", "email", "password", "country", "zip",
 
 -- Associations
 ('association', 'Société Protectrice des Animaux', 'contact@spa-example.com', 'hashed_password33', 'France', 75010, 'Paris', 2.3574, 48.8635, '0123456794', '10 Avenue de la République', 'www.spa-example.com', 'La SPA est une des plus grandes associations de protection animale en France.'),
-('association', 'Refuge Animalier', 'contact@refuge-example.com', 'hashed_password34', 'France', 67000, 'Strasbourg', 7.7521, 48.5734, '0123456795', '20 Rue de la Gare', 'www.refuge-example.com', 'Refuge dédié aux animaux abandonnés et maltraités dans l’est de la France.');
+('association', 'Refuge Animalier', 'contact@refuge-example.com', 'hashed_password34', 'France', 67000, 'Strasbourg', 7.7521, 48.5734, '0123456795', '20 Rue de la Gare', 'www.refuge-example.com', 'Refuge dédié aux animaux abandonnés et maltraités dans l’est de la France.'),
 ('association', 'Les Amis des Animaux', 'contact@amisdesanimaux.com', 'hashed_password35', 'France', 44000, 'Nantes', -1.5536, 47.2184, '0123456800', '5 Rue du Calvaire', 'www.amisdesanimaux.com', 'Association régionale pour la protection animale.'),
 ('association', 'Refuge des Montagnes', 'contact@refuge-montagnes.com', 'hashed_password36', 'France', 74000, 'Annecy', 6.1294, 45.8992, '0123456801', '21 Rue Carnot', 'www.refugemontagnes.com', 'Refuge pour animaux en montagne.'),
 ('association', 'Association Animaux Heureux', 'contact@animauxheureux.org', 'hashed_password37', 'France', 75015, 'Paris', 2.2937, 48.8413, '0123456800', '15 Rue de Vaugirard', 'www.animauxheureux.org', 'Association pour le bien-être des animaux.'),
 ('association', 'Refuge de l''Ouest', 'contact@refugeouest.com', 'hashed_password38', 'France', 33000, 'Bordeaux', -0.5792, 44.8378, '0123456713', '5 Rue Sainte-Catherine', 'www.refugeouest.com', 'Refuge spécialisé dans les chiens.'),
 ('association', 'Refuge du Centre', 'contact@refugecentre.com', 'hashed_password39', 'France', 69001, 'Lyon', 4.8357, 45.7640, '0123456714', '10 Rue Mercière', 'www.refugecentre.com', 'Protection des chats errants.'),
 ('association', 'Sauvetage NAC', 'contact@sauvetagenac.com', 'hashed_password40', 'France', 75002, 'Paris', 2.3436, 48.8662, '0123456715', '15 Rue Montmartre', 'www.sauvetagenac.com', 'Spécialisé dans le sauvetage des NAC.'),
-('association', 'Refuge des Reptiles', 'contact@refugereptiles.com', 'hashed_password41', 'France', 13001, 'Marseille', 5.3795, 43.2967, '0123456716', '12 Rue de la République', 'www.refugereptiles.com'),
+('association', 'Refuge des Reptiles', 'contact@refugereptiles.com', 'hashed_password41', 'France', 13001, 'Marseille', 5.3795, 43.2967, '0123456716', '12 Rue de la République', 'www.refugereptiles.com', 'Les amis des reptiles');
 
 -- Alimentation de la table "animals" avec 2 chiens, 2 chats, 2 chevaux, et 1 NAC de chaque
 INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "long_story", "health", "species_id", "creator_id") VALUES
@@ -74,7 +74,7 @@ INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "
 ('Mila', '2023-01-10', 'F', 'Maine Coon', 'Chat doux et calme', 'Mila est une jeune chatte douce, idéale pour les familles.', 'Bonne santé', 1, 38),
 ('Simba', '2022-11-02', 'M', 'Ragdoll', 'Chat très câlin', 'Simba adore les câlins et cherche une famille aimante.', 'En parfaite santé', 1, 39),
 ('Miko', '2019-08-27', 'M', 'Chat de gouttière', 'Chat très curieux', 'Miko est un chat très aventurier et qui n''a pas froid aux yeux', 'Un petit problème à la patte droite', 1, 37),
-('Charly', '2022-03-15', 'M', 'Chat de gouttière', 'Chat légèrement peureux', 'Charly est un adorable matou qui n''accorde sa confiance qu''aux humains qui le mettent à l''aise', 1, 39),
+('Charly', '2022-03-15', 'M', 'Chat de gouttière', 'Chat légèrement peureux', 'Charly est un adorable matou qui n''accorde sa confiance qu''aux humains qui le mettent à l''aise', 'En bonne santé', 1, 39),
 
 -- Chiens
 ('Rex', '2019-08-22', 'M', 'Berger Allemand', 'Chien protecteur', 'Rex est un chien courageux, idéal pour la garde.', 'Vacciné', 2, 33),
@@ -103,7 +103,7 @@ INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "
 ('Slytherin', '2018-08-01', 'M', 'Python Royal', 'Serpent calme', 'Slytherin est un serpent idéal pour les débutants.', 'En pleine santé', 9, 41),
 ('Leo', '2020-02-14', 'M', 'Gecko Léopard', 'Petit lézard fascinant', 'Leo est un gecko qui adore grimper et explorer.', 'En bonne santé', 10, 41),
 ('Speedy', '2019-12-21', 'M', 'Tortue de Terre', 'Tortue lente et paisible', 'Speedy est une tortue facile à entretenir.', 'En bonne santé', 11, 41),
-('Splinter', '2021-09-07', 'M', 'Rat Domestique', 'Rat intelligent et sociable', 'Splinter est un rat curieux qui adore interagir avec les humains, et les tortues...', 'En bonne santé', 12, 40);
+('Splinter', '2021-09-07', 'M', 'Rat Domestique', 'Rat intelligent et sociable', 'Splinter est un rat curieux qui adore interagir avec les humains, et les tortues...', 'En bonne santé', 12, 40),
 ('Pixie', '2021-12-15', 'F', 'Lapin Nain', 'Lapin câlin', 'Pixie adore se blottir et demande beaucoup d''attention.', 'Bonne santé', 4, 34),
 ('Tito', '2020-05-30', 'M', 'Cochon d''Inde', 'Petit rongeur curieux', 'Tito est un cochon d''Inde curieux et toujours en mouvement.', 'Bonne santé', 5, 35),
 ('Whiskers', '2021-03-28', 'M', 'Hamster Russe', 'Petit et rapide', 'Whiskers adore courir et explorer de nouveaux espaces.', 'Bonne santé', 6, 37),
@@ -231,7 +231,7 @@ INSERT INTO "animals_pictures" ("URL_picture", "animals_id") VALUES
 
 ('30-Speedy-1.webp', 30),
 
-('31-Splinter-1.webp', 31);
+('31-Splinter-1.webp', 31),
 
 ('32-Pixie-1.webp', 32),
 ('32-Pixie-2.webp', 32),
@@ -273,7 +273,7 @@ INSERT INTO "animals_pictures" ("URL_picture", "animals_id") VALUES
 ('44-Echo-2.webp', 44),
 
 ('45-Rex-1.webp', 45),
-('45-Rex-2.webp', 45),
+('45-Rex-2.webp', 45);
 
 -- Alimentation de la table "messages" 
 INSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_by_receiver") VALUES
@@ -327,7 +327,6 @@ INSERT INTO "users_pictures" ("URL_picture", "users_id") VALUES
 
 -- Alimentation de la table "fosterling_requests"
 INSERT INTO "fosterling_requests" ("request_status", "content_request", "animals_id", "users_id") VALUES
-<<<<<<< HEAD
 ('Pending', 'Je souhaiterais adopter Mimi.', 1, 1), -- Alice Dupont (adoptant)
 ('Approved', 'Demande d’adoption pour Rex approuvée.', 9, 20), -- Sophie Morel (adoptant)
 ('Rejected', 'Demande d’adoption pour Storm rejetée.', 12, 7), -- Victor Hugo (adoptant)
