@@ -230,17 +230,11 @@ export async function createUser(req: Request, res: Response) {
 
   // Valider la force du mdp
   const schema = new passwordValidator()
-    .is()
-    .min(12)
-    .has()
-    .uppercase()
-    .has()
-    .lowercase()
-    .has()
-    .digits(1)
-    .has()
-    .not()
-    .spaces();
+    .is().min(12)
+    .has().uppercase()
+    .has().lowercase()
+    .has().digits(1)
+    .has().not().spaces();
 
   if (!schema.validate(req.body.password)) {
     return res.status(400).json({ error: 'Format de mot de passe invalide.' });
