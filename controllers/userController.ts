@@ -63,14 +63,14 @@ export async function loginhUser(req: Request, res: Response) {
     where: { email: email },
   });
   if (!user) {
-    return res.status(404).json({ error: 'User not found.' });
+    return res.status(400).json({ error: 'Utilisateur non trouvé.' });
   }
 
   try {
     if (await argon2id.verify(user.password, password)) {
       // password match
     } else {
-      return res.status(401).json({ error: 'Wrong password' });
+      return res.status(401).json({ error: 'Mauvais mot de passe.' });
     }
   } catch (err) {
     return res.status(404).json({ error: 'Something went wrong' });
@@ -230,11 +230,17 @@ export async function createUser(req: Request, res: Response) {
 
   // Valider la force du mdp
   const schema = new passwordValidator()
-    .is().min(12)
-    .has().uppercase()
-    .has().lowercase()
-    .has().digits(1)
-    .has().not().spaces();
+    .is()
+    .min(12)
+    .has()
+    .uppercase()
+    .has()
+    .lowercase()
+    .has()
+    .digits(1)
+    .has()
+    .not()
+    .spaces();
 
   if (!schema.validate(req.body.password)) {
     return res.status(400).json({ error: 'Format de mot de passe invalide.' });

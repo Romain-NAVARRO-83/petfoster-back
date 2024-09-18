@@ -12,7 +12,7 @@ export function create(req: Request, res: Response) {
 
 export function verificate(req: Request, res: Response, next: any) {
   if (process.env.CSRF_IS_OFF === 'true') {
-    // console.log(process.env.CSRF_IS_OFF);
+    console.log(process.env.CSRF_IS_OFF);
     next();
   } else {
     // Validate the CSRF token in requests
