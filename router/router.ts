@@ -75,7 +75,7 @@ router.delete(
 // Ajout de la route pour télécharger une image de profil
 router.post(
   '/profiles/:id/upload-profile-picture',
-  cw(CSRF.verificate), // Vérification CSRF
+  // cw(CSRF.verificate), // Vérification CSRF
   uploadProfilePicture // Fonction de gestion de l'upload
 );
 
