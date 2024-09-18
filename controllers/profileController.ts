@@ -2,7 +2,11 @@ import Joi from 'joi';
 import * as joischema from '../utils/joi';
 import { Request, Response } from 'express';
 import FosterlingProfile from '../models/FosterlingProfile';
-import { upload, handleImageUpload } from '../utils/uploadMiddleware'; 
+import { upload, handleImageUpload } from '../utils/uploadMiddleware';
+import path from 'path';
+import multer from 'multer';
+// import { UsersPicture } from 'models';
+import UsersPictures from '../models/UsersPicture';
 
 export async function getAllProfiles(req: Request, res: Response) {
   const profiles = await FosterlingProfile.findAll();
@@ -31,25 +35,37 @@ export async function getOneProfile(req: Request, res: Response) {
   res.status(200).json(profile);
 }
 
-// permettre à l'utilisateur de télécharger une image de profil.
+// Upload d'image
 const uploadProfilePicture = [
-  upload.single('image'), // Utilisation de multer pour accepter un seul fichier
-  handleImageUpload('utilisateurs'), // Utiliser notre middleware pour gérer le téléchargement et la conversion
+  upload.single('image'),
+  handleImageUpload('utilisateurs'),
   (req: Request, res: Response) => {
+    const profileId = parseInt(req.params.id);
+    console.log(profileId);
     try {
-      // Retourner le chemin du fichier WebP converti
-      res.status(200).json({ message: 'Image téléchargée avec succès', filePath: req.filePath });
+      if (!req.file) {
+        return res.status(400).json({ error: 'Aucun fichier téléchargé' });
+      }
+
+      res.status(200).json({
+        message: 'Image téléchargée avec succès',
+        filePath: req.filePath,
+      });
+      const fileName = path.basename(req.filePath);
+      // Enregistrement en BDD
+      UsersPictures.create({ users_id: profileId, URL_picture: fileName });
     } catch (error) {
-      res.status(500).json({ error: 'Erreur lors du téléchargement de l\'image' });
+      res
+        .status(500)
+        .json({ error: "Erreur lors du téléchargement de l'image" });
     }
-  }
+  },
 ];
 
 export { uploadProfilePicture };
 
-
 export async function createFosterlingProfile(req: Request, res: Response) {
-  const createProfileSchema= joischema.createProfileSchema;
+  const createProfileSchema = joischema.createProfileSchema;
 
   // Validation de la requête
   const { error } = createProfileSchema.validate(req.body);
@@ -71,7 +87,7 @@ export async function updateProfile(req: Request, res: Response) {
     return res.status(404).json({ error: 'Bad request.' });
   }
 
-  const updateProfileSchema= joischema.updateProfileSchema;
+  const updateProfileSchema = joischema.updateProfileSchema;
 
   const { error } = updateProfileSchema.validate(req.body);
   if (error) {

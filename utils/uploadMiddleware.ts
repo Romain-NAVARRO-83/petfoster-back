@@ -2,6 +2,11 @@ import multer from 'multer';
 import sharp from 'sharp';
 import path from 'path';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+// Fix for __dirname in ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Définir le stockage temporaire avec Multer
 const upload = multer({
@@ -28,9 +33,7 @@ const handleImageUpload = (folder: string) => {
 
     try {
       // Conversion de l'image en WebP et enregistrement dans le bon dossier
-      await sharp(tempPath)
-        .webp()
-        .toFile(outputPath);
+      await sharp(tempPath).webp().toFile(outputPath);
 
       // Supprimer le fichier temporaire
       fs.unlinkSync(tempPath);
@@ -39,8 +42,8 @@ const handleImageUpload = (folder: string) => {
       req.filePath = outputPath;
       next();
     } catch (error) {
-      console.error('Erreur lors de la conversion de l\'image:', error);
-      res.status(500).send('Erreur lors de la conversion de l\'image.');
+      console.error("Erreur lors de la conversion de l'image:", error);
+      res.status(500).send("Erreur lors de la conversion de l'image.");
     }
   };
 };
