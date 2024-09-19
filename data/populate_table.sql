@@ -62,7 +62,8 @@ INSERT INTO "users" ("type_user", "name", "email", "password", "country", "zip",
 ('association', 'Refuge de l''Ouest', 'contact@refugeouest.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 33000, 'Bordeaux', -0.5792, 44.8378, '0123456713', '5 Rue Sainte-Catherine', 'www.refugeouest.com', 'Refuge spécialisé dans les chiens.'),
 ('association', 'Refuge du Centre', 'contact@refugecentre.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 69001, 'Lyon', 4.8357, 45.7640, '0123456714', '10 Rue Mercière', 'www.refugecentre.com', 'Protection des chats errants.'),
 ('association', 'Sauvetage NAC', 'contact@sauvetagenac.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 75002, 'Paris', 2.3436, 48.8662, '0123456715', '15 Rue Montmartre', 'www.sauvetagenac.com', 'Spécialisé dans le sauvetage des NAC.'),
-('association', 'Refuge des Reptiles', 'contact@refugereptiles.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 13001, 'Marseille', 5.3795, 43.2967, '0123456716', '12 Rue de la République', 'www.refugereptiles.com', 'Les amis des reptiles');
+('association', 'Refuge des Reptiles', 'contact@refugereptiles.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 13001, 'Marseille', 5.3795, 43.2967, '0123456716', '12 Rue de la République', 'www.refugereptiles.com', 'Les amis des reptiles'),
+('association', 'Refuge des Pyrénées', 'contact@refugedespyrénées.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 31190, 'Auterive', 1.4768, 43.3531, '012345671', '62 Route de Cintegabelle', 'www.refugedespyrenees.com', 'Association de protection et le bien-être des animaux');
 
 -- Alimentation de la table "animals" avec 2 chiens, 2 chats, 2 chevaux, et 1 NAC de chaque
 INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "long_story", "health", "species_id", "creator_id") VALUES
@@ -106,7 +107,7 @@ INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "
 ('Splinter', '2021-09-07', 'M', 'Rat Domestique', 'Rat intelligent et sociable', 'Splinter est un rat curieux qui adore interagir avec les humains, et les tortues...', 'En bonne santé', 12, 40),
 ('Pixie', '2021-12-15', 'F', 'Lapin Nain', 'Lapin câlin', 'Pixie adore se blottir et demande beaucoup d''attention.', 'Bonne santé', 4, 34),
 ('Tito', '2020-05-30', 'M', 'Cochon d''Inde', 'Petit rongeur curieux', 'Tito est un cochon d''Inde curieux et toujours en mouvement.', 'Bonne santé', 5, 35),
-('Whiskers', '2023-03-28', 'M', 'Hamster Russe', 'Petit et rapide', 'Whiskers adore courir et explorer de nouveaux espaces.', 'Bonne santé', 6, 37),
+('Whiskers', '2021-03-28', 'M', 'Hamster Russe', 'Petit et rapide', 'Whiskers adore courir et explorer de nouveaux espaces.', 'Bonne santé', 6, 37),
 ('Shadow', '2019-08-11', 'F', 'Furet', 'Furet joueur', 'Shadow est une furette très active et intelligente, elle adore jouer.', 'Vaccinée', 7, 40),
 ('Nibbles', '2020-04-04', 'M', 'Gerbille', 'Petit rongeur actif', 'Nibbles adore creuser et construire des tunnels.', 'Bonne santé', 5, 37),
 ('Polly', '2022-10-01', 'F', 'Perruche', 'Oiseau coloré', 'Polly est une perruche qui adore chanter et interagir avec les humains.', 'Bonne santé', 8, 40),
@@ -117,41 +118,43 @@ INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "
 ('Gizmo', '2020-08-21', 'M', 'Rat', 'Rat intelligent', 'Gizmo est un rat très intelligent qui adore résoudre des puzzles.', 'En pleine forme', 12, 37),
 ('Zazu', '2018-07-14', 'M', 'Ara Bleu', 'Oiseau majestueux', 'Zazu est un magnifique ara bleu, très sociable et joueur.', 'Bonne santé', 8, 40),
 ('Echo', '2021-11-17', 'M', 'Caméléon', 'Lézard coloré', 'Echo est un caméléon qui change de couleurs selon son humeur.', 'En bonne santé', 10, 41),
-('Rex', '2020-09-05', 'M', 'Iguane Noir', 'Lézard imposant', 'Rex est un iguane noir impressionnant, très calme et facile à vivre.', 'Bonne santé', 10, 41);
+('Rex', '2020-09-05', 'M', 'Iguane Noir', 'Lézard imposant', 'Rex est un iguane noir impressionnant, très calme et facile à vivre.', 'Bonne santé', 10, 41),
+
+-- Animaux ajoutés juste pour la démo, près de chez Romain
+
+-- Chats
+('Zelda', '2021-12-25', 'F', 'Chartreux', 'Chat indépendante', 'Zelda aime explorer et est assez indépendante mais revient toujours pour des câlins.', 'Stérilisée, en bonne santé', 1, 42),
+('Nimbus', '2022-03-15', 'M', 'British Shorthair', 'Chat très calme', 'Nimbus est un chat tranquille et idéal pour une famille ou personne âgée.', 'Vacciné, en bonne santé', 1, 42),
+
+--Chiens
+('Shadow', '2018-11-01', 'M', 'Dobermann', 'Chien loyal', 'Shadow est un chien de grande loyauté, excellent pour la sécurité et un compagnon aimant.', 'Vacciné, en bonne forme', 2, 42),
+('Daisy', '2020-05-10', 'F', 'Cocker Spaniel', 'Chienne sociable', 'Daisy est une chienne affectueuse qui adore la compagnie des enfants et des autres animaux.', 'Stérilisée, en pleine santé', 2, 42),
+
+-- Chevaux
+('Blizzard', '2019-04-22', 'M', 'Haflinger', 'Poney robuste', 'Blizzard est un poney vigoureux et idéal pour les balades en montagne.', 'En excellente santé', 3, 42),
+('Luna', '2017-06-17', 'F', 'Pur-Sang Anglais', 'Cheval de course', 'Luna est une jument rapide et excellente pour les courses d’endurance.', 'Bonne santé', 3, 42),
+
+-- NACs
+('Kiwi', '2023-02-14', 'F', 'Perroquet Gris', 'Oiseau très bavard', 'Kiwi est un perroquet intelligent qui adore répéter des mots et interagir avec les humains.', 'Bonne santé', 8, 42),
+('Twitch', '2022-10-01', 'M', 'Chinchilla', 'Petit rongeur actif', 'Twitch est un chinchilla curieux et très actif la nuit, idéal pour les familles.', 'En pleine forme', 5, 42);
 
 -- Alimentation de la table "animals_has_users" 
 INSERT INTO "animals_has_users" ("animals_id", "users_id", "date_start", "date_end") VALUES
-(1, 33, '2024-06-10', '2024-10-23'),
-(1, 24, '2024-10-23', NULL),
-(2, 34, '2021-02-01', '2021-11-13'),
-(2, 32, '2022-06-07', '2022-12-07'),
-(2, 26, '2024-03-26', NULL),
-(3, 35, '2024-05-15', NULL),
-(4, 36, '2021-01-11', '2022-02-21'),
-(4, 5, '2022-02-21', NULL),
-(5, 38, '2023-05-30', '2023-09-13'),
-(5, 27, '2023-09-13', '2024-02-04'),
-(5, 38, '2024-02-04', '2024-06-22'),
-(5, 11, '2024-09-22', NULL),
+(1, 24, '2023-08-12', '2023-06-01'),
+(2, 26, '2022-09-26', NULL),
+(3, 35, '2024-05-15', '2023-08-10'),
+(4, 5, '2021-02-21', NULL),
+(5, 11, '2020-05-25', NULL),
 (6, 39, '2023-01-16', NULL),
-(7, 37, '2021-04-03', NULL),
-(8, 39, '2022-08-24', '2023-10-10'),
-(8, 24, '2023-10-10', '2024-04-07'),
-(8, 39, '2024-04-07', NULL),
-(9, 33, '2020-09-01', NULL),
-(10, 35, '2021-09-14', '2022-06-16'),
-(10, 23, '2022-06-16', '2022-12-12'),
-(10, 35, '2022-12-12', '2023-12-27'),
-(10, 30, '2024-03-26', NULL),
-(11, 38, '2022-09-18', '2023-02-14'),
+(7, 37, '2022-04-03', NULL),
+(8, 39, '2020-08-24', NULL),
+(9, 33, '2019-03-01', NULL),
+(10, 30, '2023-12-27', NULL),
 (11, 8, '2023-02-14', NULL),
 (12, 34, '2021-05-02', NULL),
-(13, 36, '2022-01-01', '2023-07-11'),
-(13, 12, '2023-07-11', NULL),
-(14, 35, '2023-11-14', '2024-05-15'),
-(14, 32, '2024-05-15', NULL),
-(15, 37, '2020-06-30', '2022-04-27'),
-(15, 19, '2022-04-27', NULL),
+(13, 12, '2021-01-01', NULL),
+(14, 32, '2019-11-14', NULL),
+(15, 19, '2022-04-27', '2023-07-10'),
 (16, 35, '2024-06-30', NULL),
 (17, 39, '2019-11-05', NULL),
 (18, 38, '2020-07-11', '2023-07-26'),
@@ -204,8 +207,15 @@ INSERT INTO "animals_has_users" ("animals_id", "users_id", "date_start", "date_e
 (44, 41, '2022-07-28', '2023-02-26'),
 (44, 25, '2023-02-26', NULL),
 (45, 41, '2021-08-13', '2022-03-14'),
-(45, 25, '2022-03-14', NULL);
-
+(45, 25, '2022-03-14', NULL),
+(46, 42, '2022-10-05', NULL),
+(47, 42, '2023-06-24', NULL),
+(48, 42, '2020-03-11', NULL),
+(49, 42, '2022-07-12', NULL),
+(50, 42, '2022-09-17', NULL),
+(51, 42, '2019-04-26', NULL),
+(52, 42, '2024-05-04', NULL),
+(53, 42, '2023-11-30', NULL);
 
 
 -- Alimentation de la table "animals_pictures" 
@@ -338,7 +348,31 @@ INSERT INTO "animals_pictures" ("URL_picture", "animals_id") VALUES
 ('44-Echo-2.webp', 44),
 
 ('45-Rex-1.webp', 45),
-('45-Rex-2.webp', 45);
+('45-Rex-2.webp', 45),
+
+('46-Zelda-1.webp', 46),
+('46-Zelda-2.webp', 46),
+
+('47-Nimbus-1.webp', 47),
+('47-Nimbus-2.webp', 47),
+
+('48-Shadow-1.webp', 48),
+('48-Shadow-2.webp', 48),
+
+('49-Daisy-1.webp', 49),
+('49-Daisy-2.webp', 49),
+
+('50-Blizzard-1.webp', 50),
+('50-Blizzard-2.webp', 50),
+
+('51-Luna-1.webp', 51),
+('51-Luna-2.webp', 51),
+
+('52-Kiwi-1.webp', 52),
+('52-Kiwi-2.webp', 52),
+
+('53-Twitch-1.webp', 53),
+('53-Twitch-2.webp', 53);
 
 -- Alimentation de la table "messages" 
 INSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_by_receiver") VALUES
@@ -359,57 +393,21 @@ INSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_by_receiver
 (5, 6, 'Génial! Auriez-vous la possibilité de nous montrer davantage de photos?', true),
 (5, 6, 'Nous aurions également besoin de savoir s''il peut vitre avec d''autres poneys, chevaux etc..', true),
 (6, 5, 'Oui, Gringo est très sociable également avec ses congénères, il n''y a pas de problème.', false),
-(1, 2, 'Phrase bidon pour tester un truc', false),
-
--- Alice Dupont (adoptante) et Jean Martin (famille d'accueil)
-(1, 17, 'Bonjour Jean, je suis intéressée par le chat que vous avez en famille d''accueil. Pouvez-vous me dire s''il est encore disponible?', true),
-(17, 1, 'Bonjour Alice, oui, il est encore disponible. Il est très sociable et en pleine forme.', true),
-(1, 17, 'Super! J''aimerais organiser une visite pour le rencontrer avant de prendre une décision. Quand seriez-vous disponible?', false),
-(17, 1, 'Je suis disponible ce week-end, samedi après-midi par exemple. Est-ce que cela vous conviendrait?', true),
-(1, 17, 'Oui, samedi après-midi est parfait! Merci beaucoup.', true),
-
--- Clara Petit (adoptante) et Société Protectrice des Animaux (association)
-(5, 33, 'Bonjour, je suis intéressée par l''adoption d''un chien. Avez-vous des chiens disponibles dans vos refuges?', true),
-(33, 5, 'Bonjour Clara, nous avons plusieurs chiens disponibles à l''adoption. Vous pouvez consulter les profils sur notre site ou venir visiter notre refuge.', true),
-(5, 33, 'Je vais regarder sur votre site. J''ai aussi une question concernant les frais d''adoption. À combien s''élèvent-ils?', false),
-(33, 5, 'Les frais d''adoption varient entre 150 et 250 euros, en fonction de l''animal et des soins qu''il a reçus.', true),
-(5, 33, 'Merci pour l''information! Je vous recontacterai une fois que j''aurai trouvé un chien qui me correspond.', true),
-
--- Lucas Martin (adoptant) et Paul Durant (famille d'accueil)
-(6, 18, 'Bonjour Paul, j''ai vu que vous avez un chien en famille d''accueil. Est-il toujours disponible pour adoption?', true),
-(18, 6, 'Bonjour Lucas, oui, il est encore disponible. C''est un berger allemand très affectueux, idéal pour une famille active.', true),
-(6, 18, 'Je suis intéressé! Pourriez-vous me donner des détails sur son caractère et ses besoins spécifiques?', true),
-(18, 6, 'Bien sûr, il est très énergique et a besoin de beaucoup d''exercice. Il est aussi très sociable avec les autres chiens.', true),
-(6, 18, 'Merci! Je vais réfléchir et je vous tiendrai au courant.', false),
-
--- Manon Renault (adoptante) et Refuge des Reptiles (association)
-(13, 41, 'Bonjour, je suis intéressée par l''adoption d''un serpent. Avez-vous actuellement des serpents disponibles?', true),
-(41, 13, 'Bonjour Manon, nous avons plusieurs serpents disponibles, notamment des pythons royaux et des couleuvres.', true),
-(13, 41, 'Je suis particulièrement intéressée par les pythons royaux. Pouvez-vous me donner plus d''informations sur leurs soins et besoins?', true),
-(41, 13, 'Les pythons royaux ont besoin d''un habitat spécifique avec une température contrôlée et une alimentation à base de petits rongeurs. Ils sont généralement très dociles.', true),
-(13, 41, 'Merci pour ces précisions, je vais préparer l''environnement nécessaire avant de finaliser l''adoption.', false),
-
--- Sophie Morel (adoptante) et Refuge des Montagnes (association)
-(9, 36, 'Bonjour, j''aimerais savoir si vous avez des chevaux disponibles à l''adoption. Je vis à la campagne et je pense pouvoir en accueillir un.', true),
-(36, 9, 'Bonjour Sophie, nous avons actuellement trois chevaux disponibles à l''adoption. Tous sont en bonne santé et prêts à trouver un foyer.', true),
-(9, 36, 'Super! J''aimerais en savoir plus sur leurs caractéristiques. L''un d''eux serait-il adapté pour une famille avec enfants?', true),
-(36, 9, 'Oui, l''un de nos chevaux, nommé Storm, est particulièrement doux et patient avec les enfants. Il serait parfait pour une famille.', true),
-(9, 36, 'Merci beaucoup, je vais réfléchir et vous contacterai pour une éventuelle visite.', false);
-
+(1, 2, 'Phrase bidon pour tester un truc', false);
 
 
 -- Alimentation de la table "fosterling_profiles" 
 INSERT INTO "fosterling_profiles" ("age", "sexe", "quantity", "search_area", "users_id", "species_id") VALUES
-('Jeune', 'M', 1, 50, 19, 1),  -- Jean Martin, accueillant des chats
-('Adulte', 'F', 2, 100, 20, 2),  -- Paul Durant, accueillant des chiens
-('Jeune', 'M', 1, 50, 21, 3),  -- Sylvie Bernard, accueillant des rongeurs
-('Adulte', 'F', 1, 100, 22, 4),  -- Thomas Richard, accueillant des oiseaux
-('Jeune', 'M', 3, 50, 23, 5),  -- Sophie Durand, accueillant des NAC
-('Adulte', 'F', 1, 100, 24, 2),  -- Pierre Rolland, accueillant des chiens
-('Jeune', 'M', 1, 50, 25, 1),  -- Laura Barbier, accueillant des chats
-('Adulte', 'F', 2, 100, 26, 5),  -- Victor Roux, accueillant des NAC
-('Jeune', 'F', 1, 50, 27, 1),  -- Chloé Caron, accueillant des chats abandonnés
-('Adulte', 'M', 1, 100, 28, 2);  -- Antoine Muller, accueillant des chiens et chats
+('-1', 'M', 1, 50, 19, 1),  -- Jean Martin, accueillant des chats
+('1-3', 'F', 2, 100, 20, 2),  -- Paul Durant, accueillant des chiens
+('3-5', 'M', 1, 50, 21, 3),  -- Sylvie Bernard, accueillant des rongeurs
+('5+', 'F', 1, 100, 22, 4),  -- Thomas Richard, accueillant des oiseaux
+('-1', 'M', 3, 50, 23, 5),  -- Sophie Durand, accueillant des NAC
+('1-3', 'F', 1, 100, 24, 2),  -- Pierre Rolland, accueillant des chiens
+('3-5', 'M', 1, 50, 25, 1),  -- Laura Barbier, accueillant des chats
+('5+', 'F', 2, 100, 26, 5),  -- Victor Roux, accueillant des NAC
+('-1', 'F', 1, 50, 27, 1),  -- Chloé Caron, accueillant des chats abandonnés
+('1-3', 'M', 1, 100, 28, 2);  -- Antoine Muller, accueillant des chiens et chats
 
 -- Alimentation de la table "users_pictures" 
 INSERT INTO "users_pictures" ("URL_picture", "users_id") VALUES

@@ -56,9 +56,7 @@ export async function getOneAnimal(req: Request, res: Response) {
       { model: Species, as: 'species' },
       { model: AnimalsPictures, as: 'pictures' },
     ],
-    order: [
-      ['id', 'ASC'], // Trier par l'ID des Animaux en ordre croissant
-    ],
+    order: [[{ model: AnimalsHasUsers, as: 'animalOwners' }, 'id', 'DESC']],
   });
 
   // Si l'animal n'existe pas

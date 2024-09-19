@@ -33,7 +33,7 @@ export const createProfileSchema = Joi.object({
   species_id: Joi.number().integer().greater(0).required(),
   quantity: Joi.number().integer().greater(0).required(),
   users_id: Joi.number().integer().greater(0).required(),
-  age: Joi.number().integer().greater(0).allow(),
+  age: Joi.string().allow(''),
   sexe: Joi.string().allow(''),
   search_area: Joi.number().integer().min(10),
 });
