@@ -302,13 +302,13 @@ INSERT INTO "fosterling_profiles" ("age", "sexe", "quantity", "search_area", "us
 ('-1', 'M', 1, 50, 19, 1),  -- Jean Martin, accueillant des chats
 ('1-3', 'F', 2, 100, 20, 2),  -- Paul Durant, accueillant des chiens
 ('3-5', 'M', 1, 50, 21, 3),  -- Sylvie Bernard, accueillant des rongeurs
-('5+', 'F', 1, 100, 22, 4),  -- Thomas Richard, accueillant des oiseaux
+('+5', 'F', 1, 100, 22, 4),  -- Thomas Richard, accueillant des oiseaux
 ('-1', 'M', 3, 50, 23, 5),  -- Sophie Durand, accueillant des NAC
 ('1-3', 'F', 1, 100, 24, 2),  -- Pierre Rolland, accueillant des chiens
 ('3-5', 'M', 1, 50, 25, 1),  -- Laura Barbier, accueillant des chats
-('5+', 'F', 2, 100, 26, 5),  -- Victor Roux, accueillant des NAC
-('-1', 'F', 1, 50, 27, 1),  -- Chloé Caron, accueillant des chats abandonnés
-('1-3', 'M', 1, 100, 28, 2);  -- Antoine Muller, accueillant des chiens et chats
+('+5', 'F', 2, 100, 26, 5),  -- Victor Roux, accueillant des NAC
+('', 'F', 1, 50, 27, 1),  -- Chloé Caron, accueillant des chats abandonnés
+('', 'M', 1, 100, 28, 2);  -- Antoine Muller, accueillant des chiens et chats
 
 -- Alimentation de la table "users_pictures" 
 INSERT INTO "users_pictures" ("URL_picture", "users_id") VALUES
