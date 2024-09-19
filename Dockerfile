@@ -24,6 +24,8 @@ WORKDIR /usr/src/app
 # Copier le contenu du repertoire racine local dans le répertoire racine du container
 COPY ./ ./
 
+RUN pnpm run db:resetR
+
 # Exposer le port pour pouvoir acceder au container depuis l'explorateur
 # EXPOSE 3000
 
