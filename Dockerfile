@@ -28,4 +28,4 @@ COPY ./ ./
 # EXPOSE 3000
 
 # Commande à effectuer pour initialiser le container (Ici : 'pnpm run dev')
-CMD [ "pnpm", "run", "dev" ]
+CMD [ "pnpm", "run", "start" ]
