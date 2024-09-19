@@ -18,7 +18,7 @@ COPY ./pnpm-lock.yaml ./
 # Installer pnpm
 RUN npm install -g pnpm
 RUN pnpm i
-RUN pnpm add -g tsx
+RUN pnpm install -g tsx
 
 # Definir le repertoir de travail
 WORKDIR /usr/src/app
