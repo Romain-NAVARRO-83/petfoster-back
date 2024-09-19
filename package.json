@@ -14,7 +14,7 @@
     "db:reset": "pnpm run db:create && pnpm run db:populate",
     "db:createR": "PGPASSWORD=qaJldPGSGPYA0wYNXNXBRdnDWvp4l6vv psql -U petfosteruser -d petfosterdb -f data/create_tables.sql",
     "db:populateR": "PGPASSWORD=qaJldPGSGPYA0wYNXNXBRdnDWvp4l6vv psql -U petfosteruser -d petfosterdb -f data/seeding_tables.sql",
-    "db:resetR": "pnpm run db:create && pnpm run db:populate",
+    "db:resetR": "pnpm run db:createR && pnpm run db:populateR",
     "compose:dev": "docker compose -f docker-compose.dev.yml up --build",
     "rm:container": "docker rm -v -f petfoster-db petfoster-api",
     "container:api": "docker exec -it 'petfoster-api' bash",
