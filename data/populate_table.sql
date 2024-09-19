@@ -64,7 +64,7 @@ INSERT INTO "users" ("type_user", "name", "email", "password", "country", "zip",
 ('association', 'Sauvetage NAC', 'contact@sauvetagenac.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 75002, 'Paris', 2.3436, 48.8662, '0123456715', '15 Rue Montmartre', 'www.sauvetagenac.com', 'Spécialisé dans le sauvetage des NAC.'),
 ('association', 'Refuge des Reptiles', 'contact@refugereptiles.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 13001, 'Marseille', 5.3795, 43.2967, '0123456716', '12 Rue de la République', 'www.refugereptiles.com', 'Les amis des reptiles'),
 ('association', 'Refuge des Pyrénées', 'contact@refugedespyrénées.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 31190, 'Auterive', 1.4768, 43.3531, '012345671', '62 Route de Cintegabelle', 'www.refugedespyrenees.com', 'Association de protection des animaux'),
-('association', 'Pour l''Amour des Animaux', 'contact@pourlamourdesanimaux.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 31800, 'Saint-Gaudens', 0.7215, 43.1125, '0123456801', '192 Route de la Serre de Nérous', 'www.pourlamourdesanimaux.com', 'Refuge pour animaux en détresse'),
+('association', 'Pour l''Amour des Animaux', 'contact@pourlamourdesanimaux.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 31800, 'Saint-Gaudens', 0.7215, 43.1125, '0123456801', '192 Route de la Serre de Nérous', 'www.pourlamourdesanimaux.com', 'Refuge pour animaux en détresse');
 
 -- Alimentation de la table "animals" avec 2 chiens, 2 chats, 2 chevaux, et 1 NAC de chaque
 INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "long_story", "health", "species_id", "creator_id") VALUES
@@ -137,7 +137,7 @@ INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "
 
 -- NACs
 ('Kiwi', '2023-02-14', 'F', 'Perroquet Gris', 'Oiseau très bavard', 'Kiwi est un perroquet intelligent qui adore répéter des mots et interagir avec les humains.', 'Bonne santé', 8, 42),
-('Twitch', '2022-10-01', 'M', 'Chinchilla', 'Petit rongeur actif', 'Twitch est un chinchilla curieux et très actif la nuit, idéal pour les familles.', 'En pleine forme', 5, 42),
+('Twitch', '2022-10-01', 'M', 'Chinchilla', 'Petit rongeur actif', 'Twitch est un chinchilla curieux et très actif la nuit, idéal pour les familles.', 'En pleine forme', 5, 42);
 
 -- Animaux ajoutés pour la démo, près de chez Romain (Saint-Gaudens)
 
