@@ -1,6 +1,8 @@
 import Joi from 'joi';
 import * as joischema from '../utils/joi';
 import { Request, Response } from 'express';
+import { upload, handleImageUpload } from '../utils/uploadMiddleware';
+import path from 'path';
 import {
   Animal,
   User,
@@ -128,3 +130,37 @@ export async function deleteAnimal(req: Request, res: Response) {
 
   res.status(204).end();
 }
+// Route pour l'upload d'image
+export const uploadPicture = [
+  upload.single('image'), // Multer middleware pour gérer le téléchargement du fichier
+  handleImageUpload('animaux/img750'), // Middleware pour convertir et enregistrer l'image
+  async (req: Request, res: Response) => {
+    try {
+      const profileId = parseInt(req.params.id); // Assure-toi que l'ID de l'animal est passé correctement
+      console.log(`Profile ID: ${profileId}`);
+
+      if (!req.file) {
+        return res.status(400).json({ error: 'Aucun fichier téléchargé' });
+      }
+
+      const fileName = path.basename(req.filePath); // Récupère le nom du fichier à partir de req.filePath
+
+      // Enregistrement en base de données
+      await AnimalsPictures.create({
+        animals_id: profileId,
+        URL_picture: fileName,
+      });
+
+      // Réponse de succès
+      res.status(200).json({
+        message: 'Image téléchargée avec succès',
+        filePath: req.filePath,
+      });
+    } catch (error) {
+      console.error("Erreur lors du téléchargement de l'image:", error);
+      res
+        .status(500)
+        .json({ error: "Erreur lors du téléchargement de l'image" });
+    }
+  },
+];

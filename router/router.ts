@@ -37,7 +37,11 @@ router.delete(
   cw(CSRF.verificate),
   cw(animalController.deleteAnimal)
 );
-
+router.post(
+  '/animals/:id/upload-animal-picture',
+  // cw(CSRF.verificate), // Vérification CSRF
+  animalController.uploadPicture // Fonction de gestion de l'upload
+);
 //Route Auth
 router.post('/login', cw(CSRF.verificate), cw(userController.loginUser));
 router.post(

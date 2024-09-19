@@ -62,7 +62,9 @@ INSERT INTO "users" ("type_user", "name", "email", "password", "country", "zip",
 ('association', 'Refuge de l''Ouest', 'contact@refugeouest.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 33000, 'Bordeaux', -0.5792, 44.8378, '0123456713', '5 Rue Sainte-Catherine', 'www.refugeouest.com', 'Refuge spécialisé dans les chiens.'),
 ('association', 'Refuge du Centre', 'contact@refugecentre.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 69001, 'Lyon', 4.8357, 45.7640, '0123456714', '10 Rue Mercière', 'www.refugecentre.com', 'Protection des chats errants.'),
 ('association', 'Sauvetage NAC', 'contact@sauvetagenac.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 75002, 'Paris', 2.3436, 48.8662, '0123456715', '15 Rue Montmartre', 'www.sauvetagenac.com', 'Spécialisé dans le sauvetage des NAC.'),
-('association', 'Refuge des Reptiles', 'contact@refugereptiles.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 13001, 'Marseille', 5.3795, 43.2967, '0123456716', '12 Rue de la République', 'www.refugereptiles.com', 'Les amis des reptiles');
+('association', 'Refuge des Reptiles', 'contact@refugereptiles.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 13001, 'Marseille', 5.3795, 43.2967, '0123456716', '12 Rue de la République', 'www.refugereptiles.com', 'Les amis des reptiles'),
+('association', 'Refuge des Pyrénées', 'contact@refugedespyrénées.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 31190, 'Auterive', 1.4768, 43.3531, '012345671', '62 Route de Cintegabelle', 'www.refugedespyrenees.com', 'Association de protection des animaux'),
+('association', 'Pour l''Amour des Animaux', 'contact@pourlamourdesanimaux.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 31800, 'Saint-Gaudens', 0.7215, 43.1125, '0123456801', '192 Route de la Serre de Nérous', 'www.pourlamourdesanimaux.com', 'Refuge pour animaux en détresse'),
 
 -- Alimentation de la table "animals" avec 2 chiens, 2 chats, 2 chevaux, et 1 NAC de chaque
 INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "long_story", "health", "species_id", "creator_id") VALUES
@@ -117,11 +119,42 @@ INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "
 ('Gizmo', '2020-08-21', 'M', 'Rat', 'Rat intelligent', 'Gizmo est un rat très intelligent qui adore résoudre des puzzles.', 'En pleine forme', 12, 37),
 ('Zazu', '2018-07-14', 'M', 'Ara Bleu', 'Oiseau majestueux', 'Zazu est un magnifique ara bleu, très sociable et joueur.', 'Bonne santé', 8, 40),
 ('Echo', '2021-11-17', 'M', 'Caméléon', 'Lézard coloré', 'Echo est un caméléon qui change de couleurs selon son humeur.', 'En bonne santé', 10, 41),
-('Rex', '2020-09-05', 'M', 'Iguane Noir', 'Lézard imposant', 'Rex est un iguane noir impressionnant, très calme et facile à vivre.', 'Bonne santé', 10, 41);
+('Rex', '2020-09-05', 'M', 'Iguane Noir', 'Lézard imposant', 'Rex est un iguane noir impressionnant, très calme et facile à vivre.', 'Bonne santé', 10, 41),
+
+-- Animaux ajoutés pour la démo, près de chez Romain (Auterive)
+
+-- Chats
+('Zelda', '2021-12-25', 'F', 'Chartreux', 'Chat indépendante', 'Zelda aime explorer et est assez indépendante mais revient toujours pour des câlins.', 'Stérilisée, en bonne santé', 1, 42),
+('Nimbus', '2022-03-15', 'M', 'British Shorthair', 'Chat très calme', 'Nimbus est un chat tranquille et idéal pour une famille ou personne âgée.', 'Vacciné, en bonne santé', 1, 42),
+
+--Chiens
+('Shadow', '2018-11-01', 'M', 'Dobermann', 'Chien loyal', 'Shadow est un chien de grande loyauté, excellent pour la sécurité et un compagnon aimant.', 'Vacciné, en bonne forme', 2, 42),
+('Daisy', '2020-05-10', 'F', 'Cocker Spaniel', 'Chienne sociable', 'Daisy est une chienne affectueuse qui adore la compagnie des enfants et des autres animaux.', 'Stérilisée, en pleine santé', 2, 42),
+
+-- Chevaux
+('Blizzard', '2019-04-22', 'M', 'Haflinger', 'Poney robuste', 'Blizzard est un poney vigoureux et idéal pour les balades en montagne.', 'En excellente santé', 3, 42),
+('Luna', '2017-06-17', 'F', 'Pur-Sang Anglais', 'Cheval de course', 'Luna est une jument rapide et excellente pour les courses d’endurance.', 'Bonne santé', 3, 42),
+
+-- NACs
+('Kiwi', '2023-02-14', 'F', 'Perroquet Gris', 'Oiseau très bavard', 'Kiwi est un perroquet intelligent qui adore répéter des mots et interagir avec les humains.', 'Bonne santé', 8, 42),
+('Twitch', '2022-10-01', 'M', 'Chinchilla', 'Petit rongeur actif', 'Twitch est un chinchilla curieux et très actif la nuit, idéal pour les familles.', 'En pleine forme', 5, 42),
+
+-- Animaux ajoutés pour la démo, près de chez Romain (Saint-Gaudens)
+
+-- ('Milo', '2019-08-17', 'Mâle', 'Chat', 'Un chat affectueux', 'Milo a été trouvé errant et se porte bien maintenant.', 'Bonne', 1, 24),
+-- ('Lily', '2017-04-29', 'Femelle', 'Chat', 'Chat sociable', 'Lily est très sociable avec les autres animaux.', 'Excellente', 1, 24),
+-- ('Layla', '2020-05-21', 'Femelle', 'Chien', 'Un petit chien très joueur', 'Bella a été abandonnée et cherche un foyer aimant.', 'Bonne', 2, 24),
+-- ('Rex', '2018-12-02', 'Mâle', 'Chien', 'Chien très actif', 'Rex a besoin d’un maître expérimenté pour répondre à ses besoins d’exercice.', 'Bonne', 2, 24),
+-- ('Thunder', '2016-03-14', 'Mâle', 'Pur-sang', 'Un cheval puissant et énergique', 'Thunder est un cheval qui adore les longues promenades et nécessite un cavalier expérimenté.', 'Excellente', 3, 24),
+-- ('Stella', '2018-07-22', 'Femelle', 'Quarter Horse', 'Cheval doux et affectueux', 'Bella est un cheval calme, parfait pour les cavaliers débutants. Elle est en pleine santé et adore le contact humain.', 'Bonne', 3, 24);
+-- ('Lola', '2021-09-10', 'Femelle', 'Lapin', 'Lapine calme et douce', 'Lola est une lapine en pleine santé et très docile.', 'Bonne', 4, 24),
+-- ('Oscar', '2019-11-22', 'Mâle', 'Furet', 'Curieux et joueur', 'Oscar aime explorer son environnement.', 'Bonne', 7, 24),
 
 -- Alimentation de la table "animals_has_users" 
 INSERT INTO "animals_has_users" ("animals_id", "users_id", "date_start", "date_end") VALUES
-(1, 24, '2023-08-12', '2023-06-01'),
+(1, 33, '2023-08-12', '2023-06-01'),
+(1, 24, '2023-06-01', '2023-12-04'),
+(1, 33, '2023-12-04', NULL),
 (2, 26, '2022-09-26', NULL),
 (3, 35, '2024-05-15', '2023-08-10'),
 (4, 5, '2021-02-21', NULL),
@@ -138,9 +171,65 @@ INSERT INTO "animals_has_users" ("animals_id", "users_id", "date_start", "date_e
 (15, 19, '2022-04-27', '2023-07-10'),
 (16, 35, '2024-06-30', NULL),
 (17, 39, '2019-11-05', NULL),
-(18, 7, '2023-07-26', '2023-11-22'),
-(19, 18, '2022-03-25', NULL),
-(20, 18, '2023-10-29', NULL);
+(18, 38, '2020-07-11', '2023-07-26'),
+(18, 7, '2023-07-26', NULL),
+(19, 37, '2019-03-25', '2023-10-29'),
+(19, 18, '2023-10-29', NULL),
+(20, 39, '2021-03-09', '2024-08-13'),
+(20, 18, '2024-08-13', NULL),
+(21, 36, '2021-11-24', NULL),
+(22, 34, '2020-12-02', '2021-07-18'),
+(22, 7, '2021-07-18', NULL),
+(23, 33, '2023-07-25', NULL),
+(24, 36, '2022-05-05', NULL),
+(25, 40, '2021-08-01', '2022-03-15'),
+(25, 3, '2022-03-15', NULL),
+(26, 40, '2023-02-14', '2024-06-03'),
+(26, 22, '2024-06-03', NULL),
+(27, 40, '2021-06-18', '2021-09-12'),
+(27, 26, '2021-09-12', '2022-03-16'),
+(27, 21, '2022-03-16', NULL),
+(28, 41, '2019-11-09', '2020-04-19'),
+(28, 28, '2020-04-19', '2020-10-17'),
+(28, 41, '2020-10-17', '2021-02-20'),
+(28, 4, '2021-02-20', NULL),
+(29, 41, '2020-12-07', NULL),
+(30, 41, '2020-08-03', '2020-11-07'),
+(30, 13, '2020-11-07', NULL),
+(31, 40, '2022-03-03', '2024-07-25'),
+(31, 28, '2024-07-25', NULL),
+(32, 34, '2022-11-19', '2024-05-06'),
+(32, 25, '2024-05-06', NULL),
+(33, 35, '2021-03-10', '2021-08-15'),
+(33, 31, '2021-08-15', '2022-02-20'),
+(33, 35, '2022-02-20', '2022-06-12'),
+(33, 16, '2022-06-12', NULL),
+(34, 37, '2023-09-01', NULL),
+(35, 40, '2021-04-22', NULL),
+(36, 37, '2021-07-17', '2024-09-02'),
+(36, 20, '2024-09-02', NULL),
+(37, 40, '2023-04-24', '2023-06-30'),
+(37, 17, '2023-06-30', NULL),
+(38, 41, '2019-10-18', NULL),
+(39, 41, '2021-07-22', NULL),
+(40, 41, '2022-08-09', '2024-06-21'),
+(40, 29, '2024-06-21', NULL),
+(41, 35, '2023-02-14', NULL),
+(42, 37, '2021-09-30', NULL),
+(43, 40, '2022-03-17', '2024-08-12'),
+(43, 2, '2024-08-12', NULL),
+(44, 41, '2022-07-28', '2023-02-26'),
+(44, 25, '2023-02-26', NULL),
+(45, 41, '2021-08-13', '2022-03-14'),
+(45, 25, '2022-03-14', NULL),
+(46, 42, '2022-10-05', NULL),
+(47, 42, '2023-06-24', NULL),
+(48, 42, '2020-03-11', NULL),
+(49, 42, '2022-07-12', NULL),
+(50, 42, '2022-09-17', NULL),
+(51, 42, '2019-04-26', NULL),
+(52, 42, '2024-05-04', NULL),
+(53, 42, '2023-11-30', NULL);
 
 
 -- Alimentation de la table "animals_pictures" 
@@ -273,7 +362,31 @@ INSERT INTO "animals_pictures" ("URL_picture", "animals_id") VALUES
 ('44-Echo-2.webp', 44),
 
 ('45-Rex-1.webp', 45),
-('45-Rex-2.webp', 45);
+('45-Rex-2.webp', 45),
+
+('46-Zelda-1.webp', 46),
+('46-Zelda-2.webp', 46),
+
+('47-Nimbus-1.webp', 47),
+('47-Nimbus-2.webp', 47),
+
+('48-Shadow-1.webp', 48),
+('48-Shadow-2.webp', 48),
+
+('49-Daisy-1.webp', 49),
+('49-Daisy-2.webp', 49),
+
+('50-Blizzard-1.webp', 50),
+('50-Blizzard-2.webp', 50),
+
+('51-Luna-1.webp', 51),
+('51-Luna-2.webp', 51),
+
+('52-Kiwi-1.webp', 52),
+('52-Kiwi-2.webp', 52),
+
+('53-Twitch-1.webp', 53),
+('53-Twitch-2.webp', 53);
 
 -- Alimentation de la table "messages" 
 INSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_by_receiver") VALUES
