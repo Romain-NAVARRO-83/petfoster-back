@@ -7,6 +7,7 @@ FROM node:20
 
 RUN apt-get update -y
 RUN apt-get install -y rsync
+RUN apt-get install -y rsync postgresql-clientt
 
 WORKDIR /usr/src/cache
 
@@ -16,7 +17,6 @@ COPY ./pnpm-lock.yaml ./
 
 # Installer pnpm
 RUN npm install -g pnpm
-RUN apk add --no-cache postgresql-client
 RUN pnpm i
 
 # Definir le repertoir de travail
