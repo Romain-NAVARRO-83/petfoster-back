@@ -7,7 +7,7 @@ FROM node:20
 
 RUN apt-get update -y
 RUN apt-get install -y rsync
-RUN apt-get install -y rsync postgresql-client
+RUN apt-get install -y postgresql-client
 
 WORKDIR /usr/src/cache
 
