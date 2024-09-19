@@ -17,7 +17,6 @@ COPY ./pnpm-lock.yaml ./
 
 # Installer pnpm
 RUN npm install -g pnpm
-RUN npm install -g tsx
 RUN pnpm i
 
 
