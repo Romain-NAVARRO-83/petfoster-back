@@ -124,19 +124,19 @@ INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "
 
 -- Chats
 ('Zelda', '2021-12-25', 'F', 'Chartreux', 'Chat indépendante', 'Zelda aime explorer et est assez indépendante mais revient toujours pour des câlins.', 'Stérilisée, en bonne santé', 1, 42),
-('Nimbus', '2022-03-15', 'M', 'British Shorthair', 'Chat très calme', 'Nimbus est un chat tranquille et idéal pour une famille ou personne âgée.', 'Vacciné, en bonne santé', 1, 43),
+('Nimbus', '2022-03-15', 'M', 'British Shorthair', 'Chat très calme', 'Nimbus est un chat tranquille et idéal pour une famille ou personne âgée.', 'Vacciné, en bonne santé', 1, 42),
 
 --Chiens
-('Shadow', '2018-11-01', 'M', 'Dobermann', 'Chien loyal', 'Shadow est un chien de grande loyauté, excellent pour la sécurité et un compagnon aimant.', 'Vacciné, en bonne forme', 2, 44),
-('Daisy', '2020-05-10', 'F', 'Cocker Spaniel', 'Chienne sociable', 'Daisy est une chienne affectueuse qui adore la compagnie des enfants et des autres animaux.', 'Stérilisée, en pleine santé', 2, 45),
+('Shadow', '2018-11-01', 'M', 'Dobermann', 'Chien loyal', 'Shadow est un chien de grande loyauté, excellent pour la sécurité et un compagnon aimant.', 'Vacciné, en bonne forme', 2, 42),
+('Daisy', '2020-05-10', 'F', 'Cocker Spaniel', 'Chienne sociable', 'Daisy est une chienne affectueuse qui adore la compagnie des enfants et des autres animaux.', 'Stérilisée, en pleine santé', 2, 42),
 
 -- Chevaux
-('Blizzard', '2019-04-22', 'M', 'Haflinger', 'Poney robuste', 'Blizzard est un poney vigoureux et idéal pour les balades en montagne.', 'En excellente santé', 3, 46),
-('Luna', '2017-06-17', 'F', 'Pur-Sang Anglais', 'Cheval de course', 'Luna est une jument rapide et excellente pour les courses d’endurance.', 'Bonne santé', 3, 47),
+('Blizzard', '2019-04-22', 'M', 'Haflinger', 'Poney robuste', 'Blizzard est un poney vigoureux et idéal pour les balades en montagne.', 'En excellente santé', 3, 42),
+('Luna', '2017-06-17', 'F', 'Pur-Sang Anglais', 'Cheval de course', 'Luna est une jument rapide et excellente pour les courses d’endurance.', 'Bonne santé', 3, 42),
 
 -- NACs
-('Kiwi', '2023-02-14', 'F', 'Perroquet Gris', 'Oiseau très bavard', 'Kiwi est un perroquet intelligent qui adore répéter des mots et interagir avec les humains.', 'Bonne santé', 8, 48),
-('Twitch', '2022-10-01', 'M', 'Chinchilla', 'Petit rongeur actif', 'Twitch est un chinchilla curieux et très actif la nuit, idéal pour les familles.', 'En pleine forme', 5, 49);
+('Kiwi', '2023-02-14', 'F', 'Perroquet Gris', 'Oiseau très bavard', 'Kiwi est un perroquet intelligent qui adore répéter des mots et interagir avec les humains.', 'Bonne santé', 8, 42),
+('Twitch', '2022-10-01', 'M', 'Chinchilla', 'Petit rongeur actif', 'Twitch est un chinchilla curieux et très actif la nuit, idéal pour les familles.', 'En pleine forme', 5, 42);
 
 -- Alimentation de la table "animals_has_users" 
 INSERT INTO "animals_has_users" ("animals_id", "users_id", "date_start", "date_end") VALUES
