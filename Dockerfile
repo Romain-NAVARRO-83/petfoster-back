@@ -16,6 +16,7 @@ COPY ./pnpm-lock.yaml ./
 
 # Installer pnpm
 RUN npm install -g pnpm
+RUN apk add --no-cache postgresql-client
 RUN pnpm i
 
 # Definir le repertoir de travail
@@ -27,7 +28,7 @@ COPY ./ ./
 RUN pnpm run db:resetR
 
 # Exposer le port pour pouvoir acceder au container depuis l'explorateur
-# EXPOSE 3000
+EXPOSE 3000
 
 # Commande à effectuer pour initialiser le container (Ici : 'pnpm run dev')
 CMD [ "pnpm", "run", "start" ]
