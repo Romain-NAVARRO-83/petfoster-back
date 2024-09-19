@@ -62,7 +62,8 @@ INSERT INTO "users" ("type_user", "name", "email", "password", "country", "zip",
 ('association', 'Refuge de l''Ouest', 'contact@refugeouest.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 33000, 'Bordeaux', -0.5792, 44.8378, '0123456713', '5 Rue Sainte-Catherine', 'www.refugeouest.com', 'Refuge spécialisé dans les chiens.'),
 ('association', 'Refuge du Centre', 'contact@refugecentre.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 69001, 'Lyon', 4.8357, 45.7640, '0123456714', '10 Rue Mercière', 'www.refugecentre.com', 'Protection des chats errants.'),
 ('association', 'Sauvetage NAC', 'contact@sauvetagenac.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 75002, 'Paris', 2.3436, 48.8662, '0123456715', '15 Rue Montmartre', 'www.sauvetagenac.com', 'Spécialisé dans le sauvetage des NAC.'),
-('association', 'Refuge des Reptiles', 'contact@refugereptiles.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 13001, 'Marseille', 5.3795, 43.2967, '0123456716', '12 Rue de la République', 'www.refugereptiles.com', 'Les amis des reptiles');
+('association', 'Refuge des Reptiles', 'contact@refugereptiles.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 13001, 'Marseille', 5.3795, 43.2967, '0123456716', '12 Rue de la République', 'www.refugereptiles.com', 'Les amis des reptiles'),
+('association', 'Refuge des Pyrénées', 'contact@refugedespyrénées.com', '$argon2id$v=19$m=65536,t=3,p=4$Vv9js13t5L6+iHx/Hni4MA$lxbv+RCoVL/eA4EK8FECpIWutm5sHLuSj8ohUdPaV2M', 'France', 31190, 'Auterive', 1.4768, 43.3531, '012345671', '62 Route de Cintegabelle', 'www.refugedespyrenees.com', 'Association de protection et le bien-être des animaux');
 
 -- Alimentation de la table "animals" avec 2 chiens, 2 chats, 2 chevaux, et 1 NAC de chaque
 INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "long_story", "health", "species_id", "creator_id") VALUES
@@ -117,7 +118,25 @@ INSERT INTO "animals" ("name", "date_of_birth", "sexe", "race", "short_story", "
 ('Gizmo', '2020-08-21', 'M', 'Rat', 'Rat intelligent', 'Gizmo est un rat très intelligent qui adore résoudre des puzzles.', 'En pleine forme', 12, 37),
 ('Zazu', '2018-07-14', 'M', 'Ara Bleu', 'Oiseau majestueux', 'Zazu est un magnifique ara bleu, très sociable et joueur.', 'Bonne santé', 8, 40),
 ('Echo', '2021-11-17', 'M', 'Caméléon', 'Lézard coloré', 'Echo est un caméléon qui change de couleurs selon son humeur.', 'En bonne santé', 10, 41),
-('Rex', '2020-09-05', 'M', 'Iguane Noir', 'Lézard imposant', 'Rex est un iguane noir impressionnant, très calme et facile à vivre.', 'Bonne santé', 10, 41);
+('Rex', '2020-09-05', 'M', 'Iguane Noir', 'Lézard imposant', 'Rex est un iguane noir impressionnant, très calme et facile à vivre.', 'Bonne santé', 10, 41),
+
+-- Animaux ajoutés juste pour la démo, près de chez Romain
+
+-- Chats
+('Zelda', '2021-12-25', 'F', 'Chartreux', 'Chat indépendante', 'Zelda aime explorer et est assez indépendante mais revient toujours pour des câlins.', 'Stérilisée, en bonne santé', 1, 42),
+('Nimbus', '2022-03-15', 'M', 'British Shorthair', 'Chat très calme', 'Nimbus est un chat tranquille et idéal pour une famille ou personne âgée.', 'Vacciné, en bonne santé', 1, 43),
+
+--Chiens
+('Shadow', '2018-11-01', 'M', 'Dobermann', 'Chien loyal', 'Shadow est un chien de grande loyauté, excellent pour la sécurité et un compagnon aimant.', 'Vacciné, en bonne forme', 2, 44),
+('Daisy', '2020-05-10', 'F', 'Cocker Spaniel', 'Chienne sociable', 'Daisy est une chienne affectueuse qui adore la compagnie des enfants et des autres animaux.', 'Stérilisée, en pleine santé', 2, 45),
+
+-- Chevaux
+('Blizzard', '2019-04-22', 'M', 'Haflinger', 'Poney robuste', 'Blizzard est un poney vigoureux et idéal pour les balades en montagne.', 'En excellente santé', 3, 46),
+('Luna', '2017-06-17', 'F', 'Pur-Sang Anglais', 'Cheval de course', 'Luna est une jument rapide et excellente pour les courses d’endurance.', 'Bonne santé', 3, 47),
+
+-- NACs
+('Kiwi', '2023-02-14', 'F', 'Perroquet Gris', 'Oiseau très bavard', 'Kiwi est un perroquet intelligent qui adore répéter des mots et interagir avec les humains.', 'Bonne santé', 8, 48),
+('Twitch', '2022-10-01', 'M', 'Chinchilla', 'Petit rongeur actif', 'Twitch est un chinchilla curieux et très actif la nuit, idéal pour les familles.', 'En pleine forme', 5, 49);
 
 -- Alimentation de la table "animals_has_users" 
 INSERT INTO "animals_has_users" ("animals_id", "users_id", "date_start", "date_end") VALUES
@@ -204,7 +223,15 @@ INSERT INTO "animals_has_users" ("animals_id", "users_id", "date_start", "date_e
 (44, 41, '2022-07-28', '2023-02-26'),
 (44, 25, '2023-02-26', NULL),
 (45, 41, '2021-08-13', '2022-03-14'),
-(45, 25, '2022-03-14', NULL);
+(45, 25, '2022-03-14', NULL),
+(46, 42, '2022-10-05', NULL),
+(47, 42, '2023-06-24', NULL),
+(48, 42, '2020-03-11', NULL),
+(49, 42, '2022-07-12', NULL),
+(50, 42, '2022-09-17', NULL),
+(51, 42, '2019-04-26', NULL),
+(52, 42, '2024-05-04', NULL),
+(53, 42, '2023-11-30', NULL);
 
 
 
@@ -338,7 +365,31 @@ INSERT INTO "animals_pictures" ("URL_picture", "animals_id") VALUES
 ('44-Echo-2.webp', 44),
 
 ('45-Rex-1.webp', 45),
-('45-Rex-2.webp', 45);
+('45-Rex-2.webp', 45),
+
+('46-Zelda-1.webp', 46),
+('46-Zelda-2.webp', 46),
+
+('47-Nimbus-1.webp', 47),
+('47-Nimbus-2.webp', 47),
+
+('48-Shadow-1.webp', 48),
+('48-Shadow-2.webp', 48),
+
+('49-Daisy-1.webp', 49),
+('49-Daisy-2.webp', 49),
+
+('50-Blizzard-1.webp', 50),
+('50-Blizzard-2.webp', 50),
+
+('51-Luna-1.webp', 51),
+('51-Luna-2.webp', 51),
+
+('52-Kiwi-1.webp', 52),
+('52-Kiwi-2.webp', 52),
+
+('53-Twitch-1.webp', 53),
+('53-Twitch-2.webp', 53);
 
 -- Alimentation de la table "messages" 
 INSERT INTO "messages" ("sender_id", "receiver_id", "content", "read_by_receiver") VALUES
