@@ -3,53 +3,50 @@ import 'dotenv/config';
 
 // Import dependencies
 import express from 'express';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Create app
 const app = express();
-// import cors from 'cors';
+
+// Serve user and animal images
+// Get __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static files from the "public/img" directory
+app.use('/img', express.static(path.join(__dirname, 'public', 'img')));
+import cors from 'cors';
 import { router } from './router/router';
 
-// ==============Juste pour test, à remplacer par Sequelize============
-// import pg from 'pg'; // Importation par défaut du module
+// Add body parser
+app.use(express.urlencoded({ extended: true })); // Parser les bodies de type "application/www-form-urlencoded"
+app.use(express.json()); // Parser les bodies de type "application/json"
 
-// const { Pool } = pg; // Extraction de Pool du module
+// Utiliser une clé secrète pour signer les cookies
+app.use(cookieParser(process.env.COOKIE_PARSER_SECRET));
 
-// const pool = new Pool({
-//   host: 'petfoster-db',
-//   database: process.env.POSTGRES_DB,
-//   password: process.env.POSTGRES_PASSWORD,
-//   user: process.env.POSTGRES_USER,
-//   port: 5432,
+// Utiliser les cookies de manières sécurisée
+app.use(
+  session({
+    saveUninitialized: true,
+    resave: true,
+    secret: process.env.SESSION_SECRET as string, // Empêche la falsification des sessions
+    // Empêche le JS du client d'accéder aux cookies
+    cookie: { secure: true, httpOnly: true, maxAge: 10800000 }, // Le navigateur envoie le coookie que sur HTTPS
+  })
+);
 
-//   max: 20,
-//   idleTimeoutMillis: 30000,
-//   connectionTimeoutMillis: 2000,
-// });
-
-// const queryDatabase = async () => {
-//   try {
-//     // Exemple de requête SQL pour récupérer tous les enregistrements d'une table
-//     const result = await pool.query(
-//       'SELECT * FROM animals ORDER BY id LIMIT 3;'
-//     );
-//     console.log(result.rows); // Affiche les résultats de la requête
-//     return result.rows[0];
-//   } catch (error) {
-//     console.error("Erreur lors de l'exécution de la requête", error);
-//   } finally {
-//     // Ferme la connexion au pool de connexions
-//     await pool.end();
-//   }
-// };
-
-// // Exécuter la fonction pour accéder à la base de données
-// const test = await queryDatabase();
-
-// // Configure routes
-// app.get('/', (req, res) => {
-//   res.json(test);
-// });
-// ====================================================================
+// Authorize CORS requests
+// app.use(cors('http://localhost:3000'));
+// * = tous les domaines (pour nous faciliter la vie sur la saison future, mais en pratique, on devrait limiter l'accès à notre API uniquement au front qui va nous appeler !)
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+  })
+);
 
 // Configure routes
 app.use('/api', router);

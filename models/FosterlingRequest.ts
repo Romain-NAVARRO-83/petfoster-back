@@ -1,8 +1,38 @@
-import { DataTypes, Model } from 'sequelize';
 import { sequelize } from './dbClientSequelize';
+import { Model, Optional, DataTypes } from 'sequelize';
 import Animal from './Animal';
-import User from './User';
-class FosterlingRequest extends Model {}
+import { User } from './User';
+
+// Définition des attributs pour la demande d'accueil
+type FosterlingRequestAttributes = {
+  id: number;
+  request_status: string;
+  content_request?: string; // optionnel
+  animals_id: number;
+  users_id: number;
+  created_at: Date;
+  updated_at?: Date; // optionnel
+};
+
+// Définition des attributs pour la création, avec 'id' optionnel
+type FosterlingRequestCreationAttributes = Optional<
+  FosterlingRequestAttributes,
+  'id' | 'created_at' | 'updated_at'
+>;
+
+class FosterlingRequest extends Model<
+  FosterlingRequestAttributes,
+  FosterlingRequestCreationAttributes
+> {
+  declare id: number;
+  declare request_status: string;
+  declare content_request?: string;
+  declare animals_id: number;
+  declare users_id: number;
+  declare created_at: Date;
+  declare updated_at?: Date;
+}
+
 FosterlingRequest.init(
   {
     id: {

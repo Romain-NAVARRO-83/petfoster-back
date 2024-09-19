@@ -1,8 +1,42 @@
-import { DataTypes, Model } from 'sequelize';
 import { sequelize } from './dbClientSequelize';
-import User from './User';
+import { Model, Optional, DataTypes } from 'sequelize';
+import { User } from './User';
 import Species from './Species';
-class FosterlingProfile extends Model {}
+
+// Définition des attributs pour le profil d'accueil
+type FosterlingProfileAttributes = {
+  id: number;
+  age: string;
+  sexe: string;
+  quantity: number;
+  search_area: number;
+  users_id: number;
+  species_id: number;
+  created_at: Date;
+  updated_at?: Date; // optionnel
+};
+
+// Définition des attributs pour la création, avec 'id' optionnel
+type FosterlingProfileCreationAttributes = Optional<
+  FosterlingProfileAttributes,
+  'id' | 'created_at' | 'updated_at'
+>;
+
+class FosterlingProfile extends Model<
+  FosterlingProfileAttributes,
+  FosterlingProfileCreationAttributes
+> {
+  declare id: number;
+  declare age: string;
+  declare quantity: number;
+  declare sexe: string;
+  declare search_area: number;
+  declare users_id: number;
+  declare species_id: number;
+  declare created_at: Date;
+  declare updated_at?: Date;
+}
+
 FosterlingProfile.init(
   {
     id: {
@@ -15,6 +49,9 @@ FosterlingProfile.init(
     },
     sexe: {
       type: DataTypes.CHAR(1),
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
     },
     search_area: {
       type: DataTypes.INTEGER,
