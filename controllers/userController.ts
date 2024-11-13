@@ -70,10 +70,10 @@ export async function loginhUser(req: Request, res: Response) {
     if (await argon2id.verify(user.password, password)) {
       // password match
     } else {
-      return res.status(401).json({ error: 'Mauvais mot de passe.' });
+      return res.status(401).json({ error: 'Mauvais login ou mot de passe.' });
     }
   } catch (err) {
-    return res.status(404).json({ error: 'Something went wrong' });
+    return res.status(500).json({ error: 'Erreur serveur' });
   }
 
   console.log(user);
