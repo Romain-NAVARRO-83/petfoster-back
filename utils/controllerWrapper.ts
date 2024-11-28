@@ -1,4 +1,4 @@
-// Controller Wrapper (maxi bonus)
+// Controller Wrapper
 export function controllerWrapper(mdw: any) {
   return async (req: any, res: any, next: any) => {
     try {

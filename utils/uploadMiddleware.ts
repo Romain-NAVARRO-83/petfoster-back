@@ -1,48 +1,64 @@
-import multer from 'multer';
+import multer, { FileFilterCallback } from 'multer';
 import sharp from 'sharp';
 import path from 'path';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
+import { extname } from 'path';
+import { Request, Response, NextFunction } from 'express';
 
-// Fix for __dirname in ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+interface MulterFile extends Express.Multer.File {
+  path: string;
+}
 
-// Définir le stockage temporaire avec Multer
+// Configuration de Multer pour le stockage temporaire et le contrôle du format
 const upload = multer({
-  dest: 'temp/', // Stockage temporaire avant la conversion
-  limits: { fileSize: 5 * 1024 * 1024 }, // Limite à 5 Mo
+  dest: 'temp/',
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (
+    req: Request,
+    file: MulterFile,
+    cb: FileFilterCallback
+  ): void => {
+    const allowedFormats = ['.jpg', '.jpeg', '.png'];
+    const fileExt = extname(file.originalname).toLowerCase();
+
+    if (allowedFormats.includes(fileExt)) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error(
+          'Format de fichier non supporté. Seuls .jpg, .jpeg, et .png sont acceptés.'
+        )
+      );
+    }
+  },
 });
 
 // Middleware pour convertir et enregistrer l'image en WebP
 const handleImageUpload = (folder: string) => {
-  return async (req: any, res: any, next: any) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
     if (!req.file) {
       return res.status(400).send('Aucun fichier envoyé.');
     }
 
-    const tempPath = req.file.path; // Chemin temporaire du fichier téléchargé
-    const outputFolder = path.join(__dirname, '..', 'public', 'img', folder);
+    const tempPath = (req.file as MulterFile).path;
+    const outputFolder = new URL(`../public/img/${folder}/`, import.meta.url)
+      .pathname;
     const outputFileName = `${Date.now()}.webp`;
     const outputPath = path.join(outputFolder, outputFileName);
 
-    // Créer le dossier s'il n'existe pas
     if (!fs.existsSync(outputFolder)) {
       fs.mkdirSync(outputFolder, { recursive: true });
     }
 
     try {
-      // Conversion de l'image en WebP et enregistrement dans le bon dossier
       await sharp(tempPath).webp().toFile(outputPath);
 
       // Supprimer le fichier temporaire
       fs.unlinkSync(tempPath);
-
-      // Ajouter le chemin de l'image à la requête pour l'utiliser plus tard
-      req.filePath = outputPath;
+      (req as any).filePath = outputPath;
       next();
     } catch (error) {
-      console.error("Erreur lors de la conversion de l'image:", error);
+      console.error("Erreur lors de la conversion de l'image :", error);
       res.status(500).send("Erreur lors de la conversion de l'image.");
     }
   };
