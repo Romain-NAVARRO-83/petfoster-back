@@ -39,7 +39,6 @@ router.delete(
 );
 router.post(
   '/animals/:id/upload-animal-picture',
-  // cw(CSRF.verificate), // Vérification CSRF
   animalController.uploadPicture
 );
 //Route Auth

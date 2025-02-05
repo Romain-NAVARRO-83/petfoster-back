@@ -136,15 +136,14 @@ export const uploadPicture = [
   handleImageUpload('animaux/img750'), // Middleware pour convertir et enregistrer l'image
   async (req: Request, res: Response) => {
     try {
-      const profileId = parseInt(req.params.id); // Assure-toi que l'ID de l'animal est passé correctement
+      const profileId = parseInt(req.params.id);
       console.log(`Profile ID: ${profileId}`);
 
       if (!req.file) {
         return res.status(400).json({ error: 'Aucun fichier téléchargé' });
       }
 
-      const fileName = path.basename(req.filePath); // Récupère le nom du fichier à partir de req.filePath
-
+      const fileName = path.basename(req.filePath);
       // Enregistrement en base de données
       await AnimalsPictures.create({
         animals_id: profileId,
