@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: petfoster-api
-    command: pnpm run dev
+    # command: pnpm run start
     ports:
       - '3000:3000'
     depends_on:
