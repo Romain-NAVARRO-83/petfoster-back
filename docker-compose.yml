@@ -27,8 +27,6 @@ services:
       # du conteneur
       - ./:/usr/src/app
 
-    network_mode: 'host'
-
   # Definir le container contenant la bdd
   petfoster-db:
     # à partir de l'image dockerhub 'postgres'
