@@ -1,10 +1,8 @@
 # Definir la liste des services (container) dont nous aurons besoin
 
 services:
-
   # Definition du container contenant l'api
   app:
-
     # build du container à partir du dossier . au travers du dockerfile 'Dockerfile.dev'
     build:
       context: .
@@ -14,7 +12,7 @@ services:
 
     # Lier le port 3000 du container au port 3000 local
     ports:
-      -  3000:3000
+      - 3000:3000
 
     # Nommer le container
     container_name: petfoster-api
@@ -22,7 +20,7 @@ services:
     # Déclarer que ce container depend du container 'petfoster-db', sous condition que celui-ci soit en état "service_healthy"
     depends_on:
       petfoster-db:
-       condition: service_healthy
+        condition: service_healthy
     volumes:
       # mon répertoire de travail perso, avec les sources
       # de mon appli est le répertoire de travail
@@ -36,17 +34,19 @@ services:
     container_name: petfoster-db
 
     # atteindre les variables d'environnement pour renseigner les information de connexion à la bdd
-    environment: 
+    environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
 
     # test pour verifier que la bdd soit prète avant d'y relier notre api
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
       interval: 2s
       timeout: 5s
       retries: 5
+
+    restart: unless-stopped
 
     volumes:
       # copier le contenu du dossier ./data local (contenant nos scripts create_table et populate_table) dans un dossier du container prévu pour lancer automatiquement ces scripts lors de l'initialisation du container
@@ -54,7 +54,6 @@ services:
 
       # volume permettant la persistance des données
       # - petfoster-volume:/var/lib/postgresql/data
-
 
 volumes:
   petfoster-volume:
