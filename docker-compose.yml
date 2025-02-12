@@ -12,7 +12,7 @@ services:
 
     # Lier le port 3000 du container au port 3000 local
     ports:
-      - 3000:3000
+      - 80:3000
 
     # Nommer le container
     container_name: petfoster-api
