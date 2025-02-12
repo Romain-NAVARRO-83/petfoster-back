@@ -23,4 +23,4 @@ COPY . .
 EXPOSE 3000
 
 # Commande de démarrage
-CMD ["pnpm", "run", "start"]
+CMD ["pnpm", "run", "dev"]
