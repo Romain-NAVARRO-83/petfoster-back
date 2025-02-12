@@ -54,6 +54,6 @@ app.use('/api', router);
 
 // Start server
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
+app.listen(port, '217.154.3.118', () => {
+  console.log(`Server listening at http://217.154.3.118:${port}`);
 });
