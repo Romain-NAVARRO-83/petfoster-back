@@ -27,6 +27,9 @@ services:
       # du conteneur
       - ./:/usr/src/app
 
+    networks:
+      - petfoster-net # 🔥 Associer PostgreSQL au réseau
+
   # Definir le container contenant la bdd
   petfoster-db:
     # à partir de l'image dockerhub 'postgres'
@@ -55,5 +58,11 @@ services:
       # volume permettant la persistance des données
       # - petfoster-volume:/var/lib/postgresql/data
 
+    networks:
+      - petfoster-net # 🔥 Associer PostgreSQL au réseau
+
 volumes:
   petfoster-volume:
+
+networks:
+  petfoster-net:
