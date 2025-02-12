@@ -27,8 +27,7 @@ services:
       # du conteneur
       - ./:/usr/src/app
 
-    networks:
-      - petfoster-net # 🔥 Associer PostgreSQL au réseau
+    network_mode: 'host'
 
   # Definir le container contenant la bdd
   petfoster-db:
@@ -58,11 +57,5 @@ services:
       # volume permettant la persistance des données
       # - petfoster-volume:/var/lib/postgresql/data
 
-    networks:
-      - petfoster-net # 🔥 Associer PostgreSQL au réseau
-
 volumes:
   petfoster-volume:
-
-networks:
-  petfoster-net:
