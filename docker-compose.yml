@@ -1,27 +1,37 @@
-# Definir la liste des services (container) dont nous aurons besoin
+version: '3.8'
 
 services:
-  # Definition du container contenant l'api
   app:
-    # build du container à partir du dossier . au travers du dockerfile 'Dockerfile.dev'
     build:
       context: .
       dockerfile: Dockerfile
-
-    command: sh -c "rsync -arv /usr/src/cache/node_modules/. /usr/src/app/node_modules && pnpm run start"
-
-    # Lier le port 3000 du container au port 3000 local
-    ports:
-      - 3000:3000
-
-    # Nommer le container
     container_name: petfoster-api
-
+    command: pnpm run dev
+    ports:
+      - '3000:3000'
+    depends_on:
+      petfoster-db:
+        condition: service_healthy
     volumes:
-      # mon répertoire de travail perso, avec les sources
-      # de mon appli est le répertoire de travail
-      # du conteneur
-      - ./:/usr/src/app
+      - .:/usr/src/app
+      - /usr/src/app/node_modules # Exclusion des node_modules pour éviter les conflits
+
+  petfoster-db:
+    image: postgres
+    container_name: petfoster-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
+      interval: 2s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d/
+      - petfoster-volume:/var/lib/postgresql/data
 
 volumes:
   petfoster-volume:

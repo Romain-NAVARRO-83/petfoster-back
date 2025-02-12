@@ -27,5 +27,5 @@ COPY ./ ./
 # Exposer le port pour pouvoir acceder au container depuis l'explorateur
 # EXPOSE 3000
 
-# Commande à effectuer pour initialiser le container (Ici : 'pnpm run dev')
-CMD [ "pnpm", "run", "dev" ]
+# Commande à effectuer pour initialiser le container (Ici : 'pnpm run start')
+CMD [ "pnpm", "run", "start" ]

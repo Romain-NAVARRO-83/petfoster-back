@@ -1,3 +1,7 @@
 node_modules
 .pnpm-store/
 docs
+npm-debug.log
+.env
+Dockerfile
+docker-compose.yml

@@ -1,38 +1,26 @@
-# Dockerfile qui sert à lancer l'environnement
-# Node.js pour le développement de façon à ce
-# toute l'équipe utilise le même environnement
+# Utilisation d'une image node plus légère
+FROM node:20-alpine
 
-# Depuis l'image Node de dockerhub version 20
-FROM node:20
+# Mise à jour et installation de rsync
+RUN apk add --no-cache rsync
 
-RUN apt-get update -y
-RUN apt-get install -y rsync
-RUN apt-get install -y postgresql-client
-
+# Définition du répertoire de travail temporaire pour le cache
 WORKDIR /usr/src/cache
 
-# Recuperer le package.json pour la commande 'pnpm i'
-COPY ./package.json ./
-COPY ./pnpm-lock.yaml ./
+# Copier uniquement les fichiers nécessaires pour l’installation des dépendances
+COPY package.json pnpm-lock.yaml ./
 
-# Installer pnpm
-RUN npm install -g pnpm
-RUN pnpm i
+# Installer pnpm et les dépendances
+RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
-
-# Definir le repertoir de travail
+# Définition du répertoire de travail final
 WORKDIR /usr/src/app
 
-# Copier le contenu du repertoire racine local dans le répertoire racine du container
-COPY ./ ./
+# Copier le reste des fichiers après l'installation des dépendances
+COPY . .
 
-# Copier les modules Node.js du répertoire de cache au répertoire de l'application
-RUN rsync -arv /usr/src/cache/node_modules/. /usr/src/app/node_modules
-
-RUN pnpm run db:resetR
-
-# Exposer le port pour pouvoir acceder au container depuis l'explorateur
+# Exposer le port
 EXPOSE 3000
 
-# Commande à effectuer pour initialiser le container (Ici : 'pnpm run dev')
-CMD [ "pnpm", "run", "start" ]
+# Commande de démarrage
+CMD ["pnpm", "run", "start"]
