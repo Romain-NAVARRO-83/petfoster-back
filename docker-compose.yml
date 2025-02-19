@@ -3,16 +3,16 @@
 services:
   # Definition du container contenant l'api
   app:
-    # build du container à partir du dossier . au travers du dockerfile 'Dockerfile.dev'
+    # build du container à partir du dossier . au travers du dockerfile 'Dockerfile'
     build:
       context: .
       dockerfile: Dockerfile
 
-    command: sh -c "rsync -arv /usr/src/cache/node_modules/. /usr/src/app/node_modules && pnpm run dev"
+    command: sh -c "rsync -arv /usr/src/cache/node_modules/. /usr/src/app/node_modules && pnpm run start"
 
     # Lier le port 3000 du container au port 3000 local
     ports:
-      - 80:3000
+      - 3000:3000
 
     # Nommer le container
     container_name: petfoster-api
