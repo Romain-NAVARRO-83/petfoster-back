@@ -10,6 +10,8 @@ import { fileURLToPath } from 'url';
 
 // Create app
 const app = express();
+app.set('trust proxy', 1); // Nginx est un proxy, on lui fait confiance
+
 
 // Serve user and animal images
 // Get __dirname equivalent in ES modules
