@@ -52,7 +52,7 @@ app.use(
 );
 
 // Configure routes
-app.use('/api', router);
+app.use(process.env.API_PREFIX, router);
 
 // Start server
 const port = process.env.PORT || 3000;
