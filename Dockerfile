@@ -20,7 +20,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Exposer le port
-EXPOSE 80
+EXPOSE 3000
 
 # Commande de démarrage
 CMD ["pnpm", "run", "start"]
