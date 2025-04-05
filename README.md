@@ -1,20 +1,52 @@
-# Utilisation Docker
+# 🐾 PetFoster Back-End
 
-## Initialisation
+Bienvenue dans le dépôt back-end de **PetFoster**, une application web visant à faciliter l'accueil temporaire d'animaux abandonnés ou en attente d'adoption. Ce projet a été réalisé dans le cadre du TP DWWM, démontrant les compétences en développement back-end et en déploiement d'applications complètes.
 
-1. Verifier que l'extension Prettier est installée
-2. Faites votre .env !
-3. lancer la commande `pnpm run compose:dev` (On devrait se retrouver dans l'instace Vite exposant le localhost:5173)
-4. Lancer un autre et y lancer la commander `pnpm run container:db`; Pour avoir un acces interactif au container contenant la bdd et y lancer des commandes de bases comme `SELECT * FROM animals`.
-5. Lancer un autre et y lancer la commander `pnpm run container:api`; Pour avoir un acces interactif au container contenant l'application api et y lancer des commandes de bases comme `pnpm i`.
+> 🔗 [Lien vers le site web](https://petfoster.fr)
 
-Et voilà !
+---
 
-## Installer un nouveau module
+## 🚀 À propos du projet
 
-1. Dans le terminal permettant d'executer du code dans un container, avant d'executer la commande d'installation de votre module, lancer `pnpm i` puis valider avec `Y`
+Le back-end de **PetFoster** gère :
 
-## Si besoin de reinitialiser les container
+- Les opérations CRUD pour les entités principales (animaux, utilisateurs, demandes d'accueil).
+- L'authentification et l'autorisation des utilisateurs.
+- La communication avec la base de données PostgreSQL.
+- L'intégration avec le front-end via une API RESTful.
 
-1. `pnpm run rm:container`
-2. `pnpm run compose:dev`
+> 🔗 [Lien vers le dépôt front-end](https://github.com/Romain-NAVARRO-83/petfoster-front)
+
+---
+
+## 🛠️ Stack technique
+
+| Outil / Technologie | Rôle |
+|---------------------|------|
+| **Node.js**         | Environnement d'exécution JavaScript côté serveur |
+| **Express.js**      | Framework web pour Node.js |
+| **TypeScript**      | Superset de JavaScript avec typage statique |
+| **PostgreSQL**      | SGBD relationnel pour la persistance des données |
+| **Docker**          | Conteneurisation de l'application et de la base de données |
+| **pnpm**            | Gestionnaire de paquets rapide |
+| **Prettier**        | Formatage automatique du code |
+| **ESLint**          | Analyse statique du code |
+
+---
+
+## 🌌 Déploiement
+
+Le projet est déployé sur un **VPS personnel** avec les technologies suivantes :
+
+- **Docker** : Orchestration des conteneurs pour l'API et la base de données
+- **Nginx** : Proxy inverse pour gérer les redirections
+- **Certbot / Let's Encrypt** : Génération automatique de certificats SSL
+
+Ce déploiement assure :
+
+- Une architecture modulaire et scalable
+- Une connexion HTTPS sécurisée
+
+---
+
+Merci pour votre intérêt pour ce projet ! 🙌
